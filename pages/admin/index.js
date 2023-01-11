@@ -34,33 +34,24 @@ export default function Home() {
           <div className="w-full h-full flex flex-col py-2 space-y-2">
             {/* CardStart */}
             <div className="w-full bg-[#D9D9D9] p-2 rounded-md">
-              <div className="flex flex-col lg:flex-row lg:items-center">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-2">
                 <AiFillCheckCircle className="w-10 h-10" />
-                <div className="flex flex-col lg:flex-row lg:items-center">
-                  <div className="w-full lg:w-5/12 flex flex-col">
-                    <h1 className="font-Poppins text-lg font-semibold">
-                      Judul
-                    </h1>
-                    <h1 className="overflow-ellipsis overflow-hidden font-Poppins text-sm font-normal">
-                      sit amet consectetur. Pulvinar viverra dictumst eleifend
-                      sed suspendisse quis. Habitasse sit ornare sed neque.
-                    </h1>
+                <div className="w-full flex flex-col lg:flex-row justify-between gap-2">
+                  <div className="w-full lg:w-1/2 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2">
+                    <div className="flex flex-col">
+                      <h1 className="font-Poppins font-bold text-lg">Judul</h1>
+                      <h1 className="font-DMSans font-normal text-sm text-black/50">Lorem ipsum dolor Lorem ipsum....</h1>
+                    </div>
+                    <h1 className="font-DMSans font-normal text-sm">2023-01-11</h1>
                   </div>
-                  <div className="w-full lg:w-3/12 flex lg:justify-center">
-                    <h1 className="font-Poppins font-normal text-base overflow-ellipsis overflow-hidden text-center">
-                      Today at 12:00
-                    </h1>
-                  </div>
-                  <div className="lg:w-3/12 flex lg:justify-center">
-                    <h1 className="font-Poppins font-normal text-base">
-                      rizkisaefulaziz@gmail.com
-                    </h1>
-                  </div>
-                  <div className="lg:w-1/12 flex lg:justify-center items-center space-x-1">
-                    <AiFillBell className="w-6 h-6" />
-                    <button className="bg-[#112883] p-2 rounded-md text-white font-Poppins">
-                      Delete
-                    </button>
+                  <div className="w-full lg:w-1/2 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2">
+                    <h1 className="font-DMSans font-normal text-sm">rizkisaepulaziz@gmail.com</h1>
+                    <div className="flex flex-row items-center gap-2">
+                      <AiFillBell className="w-7 h-7 text-[#112883]" />
+                      <button className="bg-[#112883] p-2 rounded-md text-white font-Poppins">
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
