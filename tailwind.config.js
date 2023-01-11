@@ -9,6 +9,7 @@ module.exports = {
       fontFamily:{
         'Poppins': ['Poppins', 'sans-serif'],
         'BebasNeue': ['Bebas Neue', 'sans-serif'],
+        'DMSans': ['DM Sans', 'sans-serif'],
       }
     },
   },
