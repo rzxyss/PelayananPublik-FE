@@ -14,7 +14,7 @@ export default function TambahBerita() {
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
           <h1 className="font-BebasNeue text-3xl text-[#112883] font-medium">
-            dashboard
+            berita | tambah berita
           </h1>
           <div className="flex flex-row gap-2 items-center">
             <div className="flex flex-col items-end">

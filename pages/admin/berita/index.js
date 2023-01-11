@@ -22,16 +22,16 @@ export default function Berita() {
           <div className="flex flex-row gap-2 items-center">
             <div className="flex flex-col items-end">
               <h1 className="font-Poppins text-sm font-bold">
-                M Ilham Hardiana
+                Rizki Saepul Aziz
               </h1>
-              <h1 className="font-Poppins text-xs font-bold text-black/50">
+              <h1 className="font-Poppins text-sm font-bold text-black/50">
                 Admin
               </h1>
             </div>
             <Image
               src={"/image/pp.png"}
               width={50}
-              height={50}
+              height={0}
               className="rounded-full"
             />
           </div>
