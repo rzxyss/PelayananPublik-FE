@@ -18,7 +18,7 @@ export default function Profile() {
           </div>
           <div className='w-full h-auto lg:mt-14 px-5 lg:px-28'>
             <div className='bg-white rounded-lg shadow-2xl lg:shadow-lg'>
-              <div id='tentang-tikomdik'>
+              <div id='tentang-tikomdik' className='mb-10'>
                 <h1 className='font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883]'>uptd tikomdik</h1>
                 <div className='flex flex-col lg:flex-row gap-5 px-5 lg:px-16 py-10'>
                   <div className='lg:w-10/12 lg:mx-auto'>
@@ -29,7 +29,7 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div id='visi-misi' className='mt-10'>
+              <div id='visi-misi' className='mb-10'>
                 <h1 className='font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883]'>visi dan misi</h1>
                 <div className='grid lg:grid-cols-3 gap-2 px-16 py-5 lg:items-center'>
                   <div className='col-span-2'>
@@ -58,7 +58,7 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div id='tugas-pokok-dan-fungsi' className='mt-10'>
+              <div id='tugas-pokok-dan-fungsi' className=''>
                 <h1 className='font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883] pt-10'>tugas pokok dan fungsi</h1>
                 <div className='grid grid-cols-3 gap-2 px-10'>
                   <div className='lg:col-start-1 lg:row-start-1 col-span-3'>
