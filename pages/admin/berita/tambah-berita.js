@@ -49,7 +49,17 @@ export default function TambahBerita() {
               </div>
               <div className="flex flex-col space-y-2 mt-10">
                 <h1 className="font-Poppins font-medium text-lg">
-                  Judul Berita
+                  Deskripsi Berita
+                </h1>
+                <input
+                  type="text"
+                  className="border border-gray-400 focus:border-black p-4 rounded-lg"
+                  placeholder="Masukan Judul Berita"
+                />
+              </div>
+              <div className="flex flex-col space-y-2 mt-10">
+                <h1 className="font-Poppins font-medium text-lg">
+                  Isi Berita
                 </h1>
                 <textarea
                   className="block p-2.5 w-full text-sm rounded-lg border border-gray-400 focus:border-black"
