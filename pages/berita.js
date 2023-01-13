@@ -59,11 +59,9 @@ export default function Berita() {
               </div>
               <div className="w-full flex flex-col lg:flex-row">
                 <div className="grid lg:grid-cols-3 gap-5 w-full lg:w-8/12">
-                  <div
-                    className="hover:scale-105 hover:bg-black/10 p-3 rounded-lg duration-500"
-                  >
+                  <div className="hover:scale-105 hover:bg-black/10 p-3 rounded-lg duration-500">
                     <Image
-                      src={'/image/berita.jpg'}
+                      src={"/image/berita.jpg"}
                       width={100}
                       height={80}
                       layout="responsive"
@@ -122,9 +120,9 @@ export default function Berita() {
                     <div className="inline-flex rounded-md shadow-sm">
                       <button
                         type="button"
-                        className={`py-2 px-4 text-sm font-medium bg-white rounded-l-lg border border-[#112883] hover:bg-[#112883] hover:text-white ${
+                        className={`py-2 px-4 text-sm font-medium bg-transparent ${
                           tabBerita == "popular"
-                            ? "bg-[#112883] text-white"
+                            ? "border-b-4 border-[#112883]"
                             : ""
                         }`}
                         onClick={() => setTabBerita("popular")}
@@ -133,8 +131,10 @@ export default function Berita() {
                       </button>
                       <button
                         type="button"
-                        className={`py-2 px-4 text-sm font-medium bg-white rounded-r-lg border border-[#112883] hover:bg-[#112883] hover:text-white ${
-                          tabBerita == "baru" ? "bg-[#112883] text-white" : ""
+                        className={`py-2 px-4 text-sm font-medium bg-transparent ${
+                          tabBerita == "baru"
+                            ? "border-b-4 border-[#112883]"
+                            : ""
                         }`}
                         onClick={() => setTabBerita("baru")}
                       >

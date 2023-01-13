@@ -276,8 +276,8 @@ export default function Home() {
               <div className="inline-flex rounded-md shadow-sm">
                 <button
                   type="button"
-                  className={`py-2 px-4 text-sm font-medium bg-white rounded-l-lg border border-[#112883] hover:bg-[#112883] hover:text-white ${
-                    tabBerita == "popular" ? "bg-[#112883] text-white" : ""
+                  className={`py-2 px-4 text-sm font-medium bg-transparent ${
+                    tabBerita == "popular" ? "border-b-4 border-[#112883]" : ""
                   }`}
                   onClick={() => setTabBerita("popular")}
                 >
@@ -285,8 +285,8 @@ export default function Home() {
                 </button>
                 <button
                   type="button"
-                  className={`py-2 px-4 text-sm font-medium bg-white rounded-r-lg border border-[#112883] hover:bg-[#112883] hover:text-white ${
-                    tabBerita == "baru" ? "bg-[#112883] text-white" : ""
+                  className={`py-2 px-4 text-sm font-medium bg-transparent ${
+                    tabBerita == "baru" ? "border-b-4 border-[#112883]" : ""
                   }`}
                   onClick={() => setTabBerita("baru")}
                 >
