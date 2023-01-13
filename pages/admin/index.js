@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import Sidebar from "../../components/admin/Sidebar";
-import { AiFillCheckCircle, AiFillBell } from "react-icons/ai";
+import { HiBell } from "react-icons/hi";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 
 export default function Home() {
   return (
@@ -31,12 +32,12 @@ export default function Home() {
         </div>
         <div className="p-1">
           {/* Kontenna Disini */}
-          <div className="w-full h-full flex flex-col py-2 space-y-2">
+          <div className="w-full h-full flex flex-col py-2 space-y-2 p-2 lg:p-5">
             {/* CardStart */}
-            <div className="w-full bg-[#D9D9D9] p-2 rounded-md">
-              <div className="flex flex-col lg:flex-row lg:items-center gap-2">
-                <AiFillCheckCircle className="w-10 h-10" />
-                <div className="w-full flex flex-col lg:flex-row justify-between gap-2">
+            <div className="w-full h-auto bg-white p-2 rounded-md shadow-[0_0_5px]">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-5">
+                <BsFillCheckCircleFill className="w-10 h-10 text-[#58932A]" />
+                <div className="w-full flex flex-col lg:flex-row justify-between gap-5">
                   <div className="w-full lg:w-1/2 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2">
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-bold text-lg">Judul</h1>
@@ -47,7 +48,7 @@ export default function Home() {
                   <div className="w-full lg:w-1/2 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2">
                     <h1 className="font-DMSans font-normal text-sm">rizkisaepulaziz@gmail.com</h1>
                     <div className="flex flex-row items-center gap-2">
-                      <AiFillBell className="w-7 h-7 text-[#112883]" />
+                      <HiBell className="w-7 h-7 text-[#112883]" />
                       <button className="bg-[#112883] p-2 rounded-md text-white font-Poppins">
                         Delete
                       </button>
