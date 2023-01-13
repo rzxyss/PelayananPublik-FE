@@ -16,14 +16,14 @@ export default function Sidebar() {
 					<Image src='/image/logo.png' width={150} height={0} className='hidden lg:block' />
 					<Image src='/image/logo2.png' width={500} height={0} className='block lg:hidden' />
 				</div>
-				<ul>
-					<li className={`${router.pathname == '/admin' ? 'text-[#112883]' : ''} w-full h-auto hover:text-[#112883] p-3`}>
-						<Link href={'/admin'} className='flex gap-1 justify-center lg:justify-start	'>
+				<ul className='space-y-2'>
+					<li className={`${router.pathname == '/admin' ? 'bg-[#112883] text-white' : ''} w-10/12 h-auto hover:bg-[#112883] hover:text-white p-3 rounded-r-xl`}>
+						<Link href={'/admin'} className='flex gap-1 justify-center lg:justify-start	w-full'>
 							<BsGridFill className='w-6 h-6' />
 							<h1 className='hidden lg:block font-BebasNeue text-xl'>dashboard</h1>
 						</Link>
 					</li>
-					<li className={`${router.pathname == '/admin/berita' ? 'text-[#112883]' : ''} ${router.pathname == '/admin/berita/tambah-berita' ? 'text-[#112883]' : ''} w-full h-auto hover:text-[#112883] p-3`}>
+					<li className={`${router.pathname == '/admin/berita' ? 'bg-[#112883] text-white' : ''} ${router.pathname == '/admin/berita/tambah-berita' ? 'bg-[#112883] text-white' : ''} w-10/12 h-auto hover:bg-[#112883] hover:text-white p-3 rounded-r-xl`}>
 						<Link href={'/admin/berita'} className='flex gap-1 justify-center lg:justify-start'>
 							<BsNewspaper className='w-6 h-6' />
 							<h1 className='hidden lg:block font-BebasNeue text-xl'>Berita</h1>
