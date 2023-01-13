@@ -117,7 +117,7 @@ export default function Berita() {
                 </div>
                 <div className="w-full lg:w-4/12 mt-20">
                   <div className="w-full flex flex-col justify-center items-center gap-4 p-5">
-                    <div className="inline-flex rounded-md shadow-sm">
+                    <div className="inline-flex">
                       <button
                         type="button"
                         className={`py-2 px-4 text-sm font-medium bg-transparent ${
