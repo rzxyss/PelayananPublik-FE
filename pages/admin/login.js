@@ -3,23 +3,26 @@ import Link from "next/link";
 import Router from "next/router";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import Randomstring from "randomstring";
 
 export default function Login() {
   const [inputUsername, setUsername] = useState("");
   const [inputPassword, setPassword] = useState("");
+  let token = Randomstring.generate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
         username: inputUsername,
         password: inputPassword,
+        token: token
       });
       if (res.data.length > 0) {
         if (
           res.data[0].username === inputUsername &&
           res.data[0].password === inputPassword
         ) {
-          sessionStorage.setItem("token", res.data[0].token);
+          sessionStorage.setItem("token", token);
           Swal.fire({
             position: "center",
             icon: "success",

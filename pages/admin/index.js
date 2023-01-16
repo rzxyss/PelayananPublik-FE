@@ -39,7 +39,7 @@ export default function Home() {
     getAdmin();
   }, []);
 
-  function logoutHandle() {
+  const logoutHandle = async () => {
     sessionStorage.clear();
     Swal.fire({
       position: "center",
@@ -51,7 +51,17 @@ export default function Home() {
     setTimeout(() => {
       Router.push("/admin/login");
     }, 2100);
-  }
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/logout`,
+        {
+          id: dataAdmin[0].id,
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex">
       <Sidebar />
@@ -69,18 +79,19 @@ export default function Home() {
             <div className="flex flex-col items-end">
               {dataAdmin.map((admin, index) => {
                 return (
-                  <>
-                    <h1 className="font-Poppins text-sm font-bold" key={index}>
+                  <div key={index}>
+                    <h1 className="font-Poppins text-sm font-bold">
                       {admin.name}
                     </h1>
                     <h1 className="font-Poppins text-sm font-bold text-black/50">
                       {admin.username}
                     </h1>
-                  </>
+                  </div>
                 );
               })}
             </div>
             <Image
+              alt="Profile"
               src={"/image/pp.png"}
               width={50}
               height={0}

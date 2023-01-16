@@ -43,7 +43,7 @@ export default function TambahBerita() {
     getAdmin();
   }, []);
 
-  function logoutHandle() {
+  const logoutHandle = async () => {
     sessionStorage.clear();
     Swal.fire({
       position: "center",
@@ -55,7 +55,17 @@ export default function TambahBerita() {
     setTimeout(() => {
       Router.push("/admin/login");
     }, 2100);
-  }
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/logout`,
+        {
+          id: dataAdmin[0].id,
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex">
       <Sidebar />
