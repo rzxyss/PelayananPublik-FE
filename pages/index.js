@@ -123,7 +123,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-4 mt-16">
             {/* Card */}
             <div className="flex justify-center p-10">
-              <div className="bg-white aspect-[3/1] w-full p-10 shadow-lg rounded-lg text-[#112883] hover:bg-[#112883] lg:hover:bg-[#112883] hover:text-white hover:scale-105 duration-500 hover:shadow-[0_0_10px]">
+              <div className="bg-white aspect-[3/1] w-full p-10 shadow-md rounded-lg text-[#112883] hover:bg-[#FBFBFB] lg:hover:bg-[#FBFBFB] hover:text-[#112883] hover:scale-105 duration-500">
                 <div className="flex flex-col items-center">
                   <MdHistory className="w-16 h-16" />
                   <h1 className="mt-8 font-BebasNeue text-xl lg:text-2xl">
@@ -143,7 +143,7 @@ export default function Home() {
             </div>
             {/* Card */}
             <div className="flex justify-center p-10">
-              <div className="bg-white aspect-[3/1] w-full p-10 shadow-lg rounded-lg text-[#112883] hover:bg-[#112883] lg:hover:bg-[#112883] hover:text-white hover:scale-105 duration-500 hover:shadow-[0_0_10px]">
+              <div className="bg-white aspect-[3/1] w-full p-10 shadow-md rounded-lg text-[#112883] hover:bg-[#FBFBFB] lg:hover:bg-[#FBFBFB] hover:text-[#112883] hover:scale-105 duration-500">
                 <div className="flex flex-col items-center">
                   <BiLineChart className="w-16 h-16" />
                   <h1 className="mt-8 font-BebasNeue text-xl lg:text-2xl">
@@ -163,7 +163,7 @@ export default function Home() {
             </div>
             {/* Card */}
             <div className="flex justify-center p-10">
-              <div className="bg-white aspect-[3/1] w-full p-10 shadow-lg rounded-lg text-[#112883] hover:bg-[#112883] lg:hover:bg-[#112883] hover:text-white hover:scale-105 duration-500 hover:shadow-[0_0_10px]">
+              <div className="bg-white aspect-[3/1] w-full p-10 shadow-md rounded-lg text-[#112883] hover:bg-[#FBFBFB] lg:hover:bg-[#FBFBFB] hover:text-[#112883] hover:scale-105 duration-500">
                 <div className="flex flex-col items-center">
                   <FaTasks className="w-16 h-16" />
                   <h1 className="mt-8 font-BebasNeue text-xl lg:text-2xl">
@@ -183,7 +183,7 @@ export default function Home() {
             </div>
             {/* Card */}
             <div className="flex justify-center p-10">
-              <div className="bg-white aspect-[3/1] w-full p-10 shadow-lg rounded-lg text-[#112883] hover:bg-[#112883] lg:hover:bg-[#112883] hover:text-white hover:scale-105 duration-500 hover:shadow-[0_0_10px]">
+              <div className="bg-white aspect-[3/1] w-full p-10 shadow-md rounded-lg text-[#112883] hover:bg-[#FBFBFB] lg:hover:bg-[#FBFBFB] hover:text-[#112883] hover:scale-105 duration-500">
                 <div className="flex flex-col items-center">
                   <MdPeople className="w-16 h-16" />
                   <h1 className="mt-8 font-BebasNeue text-xl lg:text-2xl">
@@ -348,7 +348,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-2 right-2 lg:bottom-5 lg:right-5 bg-[#112883] p-3 rounded-full">
+      <div className="fixed bottom-2 right-2 lg:bottom-5 lg:right-5 bg-[#112883] p-3 rounded-full cursor-pointer">
         <BsChatDotsFill className="w-7 h-7 text-white" onClick={showChat} />
       </div>
       <div
@@ -379,9 +379,6 @@ export default function Home() {
               onChange={(e) => setQuestion(e.target.value)}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 outline-none block w-full p-2.5"
             >
-              <option selected disabled>
-                Pilih Pertanyaan
-              </option>
               {datas.map((quest, index) => {
                 return (
                   <option key={index} value={quest.id}>
