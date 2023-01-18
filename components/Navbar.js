@@ -2,10 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import logo from "../public/image/logo.png";
+import { useRouter } from 'next/router'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
 
+  const router = useRouter();
   return (
     <>
       {/* {console.log(open)} */}
@@ -18,9 +20,9 @@ export default function Navbar() {
             </svg>
           </button>
           <ul className={`${!open ? 'hidden lg:mt-0 lg:space-y-0 lg:flex lg:w-auto lg:gap-10' : 'text-center mt-5 w-full space-y-3'}`}>
-            <li className="uppercase font-BebasNeue text-2xl"><Link href='/'>home</Link></li>
-            <li className="uppercase font-BebasNeue text-2xl"><Link href='/berita'>berita</Link></li>
-            <li className="uppercase font-BebasNeue text-2xl">faq</li>
+            <li className={`uppercase font-BebasNeue text-2xl ${router.pathname === '/' ? 'lg:underline underline-offset-8 text-[#112883]' : 'text-black/50'}`}><Link href='/'>home</Link></li>
+            <li className={`uppercase font-BebasNeue text-2xl ${router.pathname === '/berita' ? 'lg:underline underline-offset-8 text-[#112883]' : 'text-black/50'}`}><Link href='/berita'>berita</Link></li>
+            <li className={`uppercase font-BebasNeue text-2xl ${router.pathname === '/faq' ? 'lg:underline underline-offset-8 text-[#112883]' : 'text-black/50'}`}>faq</li>
           </ul>
         </div>
       </div>
