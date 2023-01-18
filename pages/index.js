@@ -10,8 +10,8 @@ import { Navigation, Autoplay } from "swiper";
 
 import { MdHistory, MdPeople } from "react-icons/md";
 import { BiLineChart } from "react-icons/bi";
-import { FaTasks } from "react-icons/fa";
 import { BsChatDotsFill } from "react-icons/bs";
+import { TbNotes } from "react-icons/tb";
 import { useEffect, useState } from "react";
 
 import BeritaPopular from "../components/BeritaPopular";
@@ -98,10 +98,10 @@ export default function Home() {
             />
           </div>
           <div className="flex flex-col items-center justify-center">
-            <h1 className="uppercase text-[#112883] font-BebasNeue text-3xl lg:text-6xl">
+            <h1 className="uppercase text-[#112883] font-Lato font-extrabold text-4xl text-center">
               uptd tikomdik <span className="text-black">jawa barat</span>
             </h1>
-            <p className="font-Poppins font-normal text-sm lg:text-xl lg:w-7/12 text-center mt-10 opacity-50">
+            <p className="font-Poppins font-normal text-sm lg:w-10/12 text-center mt-10 opacity-50">
               TIKOMDIK tidak hanya berkaitan dengan teknologi tetapi bagaimana
               dapat berbagi pengetahuan dan informasi, meningkatkan komunikasi
               yang efisien dan efektif, dapat membangun komunitas belajar serta
@@ -109,96 +109,112 @@ export default function Home() {
             </p>
             <Link
               href={"/profile"}
-              className="bg-[#112883] text-white p-2 px-7 rounded-lg font-BebasNeue text-xl tracking-wider mt-5"
+              className="bg-[#112883] text-white p-2 px-7 rounded-lg font-Poppins text-xl font-semibold mt-5"
             >
               Read More
             </Link>
           </div>
         </div>
 
-        <div className="bg-transparent lg:bg-[#112883] h-[350px] mb-[1500px] lg:mb-72">
-          <h1 className="font-BebasNeue text-3xl lg:text-4xl text-center pt-20 text-black lg:text-white underline underline-offset-8">
+        <div className="bg-transparent lg:bg-[#112883] h-[350px]">
+          <h1 className="uppercase font-Lato font-extrabold text-3xl lg:text-4xl text-center pt-20 text-black lg:text-white lg:underline underline-offset-8">
             tentang uptd tikomdik jawa barat
           </h1>
-          <div className="grid lg:grid-cols-4 mt-16">
-            {/* Card */}
-            <div className="flex justify-center p-10">
-              <div className="bg-white aspect-[3/1] w-full p-10 shadow-md rounded-lg text-[#112883] hover:bg-[#FBFBFB] lg:hover:bg-[#FBFBFB] hover:text-[#112883] hover:scale-105 duration-500">
-                <div className="flex flex-col items-center">
-                  <MdHistory className="w-16 h-16" />
-                  <h1 className="mt-8 font-BebasNeue text-xl lg:text-2xl">
+        </div>
+        <div className="grid lg:grid-cols-4 -mt-60">
+          {/* Card */}
+          <div className="flex justify-center 2xl:p-20 p-10">
+            <div className="bg-white w-full p-10 shadow-md rounded-lg hover:bg-[#FBFBFB] hover:scale-105 duration-500">
+              <div className="grid grid-rows-1">
+                <div className="flex justify-center mb-5">
+                  <MdHistory className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
+                </div>
+                <div className="flex flex-col items-center mb-5">
+                  <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-[#112883]">
                     sekilas sejarah
                   </h1>
-                  <h1 className="mt-4 font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
+                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
                     Menampilkan sekilas sejarah tentang UPTD TIKOMDIK
                   </h1>
-                  <Link
-                    href={"/profile"}
-                    className="mt-8 font-Poppins font-semibold text-base text-center"
-                  >
-                    Baca Selengkapnya
-                  </Link>
                 </div>
+                <Link
+                  href={"/profile"}
+                  className="font-Poppins font-semibold text-base text-center"
+                >
+                  Baca Selengkapnya
+                </Link>
               </div>
             </div>
-            {/* Card */}
-            <div className="flex justify-center p-10">
-              <div className="bg-white aspect-[3/1] w-full p-10 shadow-md rounded-lg text-[#112883] hover:bg-[#FBFBFB] lg:hover:bg-[#FBFBFB] hover:text-[#112883] hover:scale-105 duration-500">
-                <div className="flex flex-col items-center">
-                  <BiLineChart className="w-16 h-16" />
-                  <h1 className="mt-8 font-BebasNeue text-xl lg:text-2xl">
+          </div>
+          {/* Card */}
+          <div className="flex justify-center 2xl:p-20 p-10">
+            <div className="bg-white w-full p-10 shadow-md rounded-lg hover:bg-[#FBFBFB] hover:scale-105 duration-500">
+              <div className="grid grid-rows-1">
+                <div className="flex justify-center mb-5">
+                  <TbNotes className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
+                </div>
+                <div className="flex flex-col items-center mb-5">
+                  <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-[#112883]">
                     visi dan misi
                   </h1>
-                  <h1 className="mt-4 font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
+                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
                     Memahi Visi dan Misi UPTD TIKOMDIK
                   </h1>
-                  <Link
-                    href={"/profile#visi-misi"}
-                    className="mt-8 font-Poppins font-semibold text-base text-center"
-                  >
-                    Baca Selengkapnya
-                  </Link>
                 </div>
+                <Link
+                  href={"/profile#visi-misi"}
+                  className="font-Poppins font-semibold text-base text-center"
+                >
+                  Baca Selengkapnya
+                </Link>
               </div>
             </div>
-            {/* Card */}
-            <div className="flex justify-center p-10">
-              <div className="bg-white aspect-[3/1] w-full p-10 shadow-md rounded-lg text-[#112883] hover:bg-[#FBFBFB] lg:hover:bg-[#FBFBFB] hover:text-[#112883] hover:scale-105 duration-500">
-                <div className="flex flex-col items-center">
-                  <FaTasks className="w-16 h-16" />
-                  <h1 className="mt-8 font-BebasNeue text-xl lg:text-2xl">
+          </div>
+          {/* Card */}
+          <div className="flex justify-center 2xl:p-20 p-10">
+            <div className="bg-white w-full p-10 shadow-md rounded-lg hover:bg-[#FBFBFB] hover:scale-105 duration-500">
+              <div className="grid grid-rows-1">
+                <div className="flex justify-center mb-5">
+                  <BiLineChart className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
+                </div>
+                <div className="flex flex-col items-center mb-5">
+                  <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-[#112883]">
                     tupoksi
                   </h1>
-                  <h1 className="mt-4 font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
+                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
                     Menampilkan Tugas Pokok dan Fungsi UPTD TIKOMDIK
                   </h1>
-                  <Link
-                    href={"/profile#tugas-pokok-dan-fungsi"}
-                    className="mt-8 font-Poppins font-semibold text-base text-center"
-                  >
-                    Baca Selengkapnya
-                  </Link>
                 </div>
+                <Link
+                  href={"/profile#tugas-pokok-dan-fungsi"}
+                  className="font-Poppins font-semibold text-base text-center"
+                >
+                  Baca Selengkapnya
+                </Link>
               </div>
             </div>
-            {/* Card */}
-            <div className="flex justify-center p-10">
-              <div className="bg-white aspect-[3/1] w-full p-10 shadow-md rounded-lg text-[#112883] hover:bg-[#FBFBFB] lg:hover:bg-[#FBFBFB] hover:text-[#112883] hover:scale-105 duration-500">
-                <div className="flex flex-col items-center">
-                  <MdPeople className="w-16 h-16" />
-                  <h1 className="mt-8 font-BebasNeue text-xl lg:text-2xl">
+          </div>
+          {/* Card */}
+          <div className="flex justify-center 2xl:p-20 p-10">
+            <div className="bg-white w-full p-10 shadow-md rounded-lg hover:bg-[#FBFBFB] hover:scale-105 duration-500">
+              <div className="grid grid-rows-1">
+                <div className="flex justify-center mb-5">
+                  <MdPeople className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
+                </div>
+                <div className="flex flex-col items-center mb-5">
+                  <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-[#112883]">
                     team project
                   </h1>
-                  <h1 className="mt-4 font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
-                    Menampilkan Bagian Dan Tugas Pada Project Ini
+                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
+                    Menampilkan Bagian dan Tugas dalam UPTD TIKOMDIK
                   </h1>
-                  <Link
-                    href={"/profile#team-project"}
-                    className="mt-8 font-Poppins font-semibold text-base text-center"
-                  >
-                    Baca Selengkapnya
-                  </Link>
                 </div>
+                <Link
+                  href={"/profile#tugas-pokok-dan-fungsi"}
+                  className="font-Poppins font-semibold text-base text-center"
+                >
+                  Baca Selengkapnya
+                </Link>
               </div>
             </div>
           </div>
@@ -207,7 +223,7 @@ export default function Home() {
         <div className="w-full h-auto flex flex-col lg:flex-row">
           <div className="w-full lg:w-8/12">
             <div className="w-full flex flex-col justify-center items-center p-5">
-              <h1 className="font-BebasNeue text-3xl underline underline-offset-8 mb-10">
+              <h1 className="font-Lato font-extrabold uppercase text-3xl lg:underline underline-offset-8 mb-10">
                 berita terkini
               </h1>
               <div className="grid lg:grid-cols-3 gap-5">
@@ -265,7 +281,7 @@ export default function Home() {
                   );
                 })} */}
               </div>
-              <button className="mt-10 bg-[#112883] text-white font-BebasNeue text-lg py-3 px-10 rounded-2xl">
+              <button className="mt-10 bg-[#112883] text-white font-Poppins font-semibold text-lg py-3 px-10 rounded-2xl">
                 Muat Lebih Banyak
               </button>
             </div>
@@ -300,7 +316,7 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col space-y-5 pt-20" id="program">
-          <h1 className="font-BebasNeue text-4xl text-center underline underline-offset-8">
+          <h1 className="font-Lato font-extrabold uppercase mb-5 text-4xl text-center lg:underline underline-offset-8">
             program tikomdik
           </h1>
           <div className="w-full px-5 lg:px-40 pb-20">
@@ -315,9 +331,7 @@ export default function Home() {
             >
               <SwiperSlide>
                 <div className="w-full aspect-[16/7]">
-                  <div
-                    className="bg-[url('/image/berita2.jpg')] h-full bg-cover bg-center"
-                  >
+                  <div className="bg-[url('/image/berita2.jpg')] h-full bg-cover bg-center">
                     <div className="bg-black/50 w-full h-full p-2 flex flex-col justify-end items-center">
                       <h1 className="font-bold text-3xl text-white mb-5">
                         judul

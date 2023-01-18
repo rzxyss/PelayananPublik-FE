@@ -17,7 +17,7 @@ export default function Profile() {
               Ketahui segalanya tentang UPTD TIKOMDIK.
             </h1>
           </div>
-          <div className="w-full h-auto lg:mt-14 px-5 lg:px-28">
+          <div className="w-full h-auto lg:mt-14 px-5 lg:px-20 2xl:px-60">
             <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg">
               <div id="tentang-tikomdik" className="my-10">
                 <h1 className="font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883]">
@@ -80,7 +80,7 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div id="visi-misi" className="my-10">
+              {/* <div id="visi-misi" className="my-10 px-20 2xl:px-56">
                 <h1 className="font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883]">
                   visi dan misi
                 </h1>
@@ -159,8 +159,8 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div id="tugas-pokok-dan-fungsi" className="">
-                <h1 className="font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883] pt-10">
+              <div id="tugas-pokok-dan-fungsi" className="my-10 px-20 2xl:px-56">
+                <h1 className="font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883]">
                   tugas pokok dan fungsi
                 </h1>
                 <div className="flex flex-col px-16">
@@ -219,25 +219,6 @@ export default function Profile() {
                     </ul>
                   </div>
                 </div>
-                {/* <div className='grid grid-cols-3 gap-2 px-10'>
-                  <div className='lg:col-start-1 lg:row-start-1 col-span-3'>
-                    <h1 className='font-BebasNeue font-semibold text-4xl px-5 lg:px-10 underline underline-offset-4 text-[#112883] mt-5 mb-5'>tugas pokok</h1>
-                    <h1 className='font-Poppins font-medium text-lg'>UPTD Teknologi Informasi dan Komunikasi Pendidikan mempunyai tugas pokok melaksanakan kegiatan teknis operasional dan/atau kegiatan teknis penunjang tertentu dibidang teknologi informasi dan komunikasi pendidikan, meliputi pengembangan dan produksi serta pelayanan dan promosi.</h1>
-                  </div>
-                  <div className=' lg:row-start-2 col-span-3'>
-                    <h1 className='font-BebasNeue font-semibold text-4xl px-5 lg:px-10 underline underline-offset-4 text-[#112883] mb-5'>fungsi</h1>
-                    <ul className='list-disc list-outside'>
-                      <li className='font-Poppins font-medium text-lg'>Penyiapan bahan kebijaksanaan teknis di bidang teknologi informasi dan komunikasi pendidikan.</li>
-                      <li className='font-Poppins font-medium text-lg'>Penyusunan program pengembangan teknologi informasi dan komunikasi pendidikan.</li>
-                      <li className='font-Poppins font-medium text-lg'>Penyusunan program tentang pemanfaatan Teknlogi Informasi dan Komunikasi Pendidikan untuk satuan Sekolah Menengah Atas (SMA), Sekolah Menengah Kejuruan (SMK) dan Pendidikan Khusus dan Pendidikan Layanan Khusus (PKPLK).</li>
-                      <li className='font-Poppins font-medium text-lg'>Pemberian pelayanan teknologi informasi dan komunikasi dalam bidang pendidikan.</li>
-                      <li className='font-Poppins font-medium text-lg'>Pengelolaan e-layanan bidang pendidikan.</li>
-                      <li className='font-Poppins font-medium text-lg'>Pelaksanaan kerjasama pemanfaatan teknologi informasi dan komunikasi pendidikan.</li>
-                      <li className='font-Poppins font-medium text-lg'>Pengembangan kompetensi pendidik di bidang pemanfaatan teknologi informasi dan komunikasi untuk pembelajaran.</li>
-                      <li className='font-Poppins font-medium text-lg'>Pengembangan kompetensi tenaga kependidikan dibidang pemanfaatan teknologi informasi dan komunikasi pendidikan.</li>
-                    </ul>
-                  </div>
-                </div> */}
               </div>
               <div className="mt-10" id="team-project">
                 <h1 className="font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883]">
@@ -245,7 +226,7 @@ export default function Profile() {
                 </h1>
                 <h1 className="text-center">Coming Soon......</h1>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10"></div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
