@@ -29,6 +29,18 @@ export default function Sidebar() {
 							<h1 className='hidden lg:block font-BebasNeue text-xl'>Berita</h1>
 						</Link>
 					</li>
+					<li className={`${router.pathname == '/admin/pengaduan' ? 'bg-[#112883] text-white' : ''} ${router.pathname == '/admin/berita/tambah-berita' ? 'bg-[#112883] text-white' : ''} w-10/12 h-auto hover:bg-[#112883] hover:text-white p-3 rounded-r-xl`}>
+						<Link href={'/admin/pengaduan'} className='flex gap-1 justify-center lg:justify-start'>
+							<BsNewspaper className='w-6 h-6' />
+							<h1 className='hidden lg:block font-BebasNeue text-xl'>Pengaduan</h1>
+						</Link>
+					</li>
+					<li className={`${router.pathname == '/admin/program' ? 'bg-[#112883] text-white' : ''} ${router.pathname == '/admin/berita/tambah-berita' ? 'bg-[#112883] text-white' : ''} w-10/12 h-auto hover:bg-[#112883] hover:text-white p-3 rounded-r-xl`}>
+						<Link href={'/admin/program'} className='flex gap-1 justify-center lg:justify-start'>
+							<BsNewspaper className='w-6 h-6' />
+							<h1 className='hidden lg:block font-BebasNeue text-xl'>Program</h1>
+						</Link>
+					</li>
 				</ul>
 			</div>
 		</div>

@@ -249,6 +249,7 @@ export default function Berita() {
               </div>
             </div>
           </div>
+          {/* EndKonten */}
         </div>
       </div>
     </div>
