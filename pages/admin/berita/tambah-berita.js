@@ -80,20 +80,18 @@ export default function TambahBerita() {
             </div>
           </div>
           <div className="flex flex-row gap-2 items-center">
-            <div className="flex flex-col items-end">
-              {dataAdmin.map((admin, index) => {
-                return (
-                  <>
-                    <h1 className="font-Poppins text-sm font-bold" key={index}>
-                      {admin.name}
-                    </h1>
-                    <h1 className="font-Poppins text-sm font-bold text-black/50">
-                      {admin.username}
-                    </h1>
-                  </>
-                );
-              })}
-            </div>
+            {dataAdmin.map((admin, index) => {
+              return (
+                <div key={index} className="flex flex-col items-end">
+                  <h1 className="font-Poppins text-sm font-bold">
+                    {admin.name}
+                  </h1>
+                  <h1 className="font-Poppins text-sm font-bold text-black/50">
+                    {admin.username}
+                  </h1>
+                </div>
+              );
+            })}
             <Image
               src={"/image/pp.png"}
               width={50}

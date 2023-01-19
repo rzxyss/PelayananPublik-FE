@@ -67,8 +67,8 @@ export default function Home() {
       <Sidebar />
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
-          <h1 className="font-BebasNeue text-3xl text-[#112883] font-medium">
-            dashboard
+          <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
+            Dashboard
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
             <div className="flex flex-col w-auto items-center bg-white border rounded-md p-2">
@@ -76,22 +76,19 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-row gap-2 items-center">
-            <div className="flex flex-col items-end">
-              {dataAdmin.map((admin, index) => {
-                return (
-                  <div key={index}>
-                    <h1 className="font-Poppins text-sm font-bold">
-                      {admin.name}
-                    </h1>
-                    <h1 className="font-Poppins text-sm font-bold text-black/50">
-                      {admin.username}
-                    </h1>
-                  </div>
-                );
-              })}
-            </div>
+            {dataAdmin.map((admin, index) => {
+              return (
+                <div key={index} className="flex flex-col items-end">
+                  <h1 className="font-Poppins text-sm font-bold">
+                    {admin.name}
+                  </h1>
+                  <h1 className="font-Poppins text-sm font-bold text-black/50">
+                    {admin.username}
+                  </h1>
+                </div>
+              );
+            })}
             <Image
-              alt="Profile"
               src={"/image/pp.png"}
               width={50}
               height={0}

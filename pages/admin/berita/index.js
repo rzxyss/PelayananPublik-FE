@@ -71,8 +71,8 @@ export default function Berita() {
       <Sidebar />
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
-          <h1 className="font-BebasNeue text-3xl text-[#112883] font-medium">
-            berita
+          <h1 className="font-Lato text-3xl text-[#112883] font-extrabold">
+            Berita
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
             <div className="flex flex-col w-auto items-center bg-white border rounded-md p-2">
@@ -80,20 +80,18 @@ export default function Berita() {
             </div>
           </div>
           <div className="flex flex-row gap-2 items-center">
-            <div className="flex flex-col items-end">
-              {dataAdmin.map((admin, index) => {
-                return (
-                  <>
-                    <h1 className="font-Poppins text-sm font-bold" key={index}>
-                      {admin.name}
-                    </h1>
-                    <h1 className="font-Poppins text-sm font-bold text-black/50">
-                      {admin.username}
-                    </h1>
-                  </>
-                );
-              })}
-            </div>
+            {dataAdmin.map((admin, index) => {
+              return (
+                <div key={index} className="flex flex-col items-end">
+                  <h1 className="font-Poppins text-sm font-bold">
+                    {admin.name}
+                  </h1>
+                  <h1 className="font-Poppins text-sm font-bold text-black/50">
+                    {admin.username}
+                  </h1>
+                </div>
+              );
+            })}
             <Image
               src={"/image/pp.png"}
               width={50}
@@ -115,21 +113,21 @@ export default function Berita() {
                   href={"berita/tambah-berita"}
                   className="flex flex-row items-start gap-1 border-2 border-[#112883] p-3 rounded-lg text-[#112883]"
                 >
-                  <h1 className="font-BebasNeue text-2xl font-medium">
+                  <h1 className="font-Lato text-xl font-extrabold">
                     Tambah Berita
                   </h1>
                   <AiOutlinePlus className="w-7 h-7" />
                 </Link>
                 <form className="lg:w-2/12">
-                  <div class="relative">
+                  <div className="relative">
                     <input
                       type="search"
-                      class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-black focus:border-black focus:outline-none"
+                      className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-black focus:border-black focus:outline-none"
                       placeholder="Cari ..."
                     />
                     <button
                       type="submit"
-                      class="text-white absolute right-2.5 bottom-2.5 bg-[#112883] hover:bg-[#112883]/90 font-medium rounded-lg text-sm px-4 py-2"
+                      className="text-white absolute right-2.5 bottom-2.5 bg-[#112883] hover:bg-[#112883]/90 font-medium rounded-lg text-sm px-4 py-2"
                     >
                       <BiSearch className="w-5 h-5" />
                     </button>
