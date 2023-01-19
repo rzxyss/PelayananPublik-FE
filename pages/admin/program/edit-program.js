@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 import { HiChevronDown } from "react-icons/hi";
 import Router from "next/router";
 
-export default function TambahProgram() {
+export default function EditProgram() {
   const [dataAdmin, setDataAdmin] = useState([]);
   const [profile, setProfile] = useState(false);
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function TambahProgram() {
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
           <h1 className="font-Lato font-extrabold text-3xl text-black">
-            Tambah Program
+            Edit Program
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
             <div className="flex flex-col w-auto items-center bg-white border rounded-md p-2">
@@ -107,7 +107,7 @@ export default function TambahProgram() {
         <div className="p-1">
           {/* Kontenna Disini */}
           <div className="p-5">
-            <div className="lg:w-full lg:px-20 flex flex-col">
+            <div className="lg:w-full lg:px-20 flex flex-col space-y-5">
               <div className="flex flex-col space-y-2">
                 <h1 className="font-Poppins font-medium text-lg">
                   Judul Program
@@ -116,10 +116,9 @@ export default function TambahProgram() {
                   type="text"
                   className="border border-gray-400 focus:border-black p-4 rounded-lg"
                   placeholder="Masukan Judul Program"
+                  value={"Isi Judul Nantinya"}
                 />
               </div>
-            </div>
-            <div className="lg:w-full lg:px-20 flex flex-col mt-10">
               <div className="flex flex-col space-y-2">
                 <h1 className="font-Poppins font-medium text-lg">
                   Foto Program
@@ -128,6 +127,9 @@ export default function TambahProgram() {
                   type="file"
                   className="border border-gray-400 focus:border-black p-4 rounded-lg"
                 />
+              </div>
+              <div className="flex flex-col space-y-2">
+                <Image src={'/image/gambarprogram.jpg'} width={500} height={0} />
               </div>
             </div>
             <div className="w-full flex lg:justify-end justify-center lg:px-20 mt-5 lg:mt-10 font-Poppins">
