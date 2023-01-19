@@ -93,6 +93,7 @@ export default function TambahProgram() {
               );
             })}
             <Image
+              alt="Foto Profile"
               src={"/image/pp.png"}
               width={50}
               height={0}

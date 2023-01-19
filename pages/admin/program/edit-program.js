@@ -93,6 +93,7 @@ export default function EditProgram() {
               );
             })}
             <Image
+              alt="Foto Profile"
               src={"/image/pp.png"}
               width={50}
               height={0}
@@ -129,7 +130,12 @@ export default function EditProgram() {
                 />
               </div>
               <div className="flex flex-col space-y-2">
-                <Image src={'/image/gambarprogram.jpg'} width={500} height={0} />
+                <Image
+                  alt="Program Tikomdik"
+                  src={"/image/gambarprogram.jpg"}
+                  width={500}
+                  height={0}
+                />
               </div>
             </div>
             <div className="w-full flex lg:justify-end justify-center lg:px-20 mt-5 lg:mt-10 font-Poppins">

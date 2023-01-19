@@ -86,7 +86,7 @@ export default function Program() {
       <Sidebar />
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
-          <h1 className="font-BebasNeue text-3xl text-[#112883] font-medium">
+          <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
             Program
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
@@ -108,6 +108,7 @@ export default function Program() {
               );
             })}
             <Image
+              alt="Foto Profile"
               src={"/image/pp.png"}
               width={50}
               height={0}
@@ -139,6 +140,7 @@ export default function Program() {
                   <div className="flex flex-row gap-3">
                     <div>
                       <Image
+                        alt="Program Tikomdik"
                         src={"/image/gambarprogram.jpg"}
                         width={350}
                         height={150}
