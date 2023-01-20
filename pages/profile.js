@@ -10,8 +10,8 @@ export default function Profile() {
       <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
         <div className="bg-black/60 w-full h-full">
           <div className="flex flex-col p-10">
-            <h1 className="font-Poppins font-extrabold text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white">
-              TENTANG TIKOMDIK
+            <h1 className="font-Poppins font-extrabold text-2xl lg:text-3xl xl:text-4xl text-white">
+              Tentang TIKomDik
             </h1>
             <h1 className="font-Poppins font-light text-xl text-white">
               Ketahui segalanya tentang UPTD TIKOMDIK.

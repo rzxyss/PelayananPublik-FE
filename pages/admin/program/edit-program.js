@@ -71,7 +71,7 @@ export default function EditProgram() {
       <Sidebar />
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
-          <h1 className="font-Lato font-extrabold text-3xl text-black">
+          <h1 className="font-Poppins font-extrabold text-2xl text-black">
             Edit Program
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>

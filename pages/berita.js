@@ -27,8 +27,8 @@ export default function Berita() {
       <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
         <div className="bg-black/60 w-full h-full">
           <div className="flex flex-col p-10">
-            <h1 className="font-BebasNeue font-medium text-5xl text-white">
-              berita uptd tikomdik
+            <h1 className="font-Poppins font-extrabold text-2xl lg:text-3xl xl:text-4xl text-white">
+              Berita UPTD TIKomDik
             </h1>
             <h1 className="font-Poppins font-light text-xl text-white">
               Menyajikan beragam berita seputar UPTD TIKOMDIK
@@ -37,8 +37,8 @@ export default function Berita() {
           <div className="w-full h-auto lg:mt-14 lg:px-28">
             <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg">
               <div className="w-full flex flex-row justify-between items-center px-2">
-                <h1 className="font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883]">
-                  berita terkini
+                <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
+                  Berita Terkini
                 </h1>
 
                 <form className="lg:w-2/12">
@@ -57,7 +57,7 @@ export default function Berita() {
                   </div>
                 </form>
               </div>
-              <div className="w-full flex flex-col lg:flex-row">
+              <div className="w-full flex flex-col lg:flex-row p-10">
                 <div className="grid lg:grid-cols-3 gap-5 w-full lg:w-8/12">
                   <div className="hover:scale-105 hover:bg-black/10 p-3 rounded-lg duration-500">
                     <Image

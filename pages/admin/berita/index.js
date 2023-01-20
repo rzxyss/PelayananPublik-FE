@@ -71,7 +71,7 @@ export default function Berita() {
       <Sidebar />
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
-          <h1 className="font-Lato text-3xl text-[#112883] font-extrabold">
+          <h1 className="font-Poppins text-2xl text-[#112883] font-extrabold">
             Berita
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
@@ -113,7 +113,7 @@ export default function Berita() {
                   href={"berita/tambah-berita"}
                   className="flex flex-row items-start gap-1 border-2 border-[#112883] p-3 rounded-lg text-[#112883]"
                 >
-                  <h1 className="font-Lato text-xl font-extrabold">
+                  <h1 className="font-Poppins text-xl font-extrabold">
                     Tambah Berita
                   </h1>
                   <AiOutlinePlus className="w-7 h-7" />
@@ -137,7 +137,7 @@ export default function Berita() {
               <div className="mt-5">
                 <div className="w-auto">
                   <div className="grid lg:grid-cols-3 gap-5">
-                    <div className="hover:scale-105 hover:bg-black/10 p-3 rounded-lg duration-500">
+                    <div className="hover:bg-black/10 p-3 rounded-lg duration-500">
                       <Image
                         src={"/image/berita.jpg"}
                         width={100}
@@ -166,78 +166,10 @@ export default function Berita() {
                             Berapa Hari Yang Lalu?
                           </h1>
                         </div>
-                        <div className="flex flex-row items-center text-[#112883]">
-                          <MdEdit className="w-5 h-5" />
-                          <AiFillDelete className="w-5 h-5" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="hover:scale-105 hover:bg-black/10 p-3 rounded-lg duration-500">
-                      <Image
-                        src={"/image/berita.jpg"}
-                        width={100}
-                        height={80}
-                        layout="responsive"
-                        alt="Berita"
-                        className="rounded-lg"
-                      />
-                      <div className="px-3 py-2 flex-wrap">
-                        <h1 className="font-Poppins font-medium text-lg">
-                          Judul Berita
-                        </h1>
-                        <h1 className="font-Poppins font-light text-sm">
-                          It is a long established fact that a reader will be
-                          distracted by the readable content of a page when
-                          looking at its layout. The point of using Lorem Ipsum
-                          is that it has a more-or-less normal distribution of
-                          letters, as opposed to using 'Content here, content
-                          here', making it look like readable English.
-                        </h1>
-                      </div>
-                      <div className="flex flex-row justify-between items-center">
-                        <div className="flex flex-row items-center text-black/60 mt-2">
-                          <MdHistory className="w-5 h-5" />
-                          <h1 className="font-Poppins font-light text-sm">
-                            Berapa Hari Yang Lalu?
-                          </h1>
-                        </div>
-                        <div className="flex flex-row items-center text-[#112883]">
-                          <MdEdit className="w-5 h-5" />
-                          <AiFillDelete className="w-5 h-5" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="hover:scale-105 hover:bg-black/10 p-3 rounded-lg duration-500">
-                      <Image
-                        src={"/image/berita.jpg"}
-                        width={100}
-                        height={80}
-                        layout="responsive"
-                        alt="Berita"
-                        className="rounded-lg"
-                      />
-                      <div className="px-3 py-2 flex-wrap">
-                        <h1 className="font-Poppins font-medium text-lg">
-                          Judul Berita
-                        </h1>
-                        <h1 className="font-Poppins font-light text-sm">
-                          It is a long established fact that a reader will be
-                          distracted by the readable content of a page when
-                          looking at its layout. The point of using Lorem Ipsum
-                          is that it has a more-or-less normal distribution of
-                          letters, as opposed to using 'Content here, content
-                          here', making it look like readable English.
-                        </h1>
-                      </div>
-                      <div className="flex flex-row justify-between items-center">
-                        <div className="flex flex-row items-center text-black/60 mt-2">
-                          <MdHistory className="w-5 h-5" />
-                          <h1 className="font-Poppins font-light text-sm">
-                            Berapa Hari Yang Lalu?
-                          </h1>
-                        </div>
-                        <div className="flex flex-row items-center text-[#112883]">
-                          <MdEdit className="w-5 h-5" />
+                        <div className="flex flex-row items-center text-[#112883] gap-5">
+                          <Link href={"berita/edit-berita"}>
+                            <MdEdit className="w-5 h-5" />
+                          </Link>
                           <AiFillDelete className="w-5 h-5" />
                         </div>
                       </div>

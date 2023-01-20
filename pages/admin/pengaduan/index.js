@@ -69,8 +69,8 @@ export default function Pengaduan() {
       <Sidebar />
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
-          <h1 className="font-BebasNeue text-3xl text-[#112883] font-medium">
-            pengaduan
+          <h1 className="font-Poppins font-extrabold text-2xl text-[#112883]">
+            Pengaduan
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
             <div className="flex flex-col w-auto items-center bg-white border rounded-md p-2">
@@ -109,43 +109,48 @@ export default function Pengaduan() {
           <div className="lg:p-5">
             <div className="w-full h-full flex flex-col tes">
               <div>
-                  <h1 className="font-Poppins text-xl font-semibold ">Pengaduan Terkini</h1>
-                  <h1 className="font-Poppins text-xs text-black/50 ">Ini merupakan pengaduan terkini silahkan cek dan konfirmasi</h1>
+                <h1 className="font-Poppins text-xl font-semibold ">
+                  Pengaduan Terkini
+                </h1>
+                <h1 className="font-Poppins text-xs text-black/50 ">
+                  Ini merupakan pengaduan terkini silahkan cek dan konfirmasi
+                </h1>
               </div>
-            <div className="mt-5">
-              <div className="w-full h-auto bg-white p-2 rounded-xl shadow-[0_0_5px]">
-              <div className="flex flex-col lg:flex-row lg:items-center gap-5">
-                <BsFillCheckCircleFill className="w-10 h-10 text-[#58932A]" />
-                <div className="w-full flex flex-col lg:flex-row justify-between gap-5">
-                  <div className="w-full lg:w-1/2 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2">
-                    <div className="flex flex-col">
-                      <h1 className="font-Poppins font-bold text-lg">Jadwal PPDB 2023</h1>
-                      <h1 className="font-Poppins font-normal text-sm text-black/50">
-                        Untuk Jadwal PPDB di perkirakan kapan...                      </h1>
-                    </div>
-                    <h1 className="font-Poppins font-normal text-sm">
-                      2023-01-11
-                    </h1>
-                  </div>
-                  <div className="w-full lg:w-1/2 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2">
-                    <h1 className="font-Poppins font-normal text-sm">
-                      rizkisaepulaziz@gmail.com
-                    </h1>
-                    <div className="flex flex-row items-center gap-2">
-                      <Link href={"pengaduan/pengaduan-detail"}>  
-                      <HiOutlineClipboardList className="mr-10 w-7 h-7 text-black/50" />
-                      </Link>
-                      <button className="bg-[#112883] px-4 py-3  rounded-xl text-white font-Poppins text-base ">
-                        Delete
-                      </button>
+              <div className="mt-5">
+                <div className="w-full h-auto bg-white p-2 rounded-xl shadow-[0_0_5px]">
+                  <div className="flex flex-col lg:flex-row lg:items-center gap-5">
+                    <BsFillCheckCircleFill className="w-10 h-10 text-[#58932A]" />
+                    <div className="w-full flex flex-col lg:flex-row justify-between gap-5">
+                      <div className="w-full lg:w-1/2 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2">
+                        <div className="flex flex-col">
+                          <h1 className="font-Poppins font-bold text-lg">
+                            Jadwal PPDB 2023
+                          </h1>
+                          <h1 className="font-Poppins font-normal text-sm text-black/50">
+                            Untuk Jadwal PPDB di perkirakan kapan...{" "}
+                          </h1>
+                        </div>
+                        <h1 className="font-Poppins font-normal text-sm">
+                          2023-01-11
+                        </h1>
+                      </div>
+                      <div className="w-full lg:w-1/2 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2">
+                        <h1 className="font-Poppins font-normal text-sm">
+                          rizkisaepulaziz@gmail.com
+                        </h1>
+                        <div className="flex flex-row items-center gap-2">
+                          <Link href={"pengaduan/pengaduan-detail"}>
+                            <HiOutlineClipboardList className="mr-10 w-7 h-7 text-black/50" />
+                          </Link>
+                          <button className="bg-[#112883] px-4 py-3  rounded-xl text-white font-Poppins text-base ">
+                            Delete
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          
-
             </div>
           </div>
           {/* EndKonten */}

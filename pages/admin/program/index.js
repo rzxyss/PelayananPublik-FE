@@ -13,7 +13,17 @@ import { HiChevronDown } from "react-icons/hi";
 export default function Program() {
   const [dataAdmin, setDataAdmin] = useState([]);
   const [profile, setProfile] = useState(false);
+  const [dataProgram, setDAtaProgram] = useState([]);
   useEffect(() => {
+    const fetchProgram = async () => {
+      try {
+        const rPorgram = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/program`
+        );
+        setDAtaProgram(rPorgram.data);
+      } catch (error) {}
+    };
+
     const getAdmin = async (e) => {
       try {
         const res = await axios.post(
@@ -39,24 +49,34 @@ export default function Program() {
         }, 2100);
       }
     };
+    fetchProgram();
     getAdmin();
   }, []);
 
-  const btnDelete = async () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-    });
-  };
+  // const btnDelete = async (productId) => {
+  //   try {
+  //     await axios.delete(`http://localhost:5000/products/${productId}`);
+  //     getProducts();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // const btnDelete = async () => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You won't be able to revert this!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, delete it!",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       Swal.fire("Deleted!", "Your file has been deleted.", "success");
+  //     }
+  //   });
+  // };
 
   const logoutHandle = async () => {
     sessionStorage.clear();
@@ -86,7 +106,7 @@ export default function Program() {
       <Sidebar />
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
-          <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
+          <h1 className="font-Poppins font-extrabold text-2xl text-[#112883]">
             Program
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
@@ -136,39 +156,47 @@ export default function Program() {
                 </Link>
               </div>
               <div className="mt-5">
-                <div className="w-full h-full hover:bg-black/10 p-3 rounded-xl duration-200 gap-5">
-                  <div className="flex flex-row gap-3">
-                    <div>
-                      <Image
-                        alt="Program Tikomdik"
-                        src={"/image/gambarprogram.jpg"}
-                        width={350}
-                        height={150}
-                        className="rounded-lg"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between lg:py-2 w-full">
-                      <h1 className="text-sm font-Poppins font-semibold">
-                        Judul Program
-                      </h1>
-                      <div className="flex lg:flex-row flex-col lg:items-center justify-between lg:gap-0 gap-2">
-                        <div className="flex flex-row items-center gap-1">
-                          <MdHistory className="w-5 h-5" />
-                          <h1>21/12/31</h1>
-                        </div>
-                        <div className="flex flex-row items-center gap-3">
-                          <Link href={"program/edit-program"}>
-                            <MdEdit className="w-5 h-5" />
-                          </Link>
-                          <AiFillDelete
-                            className="w-5 h-5 cursor-pointer"
-                            onClick={btnDelete}
+                {dataProgram.map((program, index) => {
+                  return (
+                    <div
+                      className="w-full h-full hover:bg-black/10 p-3 rounded-xl duration-200 gap-5"
+                      key={index}
+                    >
+                      <div className="flex flex-row gap-3">
+                        <div>
+                          <Image
+                            alt={program.judul_program}
+                            src={program.url}
+                            width={350}
+                            height={150}
+                            className="rounded-lg"
+                            priority = 'true'
                           />
+                        </div>
+                        <div className="flex flex-col justify-between lg:py-2 w-full">
+                          <h1 className="text-xl font-Poppins font-semibold">
+                            {program.judul_program}
+                          </h1>
+                          <div className="flex lg:flex-row flex-col lg:items-center justify-between lg:gap-0 gap-2">
+                            <div className="flex flex-row items-center gap-1">
+                              <MdHistory className="w-5 h-5" />
+                              <h1>{program.createdAt}</h1>
+                            </div>
+                            <div className="flex flex-row items-center gap-3">
+                              <Link href={"program/edit-program"}>
+                                <MdEdit className="w-5 h-5" />
+                              </Link>
+                              <AiFillDelete
+                                className="w-5 h-5 cursor-pointer"
+                                onClick={btnDelete}
+                              />
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
           </div>

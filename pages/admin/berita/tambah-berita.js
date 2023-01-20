@@ -71,8 +71,8 @@ export default function TambahBerita() {
       <Sidebar />
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
-          <h1 className="font-BebasNeue text-3xl text-[#112883] font-medium">
-            tambah berita
+          <h1 className="font-Poppins text-2xl text-black font-extrabold">
+            Tambah Berita
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
             <div className="flex flex-col w-auto items-center bg-white border rounded-md p-2">
@@ -150,27 +150,20 @@ export default function TambahBerita() {
                   />
                 </div>
                 <div className="flex flex-col space-y-2 mt-10">
-                  {/* <h1 className="font-Poppins font-medium text-lg">
-                  Judul Berita
-                </h1>
-                <textarea
-                  className="block p-2.5 w-full text-sm rounded-lg border border-gray-400 focus:border-black"
-                  placeholder="Masukan deskripsi berita"
-                /> */}
                 </div>
               </div>
             </div>
-            <div className="w-full flex lg:justify-end justify-center lg:px-20 mt-5 lg:mt-10 font-BebasNeue">
-              <Link href={"/"} className="px-5">
+            <div className="w-full flex lg:justify-end justify-center lg:px-20 mt-5 lg:mt-10 font-Poppins">
+              <Link href={"/admin/berita"} className="px-5">
                 <div className="w-auto h-auto lg:px-5 lg:py-1 rounded-lg flex justify-center">
-                  <h1 className="flex items-center justify-center text-lg">
+                  <h1 className="flex items-center justify-center text-lg font-semibold text-[#112883]">
                     Kembali
                   </h1>
                 </div>
               </Link>
               <Link href={"/"} className="px-5">
-                <div className="w-auto h-auto lg:px-5 lg:py-1 rounded-lg flex justify-center">
-                  <h1 className="flex items-center justify-center text-lg">
+                <div className="w-auto h-auto lg:px-5 lg:py-1 rounded-lg flex justify-center bg-[#112883]">
+                  <h1 className="flex items-center justify-center text-lg font-semibold text-white">
                     Simpan
                   </h1>
                 </div>

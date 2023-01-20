@@ -14,6 +14,33 @@ import Router from "next/router";
 export default function TambahProgram() {
   const [dataAdmin, setDataAdmin] = useState([]);
   const [profile, setProfile] = useState(false);
+  const [judulProgram, setJudulProgram] = useState("");
+  const [imageProgram, setImageProgram] = useState("");
+  const [preview, setPreview] = useState("");
+
+  const loadImage = (e) => {
+    const image = e.target.files[0];
+    setImageProgram(image);
+    setPreview(URL.createObjectURL(image));
+  };
+
+  const postProgram = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", imageProgram);
+    formData.append("judul_program", judulProgram);
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/program`, formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
+      Router.push("/admin/program");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const getAdmin = async (e) => {
       try {
@@ -71,7 +98,7 @@ export default function TambahProgram() {
       <Sidebar />
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
-          <h1 className="font-Lato font-extrabold text-3xl text-black">
+          <h1 className="font-Poppins font-extrabold text-2xl text-black">
             Tambah Program
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
@@ -115,6 +142,7 @@ export default function TambahProgram() {
                 </h1>
                 <input
                   type="text"
+                  onChange={(e) => setJudulProgram(e.target.value)}
                   className="border border-gray-400 focus:border-black p-4 rounded-lg"
                   placeholder="Masukan Judul Program"
                 />
@@ -127,7 +155,19 @@ export default function TambahProgram() {
                 </h1>
                 <input
                   type="file"
+                  onChange={loadImage}
                   className="border border-gray-400 focus:border-black p-4 rounded-lg"
+                />
+              </div>
+            </div>
+            {console.log(judulProgram)}
+            <div className="lg:w-full lg:px-20 flex flex-col mt-10">
+              <div className="flex flex-col space-y-2">
+                <Image
+                  alt="Program Tikomdik"
+                  src={preview ? preview : '/image/ProgramPreset.jpg'}
+                  width={500}
+                  height={0}
                 />
               </div>
             </div>
@@ -139,13 +179,13 @@ export default function TambahProgram() {
                   </h1>
                 </div>
               </Link>
-              <Link href={"/"} className="px-5">
+              <button onClick={postProgram} className="px-5">
                 <div className="w-auto h-auto lg:px-5 lg:py-1 rounded-lg flex justify-center bg-[#112883]">
                   <h1 className="flex items-center justify-center text-lg font-semibold text-white">
                     Simpan
                   </h1>
                 </div>
-              </Link>
+              </button>
             </div>
           </div>
           {/* Akhir Konten */}

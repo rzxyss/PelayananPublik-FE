@@ -21,7 +21,7 @@ import axios from "axios";
 
 export default function Home() {
   const [berita, setBerita] = useState([]);
-  // const [program, setProgram] = useState([]);
+  const [program, setProgram] = useState([]);
 
   // const getBerita = async () => {
   //   const resBerita = await axios.get(
@@ -30,12 +30,12 @@ export default function Home() {
   //   setBerita(resBerita.data);
   // };
 
-  // const getProgram = async () => {
-  //   const resProgram = await axios.get(
-  //     `${process.env.NEXT_PUBLIC_API_URL}/program`
-  //   );
-  //   setProgram(resProgram.data);
-  // };
+  const getProgram = async () => {
+    const resProgram = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/program`
+    );
+    setProgram(resProgram.data);
+  };
 
   const faq = [
     {
@@ -65,7 +65,7 @@ export default function Home() {
   useEffect(() => {
     setDatas(faq);
     // getBerita();
-    // getProgram();
+    getProgram();
   }, []);
 
   function handleSubmit() {
@@ -329,7 +329,7 @@ export default function Home() {
               modules={[Navigation, Autoplay]}
               className="mySwiper"
             >
-              <SwiperSlide>
+              {/* <SwiperSlide>
                 <div className="w-full aspect-[16/7]">
                   <div className="bg-[url('/image/berita2.jpg')] h-full bg-cover bg-center">
                     <div className="bg-black/50 w-full h-full p-2 flex flex-col justify-end items-center">
@@ -339,8 +339,8 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </SwiperSlide>
-              {/* {program.map((program, index) => {
+              </SwiperSlide> */}
+              {program.map((program, index) => {
                 return (
                   <SwiperSlide key={index}>
                     <div className="w-full aspect-[16/7]">
@@ -357,7 +357,7 @@ export default function Home() {
                     </div>
                   </SwiperSlide>
                 );
-              })} */}
+              })}
             </Swiper>
           </div>
         </div>

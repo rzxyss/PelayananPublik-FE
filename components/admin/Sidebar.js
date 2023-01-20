@@ -27,7 +27,7 @@ export default function Sidebar() {
             className="block lg:hidden"
           />
         </div>
-        <ul className="space-y-2">
+        <ul className="space-y-2 text-[#112883]">
           <li
             className={`${
               router.pathname == "/admin" ? "bg-[#112883] text-white" : ""
@@ -35,11 +35,11 @@ export default function Sidebar() {
           >
             <Link
               href={"/admin"}
-              className="flex gap-1 justify-center lg:justify-start	w-full"
+              className="flex gap-1 justify-center lg:justify-start space-x-1 items-center"
             >
               <BsGridFill className="w-6 h-6" />
-              <h1 className="hidden lg:block font-BebasNeue text-xl">
-                dashboard
+              <h1 className="hidden lg:block font-Poppins font-extrabold text-xl">
+                Dashboard
               </h1>
             </Link>
           </li>
@@ -52,14 +52,18 @@ export default function Sidebar() {
               router.pathname == "/admin/berita/tambah-berita"
                 ? "bg-[#112883] text-white"
                 : ""
+            } ${
+              router.pathname == "/admin/berita/edit-berita"
+                ? "bg-[#112883] text-white"
+                : ""
             } w-10/12 h-auto hover:bg-[#112883] hover:text-white p-3 rounded-r-xl`}
           >
             <Link
               href={"/admin/berita"}
-              className="flex gap-1 justify-center lg:justify-start"
+              className="flex gap-1 justify-center lg:justify-start space-x-1 items-center"
             >
               <BsNewspaper className="w-6 h-6" />
-              <h1 className="hidden lg:block font-BebasNeue text-xl">Berita</h1>
+              <h1 className="hidden lg:block font-Poppins font-extrabold text-xl">Berita</h1>
             </Link>
           </li>
           <li
@@ -68,17 +72,17 @@ export default function Sidebar() {
                 ? "bg-[#112883] text-white"
                 : ""
             } ${
-              router.pathname == "/admin/berita/tambah-berita"
+              router.pathname == "/admin/pengaduan/pengaduan-detail"
                 ? "bg-[#112883] text-white"
                 : ""
             } w-10/12 h-auto hover:bg-[#112883] hover:text-white p-3 rounded-r-xl`}
           >
             <Link
               href={"/admin/pengaduan"}
-              className="flex gap-1 justify-center lg:justify-start"
+              className="flex gap-1 justify-center lg:justify-start space-x-1 items-center"
             >
               <HiOutlineSpeakerphone className="w-6 h-6" />
-              <h1 className="hidden lg:block font-BebasNeue text-xl">
+              <h1 className="hidden lg:block font-Poppins font-extrabold text-xl">
                 Pengaduan
               </h1>
             </Link>
@@ -100,10 +104,10 @@ export default function Sidebar() {
           >
             <Link
               href={"/admin/program"}
-              className="flex gap-1 justify-center lg:justify-start"
+              className="flex gap-1 justify-center lg:justify-start space-x-1 items-center"
             >
               <HiViewBoards className="w-6 h-6" />
-              <h1 className="hidden lg:block font-BebasNeue text-xl">
+              <h1 className="hidden lg:block font-Poppins font-extrabold text-xl">
                 Program
               </h1>
             </Link>

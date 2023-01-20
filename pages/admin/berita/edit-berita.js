@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Sidebar from "../../../components/admin/Sidebar";
-import { CiUser } from "react-icons/ci";
-import { HiOutlineChatAlt2 } from "react-icons/hi";
-import { BsCalendar2 } from "react-icons/bs";
+import { AiOutlinePlus } from "react-icons/ai";
+import { BiSearch } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
 import { MdHistory, MdEdit } from "react-icons/md";
 import Link from "next/link";
 import axios from "axios";
@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 import { HiChevronDown } from "react-icons/hi";
 import Router from "next/router";
 
-export default function PengaduanDetail() {
+export default function EditBerita() {
   const [dataAdmin, setDataAdmin] = useState([]);
   const [profile, setProfile] = useState(false);
   useEffect(() => {
@@ -71,8 +71,8 @@ export default function PengaduanDetail() {
       <Sidebar />
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
-          <h1 className="font-Poppins font-extrabold text-2xl text-black">
-            Pengaduan Detail
+          <h1 className="font-Poppins text-2xl text-black font-extrabold">
+            Edit Berita
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
             <div className="flex flex-col w-auto items-center bg-white border rounded-md p-2">
@@ -93,7 +93,6 @@ export default function PengaduanDetail() {
               );
             })}
             <Image
-              alt="Foto Profile"
               src={"/image/pp.png"}
               width={50}
               height={0}
@@ -108,57 +107,72 @@ export default function PengaduanDetail() {
         <div className="p-1">
           {/* Kontenna Disini */}
           <div className="p-5">
-            <div className="w-full flex flex-col">
-              <div className="flex flex-row gap-2 items-stretch">
-                <div className="w-2/12 lg:w-1/12 flex justify-center">
-                  <CiUser className="w-10 h-10 text-[#112883]" />
+            <div className="lg:grid lg:grid-cols-2">
+              <div className="lg:w-full lg:px-20 flex flex-col">
+                <div className="flex flex-col space-y-2">
+                  <h1 className="font-Poppins font-medium text-lg">
+                    Judul Berita
+                  </h1>
+                  <input
+                    type="text"
+                    className="border border-gray-400 focus:border-black p-4 rounded-lg"
+                    placeholder="Masukan Judul Berita"
+                  />
                 </div>
-                <div className="flex flex-col w-10/12 lg:w-11/12">
-                  <h1 className="text-2xl font-Poppins font-semibold  ">
-                    Ilham hardiana
+                <div className="flex flex-col space-y-2 mt-10">
+                  <h1 className="font-Poppins font-medium text-lg">
+                    Deskripsi Berita
                   </h1>
-                  <h1 className="text-base font-DMSans text-black/50">
-                    Ilhamhardiana@gmail.com
+                  <input
+                    type="text"
+                    className="border border-gray-400 focus:border-black p-4 rounded-lg"
+                    placeholder="Masukan Judul Berita"
+                  />
+                </div>
+                <div className="flex flex-col space-y-2 mt-10">
+                  <h1 className="font-Poppins font-medium text-lg">
+                    Isi Berita
                   </h1>
-                  <h1 className="text-base font-DMSans text-black/50">
-                    type
-                  </h1>
+                  <textarea
+                    className="block p-2.5 w-full text-sm rounded-lg border border-gray-400 focus:border-black"
+                    placeholder="Masukan deskripsi berita"
+                  />
                 </div>
               </div>
-              <div className="mt-9">
-                <div className="flex flex-row gap-2 items-stretch">
-                  <div className="w-2/12 lg:w-1/12 flex justify-center">
-                    <HiOutlineChatAlt2 className="w-10 h-10 text-[#112883]" />
-                  </div>
-                  <div className="flex flex-col w-10/12 lg:w-11/12">
-                    <h1 className="text-lg font-DMSans font-semibold">
-                      Jadwal PPDB 2023
-                    </h1>
-                    <h1 className="text-base font-DMSans text-black/50">
-                      Untuk jadwal PPDB diperkirakan kapan soalnya anak saya mau
-                      daftar untuk masuk SMK
-                    </h1>
-                  </div>
+              <div className="lg:w-full lg:px-20 flex flex-col mt-10 lg:mt-0">
+                <div className="flex flex-col space-y-2">
+                  <h1 className="font-Poppins font-medium text-lg">
+                    Foto Berita
+                  </h1>
+                  <input
+                    type="file"
+                    className="border border-gray-400 focus:border-black p-4 rounded-lg"
+                  />
                 </div>
-              </div>
-              <div className="mt-9">
-                <div className="flex flex-row gap-2 items-stretch">
-                  <div className="w-2/12 lg:w-1/12 flex justify-center">
-                    <BsCalendar2 className="w-10 h-10 text-[#112883]" />
-                  </div>
-                  <div className="flex flex-col justify-center w-10/12 lg:w-11/12">
-                    <h1 className="text-lg font-DMSans font-semibold">
-                      Jadwal PPDB 2023
-                    </h1>
-                  </div>
+                <div className="flex flex-col space-y-2 mt-10">
+                <Image
+                        src={"/image/berita.jpg"}
+                        width={100}
+                        height={80}
+                        layout="responsive"
+                        alt="Berita"
+                        className="rounded-lg"
+                      />
                 </div>
               </div>
             </div>
             <div className="w-full flex lg:justify-end justify-center lg:px-20 mt-5 lg:mt-10 font-Poppins">
-              <Link href={"/admin/pengaduan"} className="px-5">
+              <Link href={"/admin/berita"} className="px-5">
                 <div className="w-auto h-auto lg:px-5 lg:py-1 rounded-lg flex justify-center">
                   <h1 className="flex items-center justify-center text-lg font-semibold text-[#112883]">
                     Kembali
+                  </h1>
+                </div>
+              </Link>
+              <Link href={"/"} className="px-5">
+                <div className="w-auto h-auto lg:px-5 lg:py-1 rounded-lg flex justify-center bg-[#112883]">
+                  <h1 className="flex items-center justify-center text-lg font-semibold text-white">
+                    Simpan
                   </h1>
                 </div>
               </Link>
