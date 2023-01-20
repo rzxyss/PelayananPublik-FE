@@ -10,8 +10,8 @@ export default function Profile() {
       <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
         <div className="bg-black/60 w-full h-full">
           <div className="flex flex-col p-10">
-            <h1 className="font-BebasNeue font-medium text-5xl text-white">
-              tentang tikomdik
+            <h1 className="font-Poppins font-extrabold text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white">
+              TENTANG TIKOMDIK
             </h1>
             <h1 className="font-Poppins font-light text-xl text-white">
               Ketahui segalanya tentang UPTD TIKOMDIK.
@@ -20,18 +20,18 @@ export default function Profile() {
           <div className="w-full h-auto lg:mt-14 px-5 lg:px-20 2xl:px-60">
             <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg">
               <div id="tentang-tikomdik" className="my-10">
-                <h1 className="font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883]">
-                  uptd tikomdik
+                <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
+                  UPTD TIKomDik
                 </h1>
                 <div className="flex flex-col lg:flex-row gap-5 px-5 lg:px-16 py-10">
                   <div className="lg:w-10/12 lg:mx-auto">
                     <Image
-                      src={"/image/lobby2.jpg"}
+                      src={"/image/TulisanTikomdik.jpg"}
                       responsive="true"
                       alt="Hero Image"
                       width={350}
                       height={0}
-                      className="rounded-xl float-none mb-5 mr-5 lg:float-left"
+                      className="rounded-xl float-none lg:mb-5 lg:mr-5 mx-auto lg:float-left"
                     />
                     <h1 className="font-Poppins font-medium text-lg text-black/50 indent-5 lg:indent-8 mb-5">
                       Disrupsi Teknologi 4.0 mempengaruhi dunia pendidikan
@@ -80,15 +80,15 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              {/* <div id="visi-misi" className="my-10 px-20 2xl:px-56">
-                <h1 className="font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883]">
-                  visi dan misi
+              <div id="visi-misi" className="my-10 px-7 lg:px-20 2xl:px-56">
+                <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
+                  Visi dan Misi
                 </h1>
-                <div className="grid lg:grid-cols-3 gap-2 px-16 py-5 lg:items-center">
+                <div className="grid lg:grid-cols-3 gap-2 lg:px-16 py-5 lg:py-0 lg:items-center">
                   <div className="col-span-2">
-                    <div className="flex flex-col">
-                      <div className="flex-col">
-                        <h1 className="font-BebasNeue font-semibold text-4xl px-5 lg:px-10 underline underline-offset-4 text-[#112883] mb-5">
+                    <div className="flex flex-col space-y-3">
+                      <div className="flex-col space-y-2">
+                        <h1 className="font-Lato font-extrabold text-3xl px-5 lg:px-10 text-[#112883]">
                           Visi
                         </h1>
                         <h1 className="font-Poppins font-medium text-lg text-black/50">
@@ -97,8 +97,8 @@ export default function Profile() {
                           kelola Pendidikan di era milenial.
                         </h1>
                       </div>
-                      <div className="flex-col mt-10">
-                        <h1 className="font-BebasNeue font-semibold text-4xl px-5 lg:px-10 underline underline-offset-4 text-[#112883] mb-5">
+                      <div className="flex-col space-y-2">
+                        <h1 className="font-Lato font-extrabold text-3xl px-5 lg:px-10 text-[#112883]">
                           Misi
                         </h1>
                         <ul className="list-disc list-outside text-black/50">
@@ -159,14 +159,14 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div id="tugas-pokok-dan-fungsi" className="my-10 px-20 2xl:px-56">
-                <h1 className="font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883]">
-                  tugas pokok dan fungsi
+              <div id="tugas-pokok-dan-fungsi" className="my-10 px-7 lg:px-20 2xl:px-56">
+                <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
+                  Tugas Pokok Dan Fungsi
                 </h1>
-                <div className="flex flex-col px-16">
-                  <div className="my-5">
-                    <h1 className="font-BebasNeue font-semibold text-4xl px-5 lg:px-10 underline underline-offset-4 text-[#112883] mt-5 mb-5">
-                      tugas pokok
+                <div className="flex flex-col space-y-3">
+                  <div className="flex flex-col space-y-2">
+                    <h1 className="font-Lato font-extrabold text-3xl px-5 lg:px-10 text-[#112883]">
+                      Tugas Pokok
                     </h1>
                     <h1 className="font-Poppins font-medium text-lg text-black/50">
                       UPTD Teknologi Informasi dan Komunikasi Pendidikan
@@ -177,9 +177,9 @@ export default function Profile() {
                       promosi.
                     </h1>
                   </div>
-                  <div className="my-5">
-                    <h1 className="font-BebasNeue font-semibold text-4xl px-5 lg:px-10 underline underline-offset-4 text-[#112883] mt-5 mb-5">
-                      fungsi
+                  <div className="flex flex-col space-y-2">
+                    <h1 className="font-Lato font-extrabold text-3xl px-5 lg:px-10 text-[#112883]">
+                      Fungsi
                     </h1>
                     <ul className="list-disc list-outside text-black/50">
                       <li className="font-Poppins font-medium text-lg">
@@ -221,12 +221,12 @@ export default function Profile() {
                 </div>
               </div>
               <div className="mt-10" id="team-project">
-                <h1 className="font-BebasNeue font-semibold text-3xl underline underline-offset-8 p-5 text-center text-[#112883]">
-                  team project
+                <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
+                  Team Project
                 </h1>
                 <h1 className="text-center">Coming Soon......</h1>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10"></div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
