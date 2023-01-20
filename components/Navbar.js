@@ -20,9 +20,9 @@ export default function Navbar() {
             </svg>
           </button>
           <ul className={`${!open ? 'hidden lg:mt-0 lg:space-y-0 lg:flex lg:w-auto lg:gap-10' : 'text-center mt-5 w-full space-y-3'}`}>
-            <li className={`uppercase font-BebasNeue text-2xl ${router.pathname === '/' ? 'lg:underline underline-offset-8 text-[#112883]' : 'text-black/50'}`}><Link href='/'>home</Link></li>
-            <li className={`uppercase font-BebasNeue text-2xl ${router.pathname === '/berita' ? 'lg:underline underline-offset-8 text-[#112883]' : 'text-black/50'}`}><Link href='/berita'>berita</Link></li>
-            <li className={`uppercase font-BebasNeue text-2xl ${router.pathname === '/faq' ? 'lg:underline underline-offset-8 text-[#112883]' : 'text-black/50'}`}>faq</li>
+            <li className={`font-Poppins font-semibold text-xl ${router.pathname === '/' ? 'lg:underline underline-offset-8 text-[#112883]' : 'text-black/50'}`}><Link href='/'>Home</Link></li>
+            <li className={`font-Poppins font-semibold text-xl ${router.pathname === '/berita' ? 'lg:underline underline-offset-8 text-[#112883]' : 'text-black/50'}`}><Link href='/berita'>Berita</Link></li>
+            <li className={`font-Poppins font-semibold text-xl ${router.pathname === '/faq' ? 'lg:underline underline-offset-8 text-[#112883]' : 'text-black/50'}`}>FaQ</li>
           </ul>
         </div>
       </div>
