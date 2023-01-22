@@ -183,12 +183,12 @@ export default function Program() {
                               <h1>{program.createdAt}</h1>
                             </div>
                             <div className="flex flex-row items-center gap-3">
-                              <Link href={"program/edit-program"}>
+                              <Link href={`program/edit-program/${program.id}`}>
                                 <MdEdit className="w-5 h-5" />
                               </Link>
                               <AiFillDelete
                                 className="w-5 h-5 cursor-pointer"
-                                onClick={btnDelete}
+                                // onClick={btnDelete}
                               />
                             </div>
                           </div>

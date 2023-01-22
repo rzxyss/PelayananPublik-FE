@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Sidebar from "../../../components/admin/Sidebar";
+import Sidebar from "../../../../components/admin/Sidebar";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
@@ -11,37 +11,62 @@ import Swal from "sweetalert2";
 import { HiChevronDown } from "react-icons/hi";
 import Router from "next/router";
 
-export default function EditProgram() {
+export default function EditProgram({programId}) {
   const [dataAdmin, setDataAdmin] = useState([]);
   const [profile, setProfile] = useState(false);
-  useEffect(() => {
-    const getAdmin = async (e) => {
-      try {
-        const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/token`,
-          {
-            token: sessionStorage.getItem("token") || "null",
-          }
-        );
-        setDataAdmin(res.data);
-        if (sessionStorage.getItem("token", res.data[0].token)) {
-          console.log("admin login");
+  const [dataProgram, setDataProgram] = useState([]);
+  const [judulProgram, setJudulProgram] = useState("");
+  const [imageProgram, setImageProgram] = useState("");
+  const [preview, setPreview] = useState("");
+
+  const fetchProgram = async () => {
+    try {
+      const rPorgram = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/program/${programId}`
+      );
+      setJudulProgram(rPorgram.data.judul_program)
+      setImageProgram(rPorgram.data.image)
+      setPreview(rPorgram.data.url);
+      setDataProgram(rPorgram.data);
+    } catch (error) {}
+  };
+
+  const getAdmin = async (e) => {
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/token`,
+        {
+          token: sessionStorage.getItem("token") || "null",
         }
-      } catch (error) {
-        Swal.fire({
-          position: "center",
-          icon: "warning",
-          title: "Anda Harus Login Terlebih Dahulu!",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        setTimeout(() => {
-          Router.push("/admin/login");
-        }, 2100);
+      );
+      setDataAdmin(res.data);
+      if (sessionStorage.getItem("token", res.data[0].token)) {
+        console.log("admin login");
       }
-    };
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "Anda Harus Login Terlebih Dahulu!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setTimeout(() => {
+        Router.push("/admin/login");
+      }, 2100);
+    }
+  };
+
+  useEffect(() => {
     getAdmin();
+    fetchProgram();
   }, []);
+
+  const loadImage = (e) => {
+    const image = e.target.files[0];
+    setImageProgram(image);
+    setPreview(URL.createObjectURL(image));
+  };
 
   const logoutHandle = async () => {
     sessionStorage.clear();
@@ -117,7 +142,6 @@ export default function EditProgram() {
                   type="text"
                   className="border border-gray-400 focus:border-black p-4 rounded-lg"
                   placeholder="Masukan Judul Program"
-                  value={"Isi Judul Nantinya"}
                 />
               </div>
               <div className="flex flex-col space-y-2">
@@ -132,7 +156,7 @@ export default function EditProgram() {
               <div className="flex flex-col space-y-2">
                 <Image
                   alt="Program Tikomdik"
-                  src={"/image/gambarprogram.jpg"}
+                  src={loadImage}
                   width={500}
                   height={0}
                 />
@@ -160,4 +184,14 @@ export default function EditProgram() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { programId } = params;
+  return {
+    props: {
+      programId,
+    },
+  };
 }
