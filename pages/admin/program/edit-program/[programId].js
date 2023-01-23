@@ -1,44 +1,24 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Sidebar from "../../../../components/admin/Sidebar";
-import { AiOutlinePlus } from "react-icons/ai";
-import { BiSearch } from "react-icons/bi";
-import { AiFillDelete } from "react-icons/ai";
-import { MdHistory, MdEdit } from "react-icons/md";
 import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { HiChevronDown } from "react-icons/hi";
 import Router from "next/router";
 
-export default function EditProgram({programId}) {
+export default function TambahProgram({ programId }) {
   const [dataAdmin, setDataAdmin] = useState([]);
   const [profile, setProfile] = useState(false);
-  const [dataProgram, setDataProgram] = useState([]);
   const [judulProgram, setJudulProgram] = useState("");
   const [imageProgram, setImageProgram] = useState("");
   const [preview, setPreview] = useState("");
 
-  const fetchProgram = async () => {
-    try {
-      const rPorgram = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/program/${programId}`
-      );
-      setJudulProgram(rPorgram.data.judul_program)
-      setImageProgram(rPorgram.data.image)
-      setPreview(rPorgram.data.url);
-      setDataProgram(rPorgram.data);
-    } catch (error) {}
-  };
-
   const getAdmin = async (e) => {
     try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/token`,
-        {
-          token: sessionStorage.getItem("token") || "null",
-        }
-      );
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
+        token: sessionStorage.getItem("token") || "null",
+      });
       setDataAdmin(res.data);
       if (sessionStorage.getItem("token", res.data[0].token)) {
         console.log("admin login");
@@ -57,16 +37,50 @@ export default function EditProgram({programId}) {
     }
   };
 
-  useEffect(() => {
-    getAdmin();
-    fetchProgram();
-  }, []);
+  const getProgram = async (e) => {
+    try {
+      const rProgram = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/program/${programId}`
+      );
+      setJudulProgram(rProgram.data.judul_program);
+      setImageProgram(rProgram.data.image);
+      setPreview(rProgram.data.url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const loadImage = (e) => {
-    const image = e.target.files[0];
+    const image = e.target.files[0] ? e.target.files[0] : imageProgram;
     setImageProgram(image);
     setPreview(URL.createObjectURL(image));
   };
+
+  const updateProgram = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", imageProgram);
+    formData.append("judul_program", judulProgram);
+    try {
+      await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_URL}/program/${programId}`,
+        formData,
+        {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
+        }
+      );
+      Router.push("/admin/program");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAdmin();
+    getProgram();
+  }, []);
 
   const logoutHandle = async () => {
     sessionStorage.clear();
@@ -97,7 +111,7 @@ export default function EditProgram({programId}) {
       <div className="w-10/12 flex-col">
         <div className="flex flex-row justify-between p-3 items-center shadow-md">
           <h1 className="font-Poppins font-extrabold text-2xl text-black">
-            Edit Program
+            Tambah Program
           </h1>
           <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
             <div className="flex flex-col w-auto items-center bg-white border rounded-md p-2">
@@ -133,30 +147,36 @@ export default function EditProgram({programId}) {
         <div className="p-1">
           {/* Kontenna Disini */}
           <div className="p-5">
-            <div className="lg:w-full lg:px-20 flex flex-col space-y-5">
+            <div className="lg:w-full lg:px-20 flex flex-col">
               <div className="flex flex-col space-y-2">
                 <h1 className="font-Poppins font-medium text-lg">
                   Judul Program
                 </h1>
                 <input
                   type="text"
+                  onChange={(e) => setJudulProgram(e.target.value)}
                   className="border border-gray-400 focus:border-black p-4 rounded-lg"
                   placeholder="Masukan Judul Program"
                 />
               </div>
+            </div>
+            <div className="lg:w-full lg:px-20 flex flex-col mt-10">
               <div className="flex flex-col space-y-2">
                 <h1 className="font-Poppins font-medium text-lg">
                   Foto Program
                 </h1>
                 <input
                   type="file"
+                  onChange={loadImage}
                   className="border border-gray-400 focus:border-black p-4 rounded-lg"
                 />
               </div>
+            </div>
+            <div className="lg:w-full lg:px-20 flex flex-col mt-10">
               <div className="flex flex-col space-y-2">
                 <Image
                   alt="Program Tikomdik"
-                  src={loadImage}
+                  src={preview}
                   width={500}
                   height={0}
                 />
@@ -170,13 +190,13 @@ export default function EditProgram({programId}) {
                   </h1>
                 </div>
               </Link>
-              <Link href={"/"} className="px-5">
+              <button onClick={updateProgram} className="px-5">
                 <div className="w-auto h-auto lg:px-5 lg:py-1 rounded-lg flex justify-center bg-[#112883]">
                   <h1 className="flex items-center justify-center text-lg font-semibold text-white">
                     Simpan
                   </h1>
                 </div>
-              </Link>
+              </button>
             </div>
           </div>
           {/* Akhir Konten */}

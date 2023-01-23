@@ -18,6 +18,32 @@ export default function TambahProgram() {
   const [imageProgram, setImageProgram] = useState("");
   const [preview, setPreview] = useState("");
 
+  const getAdmin = async (e) => {
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/token`,
+        {
+          token: sessionStorage.getItem("token") || "null",
+        }
+      );
+      setDataAdmin(res.data);
+      if (sessionStorage.getItem("token", res.data[0].token)) {
+        console.log("admin login");
+      }
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "Anda Harus Login Terlebih Dahulu!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setTimeout(() => {
+        Router.push("/admin/login");
+      }, 2100);
+    }
+  };
+
   const loadImage = (e) => {
     const image = e.target.files[0];
     setImageProgram(image);
@@ -42,31 +68,6 @@ export default function TambahProgram() {
   };
 
   useEffect(() => {
-    const getAdmin = async (e) => {
-      try {
-        const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/token`,
-          {
-            token: sessionStorage.getItem("token") || "null",
-          }
-        );
-        setDataAdmin(res.data);
-        if (sessionStorage.getItem("token", res.data[0].token)) {
-          console.log("admin login");
-        }
-      } catch (error) {
-        Swal.fire({
-          position: "center",
-          icon: "warning",
-          title: "Anda Harus Login Terlebih Dahulu!",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        setTimeout(() => {
-          Router.push("/admin/login");
-        }, 2100);
-      }
-    };
     getAdmin();
   }, []);
 
@@ -119,13 +120,6 @@ export default function TambahProgram() {
                 </div>
               );
             })}
-            <Image
-              alt="Foto Profile"
-              src={"/image/pp.png"}
-              width={50}
-              height={0}
-              className="rounded-full"
-            />
             <HiChevronDown
               className="w-7 h-7 cursor-pointer"
               onClick={() => setProfile(!profile)}
@@ -160,7 +154,6 @@ export default function TambahProgram() {
                 />
               </div>
             </div>
-            {console.log(judulProgram)}
             <div className="lg:w-full lg:px-20 flex flex-col mt-10">
               <div className="flex flex-col space-y-2">
                 <Image
