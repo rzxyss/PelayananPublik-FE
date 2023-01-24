@@ -68,22 +68,22 @@ export default function Sidebar() {
           </li>
           <li
             className={`${
-              router.pathname == "/admin/pengaduan"
+              router.pathname == "/admin/laporan"
                 ? "bg-[#112883] text-white"
                 : ""
             } ${
-              router.pathname == "/admin/pengaduan/pengaduan-detail"
+              router.pathname == "/admin/laporan/pengaduan-detail"
                 ? "bg-[#112883] text-white"
                 : ""
             } w-10/12 h-auto hover:bg-[#112883] hover:text-white p-3 rounded-r-xl`}
           >
             <Link
-              href={"/admin/pengaduan"}
+              href={"/admin/laporan"}
               className="flex gap-1 justify-center lg:justify-start space-x-1 items-center"
             >
               <HiOutlineSpeakerphone className="w-6 h-6" />
               <h1 className="hidden lg:block font-Poppins font-extrabold text-xl">
-                Pengaduan
+                Laporan
               </h1>
             </Link>
           </li>
