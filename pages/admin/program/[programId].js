@@ -20,9 +20,7 @@ export default function TambahProgram({ programId }) {
         token: sessionStorage.getItem("token") || "null",
       });
       setDataAdmin(res.data);
-      if (sessionStorage.getItem("token", res.data[0].token)) {
-        console.log("admin login");
-      }
+      if (sessionStorage.getItem("token", res.data[0].token));
     } catch (error) {
       Swal.fire({
         position: "center",
