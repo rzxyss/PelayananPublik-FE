@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Sidebar from "../../../../components/admin/Sidebar";
+import Sidebar from "../../../components/admin/Sidebar";
 import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -51,7 +51,7 @@ export default function TambahProgram({ programId }) {
   };
 
   const loadImage = (e) => {
-    const image = e.target.files[0] ? e.target.files[0] : imageProgram;
+    const image = e.target.files[0];
     setImageProgram(image);
     setPreview(URL.createObjectURL(image));
   };
@@ -105,6 +105,7 @@ export default function TambahProgram({ programId }) {
       console.log(error);
     }
   };
+  
   return (
     <div className="flex">
       <Sidebar />
@@ -131,13 +132,6 @@ export default function TambahProgram({ programId }) {
                 </div>
               );
             })}
-            <Image
-              alt="Foto Profile"
-              src={"/image/pp.png"}
-              width={50}
-              height={0}
-              className="rounded-full"
-            />
             <HiChevronDown
               className="w-7 h-7 cursor-pointer"
               onClick={() => setProfile(!profile)}
@@ -155,6 +149,7 @@ export default function TambahProgram({ programId }) {
                 <input
                   type="text"
                   onChange={(e) => setJudulProgram(e.target.value)}
+                  value={judulProgram}
                   className="border border-gray-400 focus:border-black p-4 rounded-lg"
                   placeholder="Masukan Judul Program"
                 />

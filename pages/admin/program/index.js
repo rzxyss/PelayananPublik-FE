@@ -14,69 +14,71 @@ export default function Program() {
   const [dataAdmin, setDataAdmin] = useState([]);
   const [profile, setProfile] = useState(false);
   const [dataProgram, setDAtaProgram] = useState([]);
-  useEffect(() => {
-    const fetchProgram = async () => {
-      try {
-        const rPorgram = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/program`
-        );
-        setDAtaProgram(rPorgram.data);
-      } catch (error) {}
-    };
-
-    const getAdmin = async (e) => {
-      try {
-        const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/token`,
-          {
-            token: sessionStorage.getItem("token") || "null",
-          }
-        );
-        setDataAdmin(res.data);
-        if (sessionStorage.getItem("token", res.data[0].token)) {
-          console.log("admin login");
+  
+  const getAdmin = async (e) => {
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/token`,
+        {
+          token: sessionStorage.getItem("token") || "null",
         }
-      } catch (error) {
-        Swal.fire({
-          position: "center",
-          icon: "warning",
-          title: "Anda Harus Login Terlebih Dahulu!",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        setTimeout(() => {
-          Router.push("/admin/login");
-        }, 2100);
+      );
+      setDataAdmin(res.data);
+      if (sessionStorage.getItem("token", res.data[0].token)) {
+        console.log("admin login");
       }
-    };
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "Anda Harus Login Terlebih Dahulu!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setTimeout(() => {
+        Router.push("/admin/login");
+      }, 2100);
+    }
+  };
+
+  const fetchProgram = async () => {
+    try {
+      const rPorgram = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/program`
+      );
+      setDAtaProgram(rPorgram.data);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
     fetchProgram();
     getAdmin();
   }, []);
 
-  // const btnDelete = async (productId) => {
-  //   try {
-  //     await axios.delete(`http://localhost:5000/products/${productId}`);
-  //     getProducts();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const btnDelete = async () => {
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "You won't be able to revert this!",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, delete it!",
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       Swal.fire("Deleted!", "Your file has been deleted.", "success");
-  //     }
-  //   });
-  // };
+  const btnDelete = async (programId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/program/${programId}`);
+        } catch (error) {
+          console.log(error);
+        }
+        Swal.fire("Deleted!", "Your file has been deleted.", "success").then((confirm) => {
+          if (confirm.isConfirmed) {
+            location.reload();
+          }
+        })
+      }
+    });
+  };
 
   const logoutHandle = async () => {
     sessionStorage.clear();
@@ -101,6 +103,7 @@ export default function Program() {
       console.log(error);
     }
   };
+
   return (
     <div className="flex">
       <Sidebar />
@@ -127,13 +130,6 @@ export default function Program() {
                 </div>
               );
             })}
-            <Image
-              alt="Foto Profile"
-              src={"/image/pp.png"}
-              width={50}
-              height={0}
-              className="rounded-full"
-            />
             <HiChevronDown
               className="w-7 h-7 cursor-pointer"
               onClick={() => setProfile(!profile)}
@@ -183,12 +179,12 @@ export default function Program() {
                               <h1>{program.createdAt}</h1>
                             </div>
                             <div className="flex flex-row items-center gap-3">
-                              <Link href={`program/edit-program/${program.id}`}>
+                              <Link href={`program/${program.id}`}>
                                 <MdEdit className="w-5 h-5" />
                               </Link>
                               <AiFillDelete
                                 className="w-5 h-5 cursor-pointer"
-                                // onClick={btnDelete}
+                                onClick={() => btnDelete(program.id)}
                               />
                             </div>
                           </div>

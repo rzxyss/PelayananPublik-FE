@@ -1,10 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Sidebar from "../../../components/admin/Sidebar";
-import { AiOutlinePlus } from "react-icons/ai";
-import { BiSearch } from "react-icons/bi";
-import { AiFillDelete } from "react-icons/ai";
-import { MdHistory, MdEdit } from "react-icons/md";
 import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
