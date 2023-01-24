@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { HiChevronDown } from "react-icons/hi";
 import Router from "next/router";
 
-export default function TambahBerita({ beritaId }) {
+export default function EditBerita({ beritaId }) {
   const [dataAdmin, setDataAdmin] = useState([]);
   const [profile, setProfile] = useState(false);
   const [judulBerita, setJudulBerita] = useState("");
