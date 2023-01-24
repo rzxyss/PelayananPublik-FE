@@ -1,10 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Sidebar from "../../../components/admin/Sidebar";
-import { AiOutlinePlus } from "react-icons/ai";
-import { BiSearch } from "react-icons/bi";
-import { AiFillDelete } from "react-icons/ai";
-import { MdHistory, MdEdit } from "react-icons/md";
 import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -14,32 +10,59 @@ import Router from "next/router";
 export default function TambahBerita() {
   const [dataAdmin, setDataAdmin] = useState([]);
   const [profile, setProfile] = useState(false);
+  const [judulBerita, setJudulBerita] = useState("");
+  const [deskripsiBerita, setDeskripsiBerita] = useState("");
+  const [isiBerita, setIsiBerita] = useState("");
+  const [imageBerita, setImageBerita] = useState("");
+  const [preview, setPreview] = useState("");
+
+  const getAdmin = async (e) => {
+    try {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
+        token: sessionStorage.getItem("token") || "null",
+      });
+      setDataAdmin(res.data);
+      if (sessionStorage.getItem("token", res.data[0].token));
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "Anda Harus Login Terlebih Dahulu!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setTimeout(() => {
+        Router.push("/admin/login");
+      }, 2100);
+    }
+  };
+
+  const loadImage = (e) => {
+    const image = e.target.files[0];
+    setImageBerita(image);
+    setPreview(URL.createObjectURL(image));
+  };
+
+  const postBerita = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", imageBerita);
+    formData.append("judul_berita", judulBerita);
+    formData.append("deskripsi_berita", deskripsiBerita);
+    formData.append("isi_berita", isiBerita);
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/berita`, formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
+      Router.push("/admin/berita");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const getAdmin = async (e) => {
-      try {
-        const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/token`,
-          {
-            token: sessionStorage.getItem("token") || "null",
-          }
-        );
-        setDataAdmin(res.data);
-        if (sessionStorage.getItem("token", res.data[0].token)) {
-          console.log("admin login");
-        }
-      } catch (error) {
-        Swal.fire({
-          position: "center",
-          icon: "warning",
-          title: "Anda Harus Login Terlebih Dahulu!",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        setTimeout(() => {
-          Router.push("/admin/login");
-        }, 2100);
-      }
-    };
     getAdmin();
   }, []);
 
@@ -66,6 +89,7 @@ export default function TambahBerita() {
       console.log(error);
     }
   };
+
   return (
     <div className="flex">
       <Sidebar />
@@ -92,12 +116,6 @@ export default function TambahBerita() {
                 </div>
               );
             })}
-            <Image
-              src={"/image/pp.png"}
-              width={50}
-              height={0}
-              className="rounded-full"
-            />
             <HiChevronDown
               className="w-7 h-7 cursor-pointer"
               onClick={() => setProfile(!profile)}
@@ -114,6 +132,7 @@ export default function TambahBerita() {
                     Judul Berita
                   </h1>
                   <input
+                    onChange={(e) => setJudulBerita(e.target.value)}
                     type="text"
                     className="border border-gray-400 focus:border-black p-4 rounded-lg"
                     placeholder="Masukan Judul Berita"
@@ -124,6 +143,7 @@ export default function TambahBerita() {
                     Deskripsi Berita
                   </h1>
                   <input
+                    onChange={(e) => setDeskripsiBerita(e.target.value)}
                     type="text"
                     className="border border-gray-400 focus:border-black p-4 rounded-lg"
                     placeholder="Masukan Judul Berita"
@@ -134,6 +154,7 @@ export default function TambahBerita() {
                     Isi Berita
                   </h1>
                   <textarea
+                    onChange={(e) => setIsiBerita(e.target.value)}
                     className="block p-2.5 w-full text-sm rounded-lg border border-gray-400 focus:border-black"
                     placeholder="Masukan deskripsi berita"
                   />
@@ -146,10 +167,17 @@ export default function TambahBerita() {
                   </h1>
                   <input
                     type="file"
+                    onChange={loadImage}
                     className="border border-gray-400 focus:border-black p-4 rounded-lg"
                   />
                 </div>
                 <div className="flex flex-col space-y-2 mt-10">
+                  <Image
+                    alt="Berita Tikomdik"
+                    src={preview ? preview : "/image/ProgramPreset.jpg"}
+                    width={500}
+                    height={0}
+                  />
                 </div>
               </div>
             </div>
@@ -161,13 +189,13 @@ export default function TambahBerita() {
                   </h1>
                 </div>
               </Link>
-              <Link href={"/"} className="px-5">
+              <button onClick={postBerita} className="px-5">
                 <div className="w-auto h-auto lg:px-5 lg:py-1 rounded-lg flex justify-center bg-[#112883]">
                   <h1 className="flex items-center justify-center text-lg font-semibold text-white">
                     Simpan
                   </h1>
                 </div>
-              </Link>
+              </button>
             </div>
           </div>
           {/* Akhir Konten */}

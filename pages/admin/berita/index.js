@@ -14,34 +14,69 @@ import { HiChevronDown } from "react-icons/hi";
 export default function Berita() {
   const [dataAdmin, setDataAdmin] = useState([]);
   const [profile, setProfile] = useState(false);
+  const [dataBerita, setDataBerita] = useState([]);
+
+  const getAdmin = async (e) => {
+    try {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
+        token: sessionStorage.getItem("token") || "null",
+      });
+      setDataAdmin(res.data);
+      if (sessionStorage.getItem("token", res.data[0].token));
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: "Anda Harus Login Terlebih Dahulu!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setTimeout(() => {
+        Router.push("/admin/login");
+      }, 2100);
+    }
+  };
+
+  const fetchBerita = async () => {
+    try {
+      const rBerita = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/berita`
+      );
+      setDataBerita(rBerita.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const getAdmin = async (e) => {
-      try {
-        const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL}/token`,
-          {
-            token: sessionStorage.getItem("token") || "null",
-          }
-        );
-        setDataAdmin(res.data);
-        if (sessionStorage.getItem("token", res.data[0].token)) {
-          console.log("admin login");
-        }
-      } catch (error) {
-        Swal.fire({
-          position: "center",
-          icon: "warning",
-          title: "Anda Harus Login Terlebih Dahulu!",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        setTimeout(() => {
-          Router.push("/admin/login");
-        }, 2100);
-      }
-    };
     getAdmin();
+    fetchBerita();
   }, []);
+
+  const btnDelete = async (beritaId) => {
+    Swal.fire({
+      title: "Apakah anda yakin?",
+      text: "Anda tidak dapat mengembalikan Berita ini!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        try {
+          axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/berita/${beritaId}`);
+        } catch (error) {
+          console.log(error);
+        }
+        Swal.fire("Berhasil!", "Berita berhasil dihapus!", "success").then((confirm) => {
+          if (confirm.isConfirmed) {
+            location.reload();
+          }
+        })
+      }
+    });
+  };
 
   const logoutHandle = async () => {
     sessionStorage.clear();
@@ -92,12 +127,6 @@ export default function Berita() {
                 </div>
               );
             })}
-            <Image
-              src={"/image/pp.png"}
-              width={50}
-              height={0}
-              className="rounded-full"
-            />
             <HiChevronDown
               className="w-7 h-7 cursor-pointer"
               onClick={() => setProfile(!profile)}
@@ -137,43 +166,45 @@ export default function Berita() {
               <div className="mt-5">
                 <div className="w-auto">
                   <div className="grid lg:grid-cols-3 gap-5">
-                    <div className="hover:bg-black/10 p-3 rounded-lg duration-500">
-                      <Image
-                        src={"/image/berita.jpg"}
-                        width={100}
-                        height={80}
-                        layout="responsive"
-                        alt="Berita"
-                        className="rounded-lg"
-                      />
-                      <div className="px-3 py-2 flex-wrap">
-                        <h1 className="font-Poppins font-medium text-lg">
-                          Judul Berita
-                        </h1>
-                        <h1 className="font-Poppins font-light text-sm">
-                          It is a long established fact that a reader will be
-                          distracted by the readable content of a page when
-                          looking at its layout. The point of using Lorem Ipsum
-                          is that it has a more-or-less normal distribution of
-                          letters, as opposed to using 'Content here, content
-                          here', making it look like readable English.
-                        </h1>
-                      </div>
-                      <div className="flex flex-row justify-between items-center">
-                        <div className="flex flex-row items-center text-black/60 mt-2">
-                          <MdHistory className="w-5 h-5" />
-                          <h1 className="font-Poppins font-light text-sm">
-                            Berapa Hari Yang Lalu?
-                          </h1>
+                    {dataBerita.map((berita, index) => {
+                      return (
+                        <div
+                          className="hover:bg-black/10 p-3 rounded-lg duration-500"
+                          key={index}
+                        >
+                          <Image
+                            alt={berita.judul_berita}
+                            src={berita.url}
+                            width={100}
+                            height={80}
+                            layout="responsive"
+                            className="rounded-lg"
+                          />
+                          <div className="px-3 py-2 flex-wrap">
+                            <h1 className="font-Poppins font-medium text-lg">
+                              {berita.judul_berita}
+                            </h1>
+                            <h1 className="font-Poppins font-light text-sm">
+                              {berita.deskripsi_berita}
+                            </h1>
+                          </div>
+                          <div className="flex flex-row justify-between items-center">
+                            <div className="flex flex-row items-center text-black/60 mt-2">
+                              <MdHistory className="w-5 h-5" />
+                              <h1 className="font-Poppins font-light text-sm">
+                                {berita.createdAt}
+                              </h1>
+                            </div>
+                            <div className="flex flex-row items-center text-[#112883] gap-5">
+                              <Link href={`berita/${berita.id}`}>
+                                <MdEdit className="w-5 h-5" />
+                              </Link>
+                              <AiFillDelete className="w-5 h-5" onClick={() => btnDelete(berita.id)} />
+                            </div>
+                          </div>
                         </div>
-                        <div className="flex flex-row items-center text-[#112883] gap-5">
-                          <Link href={"berita/edit-berita"}>
-                            <MdEdit className="w-5 h-5" />
-                          </Link>
-                          <AiFillDelete className="w-5 h-5" />
-                        </div>
-                      </div>
-                    </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
