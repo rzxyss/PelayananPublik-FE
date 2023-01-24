@@ -13,7 +13,7 @@ import { HiChevronDown } from "react-icons/hi";
 export default function Program() {
   const [dataAdmin, setDataAdmin] = useState([]);
   const [profile, setProfile] = useState(false);
-  const [dataProgram, setDAtaProgram] = useState([]);
+  const [dataProgram, setDataProgram] = useState([]);
   
   const getAdmin = async (e) => {
     try {
@@ -44,8 +44,10 @@ export default function Program() {
       const rPorgram = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/program`
       );
-      setDAtaProgram(rPorgram.data);
-    } catch (error) {}
+      setDataProgram(rPorgram.data);
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   useEffect(() => {
@@ -55,13 +57,13 @@ export default function Program() {
 
   const btnDelete = async (programId) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Apakah anda yakin?",
+      text: "Anda tidak dapat mengembalikan Program ini!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Delete",
     }).then((result) => {
       if (result.isConfirmed) {
         try {
@@ -69,7 +71,7 @@ export default function Program() {
         } catch (error) {
           console.log(error);
         }
-        Swal.fire("Deleted!", "Your file has been deleted.", "success").then((confirm) => {
+        Swal.fire("Berhasil!", "Program berhasil dihapus!", "success").then((confirm) => {
           if (confirm.isConfirmed) {
             location.reload();
           }
