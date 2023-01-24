@@ -349,7 +349,7 @@ export default function Home() {
                         style={{ backgroundImage: `url(${program.url})` }}
                       >
                         <div className="bg-black/50 w-full h-full p-2 flex flex-col justify-end items-center">
-                          <h1 className="font-bold text-3xl text-white mb-5">
+                          <h1 className="font-bold lg:text-3xl text-white lg:mb-5">
                             {program.judul_program}
                           </h1>
                         </div>
