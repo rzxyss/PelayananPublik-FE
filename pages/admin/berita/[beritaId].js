@@ -4,25 +4,21 @@ import Sidebar from "../../../components/admin/Sidebar";
 import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { HiChevronDown } from "react-icons/hi";
 import Router from "next/router";
 
 export default function EditBerita({ beritaId }) {
-  const [dataAdmin, setDataAdmin] = useState([]);
-  const [profile, setProfile] = useState(false);
   const [judulBerita, setJudulBerita] = useState("");
   const [deskripsiBerita, setDeskripsiBerita] = useState("");
   const [isiBerita, setIsiBerita] = useState("");
   const [imageBerita, setImageBerita] = useState("");
   const [preview, setPreview] = useState("");
 
-  const getAdmin = async (e) => {
+  const getAdmin = async () => {
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
-        token: sessionStorage.getItem("token") || "null",
+        token: sessionStorage.getItem("token"),
       });
-      setDataAdmin(res.data);
-      if (sessionStorage.getItem("token", res.data[0].token));
+      if (sessionStorage.getItem("token") != res.data);
     } catch (error) {
       Swal.fire({
         position: "center",
@@ -66,11 +62,15 @@ export default function EditBerita({ beritaId }) {
     formData.append("deskripsi_berita", deskripsiBerita);
     formData.append("isi_berita", isiBerita);
     try {
-      await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/berita/${beritaId}`, formData, {
-        headers: {
-          "Content-type": "multipart/form-data",
-        },
-      });
+      await axios.patch(
+        `${process.env.NEXT_PUBLIC_API_URL}/berita/${beritaId}`,
+        formData,
+        {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
+        }
+      );
       Router.push("/admin/berita");
     } catch (error) {
       console.log(error);
@@ -83,7 +83,6 @@ export default function EditBerita({ beritaId }) {
   }, []);
 
   const logoutHandle = async () => {
-    sessionStorage.clear();
     Swal.fire({
       position: "center",
       icon: "success",
@@ -98,9 +97,10 @@ export default function EditBerita({ beritaId }) {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
         {
-          id: dataAdmin[0].id,
+          token: sessionStorage.getItem("token"),
         }
       );
+      sessionStorage.clear();
     } catch (error) {
       console.log(error);
     }
@@ -114,29 +114,9 @@ export default function EditBerita({ beritaId }) {
           <h1 className="font-Poppins text-2xl text-black font-extrabold">
             Tambah Berita
           </h1>
-          <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
-            <div className="flex flex-col w-auto items-center bg-white border rounded-md p-2">
-              <button onClick={logoutHandle}>Log Out</button>
-            </div>
-          </div>
-          <div className="flex flex-row gap-2 items-center">
-            {dataAdmin.map((admin, index) => {
-              return (
-                <div key={index} className="flex flex-col items-end">
-                  <h1 className="font-Poppins text-sm font-bold">
-                    {admin.name}
-                  </h1>
-                  <h1 className="font-Poppins text-sm font-bold text-black/50">
-                    {admin.username}
-                  </h1>
-                </div>
-              );
-            })}
-            <HiChevronDown
-              className="w-7 h-7 cursor-pointer"
-              onClick={() => setProfile(!profile)}
-            />
-          </div>
+          <h1 className="font-Poppins font-light text-lg text-black">
+            LogOut
+          </h1>
         </div>
         <div className="p-1">
           {/* Kontenna Disini */}

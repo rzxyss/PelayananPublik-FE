@@ -1,52 +1,30 @@
 import axios from "axios";
 import Link from "next/link";
 import Router from "next/router";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Swal from "sweetalert2";
 import Randomstring from "randomstring";
 
-export default function Login() {
-  const [inputUsername, setUsername] = useState("");
-  const [inputPassword, setPassword] = useState("");
-  let token = Randomstring.generate();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
-        username: inputUsername,
-        password: inputPassword,
-        token: token,
-      });
-      if (res.data.length > 0) {
-        if (
-          res.data[0].username === inputUsername &&
-          res.data[0].password === inputPassword
-        ) {
-          sessionStorage.setItem("token", token);
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Anda Telah Berhasil Login",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-          setTimeout(() => {
-            Router.push("/admin");
-          }, 2100);
-        }
-      } else {
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: res.data.msg,
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export default function Login({username, password}) {
+  const [inputUsername, setUsername] = useState(username);
+  const [inputPassword, setPassword] = useState(password);
+  console.log(inputUsername)
+  // let token = Randomstring.generate();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+  //       username: inputUsername,
+  //       password: inputPassword,
+  //     });
+  //     sessionStorage.setItem("token", token);
+  //     setTimeout(() => {
+  //       Router.push("/admin");
+  //     }, 2100);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>
@@ -101,4 +79,19 @@ export default function Login() {
       </div>
     </>
   );
+}
+
+
+export async function getServerSideProps({req, res}){
+  const responsive = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+    username: username,
+    password: password,
+  });
+
+  return{
+    props: {
+      username: req.body.username,
+      password: req.body.password
+    }
+  }
 }

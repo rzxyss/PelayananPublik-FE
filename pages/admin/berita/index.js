@@ -9,20 +9,16 @@ import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
-import { HiChevronDown } from "react-icons/hi";
 
 export default function Berita() {
-  const [dataAdmin, setDataAdmin] = useState([]);
-  const [profile, setProfile] = useState(false);
   const [dataBerita, setDataBerita] = useState([]);
 
-  const getAdmin = async (e) => {
+  const getAdmin = async () => {
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
-        token: sessionStorage.getItem("token") || "null",
+        token: sessionStorage.getItem("token"),
       });
-      setDataAdmin(res.data);
-      if (sessionStorage.getItem("token", res.data[0].token));
+      if (sessionStorage.getItem("token") != res.data);
     } catch (error) {
       Swal.fire({
         position: "center",
@@ -69,17 +65,18 @@ export default function Berita() {
         } catch (error) {
           console.log(error);
         }
-        Swal.fire("Berhasil!", "Berita berhasil dihapus!", "success").then((confirm) => {
-          if (confirm.isConfirmed) {
-            location.reload();
+        Swal.fire("Berhasil!", "Berita berhasil dihapus!", "success").then(
+          (confirm) => {
+            if (confirm.isConfirmed) {
+              location.reload();
+            }
           }
-        })
+        );
       }
     });
   };
 
   const logoutHandle = async () => {
-    sessionStorage.clear();
     Swal.fire({
       position: "center",
       icon: "success",
@@ -94,13 +91,15 @@ export default function Berita() {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
         {
-          id: dataAdmin[0].id,
+          token: sessionStorage.getItem("token"),
         }
       );
+      sessionStorage.clear();
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div className="flex">
       <Sidebar />
@@ -109,29 +108,9 @@ export default function Berita() {
           <h1 className="font-Poppins text-2xl text-[#112883] font-extrabold">
             Berita
           </h1>
-          <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
-            <div className="flex flex-col w-auto items-center bg-white border rounded-md p-2">
-              <button onClick={logoutHandle}>Log Out</button>
-            </div>
-          </div>
-          <div className="flex flex-row gap-2 items-center">
-            {dataAdmin.map((admin, index) => {
-              return (
-                <div key={index} className="flex flex-col items-end">
-                  <h1 className="font-Poppins text-sm font-bold">
-                    {admin.name}
-                  </h1>
-                  <h1 className="font-Poppins text-sm font-bold text-black/50">
-                    {admin.username}
-                  </h1>
-                </div>
-              );
-            })}
-            <HiChevronDown
-              className="w-7 h-7 cursor-pointer"
-              onClick={() => setProfile(!profile)}
-            />
-          </div>
+          <h1 className="font-Poppins font-light text-lg text-black">
+            LogOut
+          </h1>
         </div>
         <div className="p-1">
           {/* Kontenna Disini */}
@@ -199,7 +178,10 @@ export default function Berita() {
                               <Link href={`berita/${berita.id}`}>
                                 <MdEdit className="w-5 h-5" />
                               </Link>
-                              <AiFillDelete className="w-5 h-5" onClick={() => btnDelete(berita.id)} />
+                              <AiFillDelete
+                                className="w-5 h-5"
+                                onClick={() => btnDelete(berita.id)}
+                              />
                             </div>
                           </div>
                         </div>

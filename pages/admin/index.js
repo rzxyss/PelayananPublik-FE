@@ -1,25 +1,17 @@
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import Sidebar from "../../components/admin/Sidebar";
-import { HiBell, HiChevronDown } from "react-icons/hi";
 import { FcStatistics } from "react-icons/fc";
 import Router from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function Home() {
-  const [dataAdmin, setDataAdmin] = useState([]);
-  const [profile, setProfile] = useState(false);
-
-  const getAdmin = async (e) => {
+  const getAdmin = async () => {
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
-        token: sessionStorage.getItem("token") || "null",
+        token: sessionStorage.getItem("token"),
       });
-      setDataAdmin(res.data);
-      if (sessionStorage.getItem("token", res.data[0].token)) {
-        console.log("admin login");
-      }
+      if (sessionStorage.getItem("token") != res.data);
     } catch (error) {
       Swal.fire({
         position: "center",
@@ -39,7 +31,6 @@ export default function Home() {
   }, []);
 
   const logoutHandle = async () => {
-    sessionStorage.clear();
     Swal.fire({
       position: "center",
       icon: "success",
@@ -54,9 +45,10 @@ export default function Home() {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
         {
-          id: dataAdmin[0].id,
+          token: sessionStorage.getItem("token"),
         }
       );
+      sessionStorage.clear();
     } catch (error) {
       console.log(error);
     }
@@ -69,29 +61,9 @@ export default function Home() {
           <h1 className="font-Poppins font-extrabold text-2xl text-[#112883]">
             Dashboard
           </h1>
-          <div className={`${!profile ? "hidden" : "absolute top-16 right-2"}`}>
-            <div className="flex flex-col w-auto items-center bg-white border rounded-md p-2">
-              <button onClick={logoutHandle}>Log Out</button>
-            </div>
-          </div>
-          <div className="flex flex-row gap-2 items-center">
-            {dataAdmin.map((admin, index) => {
-              return (
-                <div key={index} className="flex flex-col items-end">
-                  <h1 className="font-Poppins text-sm font-bold">
-                    {admin.name}
-                  </h1>
-                  <h1 className="font-Poppins text-sm font-bold text-black/50">
-                    {admin.username}
-                  </h1>
-                </div>
-              );
-            })}
-            <HiChevronDown
-              className="w-7 h-7 cursor-pointer"
-              onClick={() => setProfile(!profile)}
-            />
-          </div>
+          <h1 className="font-Poppins font-light text-lg text-black">
+            LogOut
+          </h1>
         </div>
         <div className="p-1">
           {/* Kontenna Disini */}
