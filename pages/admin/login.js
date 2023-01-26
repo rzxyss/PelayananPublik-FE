@@ -3,28 +3,32 @@ import Link from "next/link";
 import Router from "next/router";
 import React, { use, useState } from "react";
 import Swal from "sweetalert2";
-import Randomstring from "randomstring";
 
-export default function Login({username, password}) {
-  const [inputUsername, setUsername] = useState(username);
-  const [inputPassword, setPassword] = useState(password);
-  console.log(inputUsername)
-  // let token = Randomstring.generate();
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
-  //       username: inputUsername,
-  //       password: inputPassword,
-  //     });
-  //     sessionStorage.setItem("token", token);
-  //     setTimeout(() => {
-  //       Router.push("/admin");
-  //     }, 2100);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+export default function Login() {
+  const [inputUsername, setUsername] = useState('')
+  const [inputPassword, setPassword] = useState('')
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+        username: inputUsername,
+        password: inputPassword,
+      });
+      sessionStorage.setItem('accessToken', res.data.token)
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Berhasil LogIn!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setTimeout(() => {
+        Router.push("/admin");
+      }, 2100);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -79,19 +83,4 @@ export default function Login({username, password}) {
       </div>
     </>
   );
-}
-
-
-export async function getServerSideProps({req, res}){
-  const responsive = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
-    username: username,
-    password: password,
-  });
-
-  return{
-    props: {
-      username: req.body.username,
-      password: req.body.password
-    }
-  }
 }

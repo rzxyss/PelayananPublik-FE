@@ -7,22 +7,22 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
 
-export default function Laporan() {
-  const [dataLaporan, setDataLaporan] = useState([]);
-
-  const getAdmin = async () => {
+export default function Laporan({dataLaporan}) {
+  const verifyAdmin = async () => {
     try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
-        token: sessionStorage.getItem("token"),
-      });
-      if (sessionStorage.getItem("token") != res.data);
+      const checkAdmin = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/check`,
+        {
+          token: sessionStorage.getItem("accessToken"),
+        }
+      );
     } catch (error) {
       Swal.fire({
         position: "center",
-        icon: "warning",
-        title: "Anda Harus Login Terlebih Dahulu!",
+        icon: "error",
+        title: "Gagal Login!",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1500,
       });
       setTimeout(() => {
         Router.push("/admin/login");
@@ -30,20 +30,8 @@ export default function Laporan() {
     }
   };
 
-  const fetchLaporan = async (e) => {
-    try {
-      const rLaporan = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/laporan`
-      );
-      setDataLaporan(rLaporan.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    fetchLaporan();
-    getAdmin();
+    verifyAdmin();
   }, []);
 
   const logoutHandle = async () => {
@@ -61,7 +49,7 @@ export default function Laporan() {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
         {
-          token: sessionStorage.getItem("token"),
+          token: sessionStorage.getItem("accessToken"),
         }
       );
       sessionStorage.clear();
@@ -107,7 +95,10 @@ export default function Laporan() {
           <h1 className="font-Poppins font-extrabold text-2xl text-[#112883]">
             Laporan
           </h1>
-          <h1 className="font-Poppins font-light text-lg text-black">
+          <h1
+            className="font-Poppins font-light text-lg text-black"
+            onClick={logoutHandle}
+          >
             LogOut
           </h1>
         </div>
@@ -154,7 +145,10 @@ export default function Laporan() {
                               <Link href={`laporan/${laporan.id}`}>
                                 <HiOutlineClipboardList className="mr-10 w-7 h-7 text-black/50" />
                               </Link>
-                              <button onClick={() => btnDelete(laporan.id)} className="bg-[#112883] px-4 py-3  rounded-xl text-white font-Poppins text-base ">
+                              <button
+                                onClick={() => btnDelete(laporan.id)}
+                                className="bg-[#112883] px-4 py-3  rounded-xl text-white font-Poppins text-base "
+                              >
                                 Delete
                               </button>
                             </div>
@@ -172,4 +166,16 @@ export default function Laporan() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const rLaporan = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/laporan`
+  );
+
+  return{
+    props: {
+      dataLaporan: rLaporan.data
+    }
+  }
 }

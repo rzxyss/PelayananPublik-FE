@@ -10,22 +10,22 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
 
-export default function Berita() {
-  const [dataBerita, setDataBerita] = useState([]);
-
-  const getAdmin = async () => {
+export default function Berita({dataBerita}) {
+  const verifyAdmin = async () => {
     try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
-        token: sessionStorage.getItem("token"),
-      });
-      if (sessionStorage.getItem("token") != res.data);
+      const checkAdmin = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/check`,
+        {
+          token: sessionStorage.getItem("accessToken"),
+        }
+      );
     } catch (error) {
       Swal.fire({
         position: "center",
-        icon: "warning",
-        title: "Anda Harus Login Terlebih Dahulu!",
+        icon: "error",
+        title: "Gagal Login!",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1500,
       });
       setTimeout(() => {
         Router.push("/admin/login");
@@ -33,20 +33,9 @@ export default function Berita() {
     }
   };
 
-  const fetchBerita = async () => {
-    try {
-      const rBerita = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/berita`
-      );
-      setDataBerita(rBerita.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
-    getAdmin();
-    fetchBerita();
+    verifyAdmin();
   }, []);
 
   const btnDelete = async (beritaId) => {
@@ -91,7 +80,7 @@ export default function Berita() {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
         {
-          token: sessionStorage.getItem("token"),
+          token: sessionStorage.getItem("accessToken"),
         }
       );
       sessionStorage.clear();
@@ -108,7 +97,7 @@ export default function Berita() {
           <h1 className="font-Poppins text-2xl text-[#112883] font-extrabold">
             Berita
           </h1>
-          <h1 className="font-Poppins font-light text-lg text-black">
+          <h1 className="font-Poppins font-light text-lg text-black" onClick={logoutHandle}>
             LogOut
           </h1>
         </div>
@@ -197,4 +186,16 @@ export default function Berita() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(){
+  const rBerita = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/berita`
+  );
+
+  return{
+    props: {
+      dataBerita: rBerita.data
+    }
+  }
 }

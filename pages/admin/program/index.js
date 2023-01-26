@@ -9,31 +9,31 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
 
-export default function Program({dataProgram, tes}) {
-  console.log(tes)
-
-  const getAdmin = async () => {
-    // if(sessionStorage.getItem('token'))
-    // try {
-    //   const res = 
-    //   if (sessionStorage.getItem("token") != res.data);
-    // } catch (error) {
-    //   Swal.fire({
-    //     position: "center",
-    //     icon: "warning",
-    //     title: "Anda Harus Login Terlebih Dahulu!",
-    //     showConfirmButton: false,
-    //     timer: 2000,
-    //   });
-    //   setTimeout(() => {
-    //     Router.push("/admin/login");
-    //   }, 2100);
-    // }
+export default function Program({dataProgram}) {
+  const verifyAdmin = async () => {
+    try {
+      const checkAdmin = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/check`,
+        {
+          token: sessionStorage.getItem("accessToken"),
+        }
+      );
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Gagal Login!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setTimeout(() => {
+        Router.push("/admin/login");
+      }, 2100);
+    }
   };
 
   useEffect(() => {
-    // fetchProgram();
-    getAdmin();
+    verifyAdmin();
   }, []);
 
   const btnDelete = async (programId) => {
@@ -80,7 +80,7 @@ export default function Program({dataProgram, tes}) {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
         {
-          token: sessionStorage.getItem("token"),
+          token: sessionStorage.getItem("accessToken"),
         }
       );
       sessionStorage.clear();
@@ -97,7 +97,7 @@ export default function Program({dataProgram, tes}) {
           <h1 className="font-Poppins font-extrabold text-2xl text-[#112883]">
             Program
           </h1>
-          <h1 className="font-Poppins font-light text-lg text-black">
+          <h1 className="font-Poppins font-light text-lg text-black" onClick={logoutHandle}>
             LogOut
           </h1>
         </div>
@@ -168,24 +168,15 @@ export default function Program({dataProgram, tes}) {
   );
 }
 
-export async function getServerSideProps(context){
-  const {req, res} = context
-
-  res.setHeader('Set-Cookie', ['token=tes'])
-  const tes = req.cookies['token']
-  
+export async function getServerSideProps(){
   const rProgram = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}/program`
   );
   
-  // const rToken = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
-  //   token: getToken,
-  // });
 
   return {
     props: {
       dataProgram: rProgram.data,
-      tes
     }
   }
 }

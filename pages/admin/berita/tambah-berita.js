@@ -13,19 +13,21 @@ export default function TambahBerita() {
   const [imageBerita, setImageBerita] = useState("");
   const [preview, setPreview] = useState("");
 
-  const getAdmin = async () => {
+  const verifyAdmin = async () => {
     try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
-        token: sessionStorage.getItem("token"),
-      });
-      if (sessionStorage.getItem("token") != res.data);
+      const checkAdmin = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/check`,
+        {
+          token: sessionStorage.getItem("accessToken"),
+        }
+      );
     } catch (error) {
       Swal.fire({
         position: "center",
-        icon: "warning",
-        title: "Anda Harus Login Terlebih Dahulu!",
+        icon: "error",
+        title: "Gagal Login!",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1500,
       });
       setTimeout(() => {
         Router.push("/admin/login");
@@ -59,7 +61,7 @@ export default function TambahBerita() {
   };
 
   useEffect(() => {
-    getAdmin();
+    verifyAdmin();
   }, []);
 
   const logoutHandle = async () => {
@@ -77,7 +79,7 @@ export default function TambahBerita() {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/logout`,
         {
-          token: sessionStorage.getItem("token"),
+          token: sessionStorage.getItem("accessToken"),
         }
       );
       sessionStorage.clear();
@@ -94,7 +96,7 @@ export default function TambahBerita() {
           <h1 className="font-Poppins text-2xl text-black font-extrabold">
             Tambah Berita
           </h1>
-          <h1 className="font-Poppins font-light text-lg text-black">
+          <h1 className="font-Poppins font-light text-lg text-black" onClick={logoutHandle}>
             LogOut
           </h1>
         </div>
