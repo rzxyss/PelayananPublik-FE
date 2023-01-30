@@ -23,12 +23,15 @@ export default function Home() {
   const [berita, setBerita] = useState([]);
   const [program, setProgram] = useState([]);
 
-  // const getBerita = async () => {
-  //   const resBerita = await axios.get(
-  //     `${process.env.NEXT_PUBLIC_API_URL}/berita`
-  //   );
-  //   setBerita(resBerita.data);
-  // };
+  const getBerita = async () => {
+    const resBerita = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/getBerita`,
+      {
+        limit: 0
+      }
+    );
+    setBerita(resBerita.data.results);
+  };
 
   const getProgram = async () => {
     const resProgram = await axios.get(
@@ -64,7 +67,7 @@ export default function Home() {
 
   useEffect(() => {
     setDatas(faq);
-    // getBerita();
+    getBerita();
     getProgram();
   }, []);
 
@@ -227,29 +230,7 @@ export default function Home() {
                 berita terkini
               </h1>
               <div className="grid lg:grid-cols-3 gap-5">
-                <div className="hover:scale-105 hover:bg-black/10 p-3 rounded-lg duration-500">
-                  <Image
-                    src={"/image/berita.jpg"}
-                    width={100}
-                    height={80}
-                    layout="responsive"
-                    alt="Berita"
-                    className="rounded-lg"
-                  />
-                  <div className="px-3 py-2 flex-wrap">
-                    <h1 className="font-Poppins font-semibold text-lg">
-                      judul
-                    </h1>
-                    <h1 className="font-DMSans text-lg text-black/50 font-medium">
-                      deskripsi
-                    </h1>
-                  </div>
-                  <div className="flex flex-row items-center text-black/60 mt-2">
-                    <MdHistory className="w-5 h-5" />
-                    <h1 className="font-Poppins font-light text-sm">create</h1>
-                  </div>
-                </div>
-                {/* {berita.map((data, index) => {
+                {berita.map((data, index) => {
                   return (
                     <div
                       className="hover:scale-105 hover:bg-black/10 p-3 rounded-lg duration-500"
@@ -279,7 +260,7 @@ export default function Home() {
                       </div>
                     </div>
                   );
-                })} */}
+                })}
               </div>
               <button className="mt-10 bg-[#112883] text-white font-Poppins font-semibold text-lg py-3 px-10 rounded-2xl">
                 Muat Lebih Banyak

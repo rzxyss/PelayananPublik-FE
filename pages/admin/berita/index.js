@@ -10,7 +10,18 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
 
-export default function Berita({dataBerita}) {
+export default function Berita() {
+  const [dataBerita, setDataBerita] = useState([]);
+  const [limit, setLimit] = useState(1);
+  const [page, setPage] = useState(0);
+
+  const getBerita = async () => {
+    const rBerita = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/berita?limit=${limit}&page=${page}`
+    );
+    setDataBerita(rBerita.data.results);
+  };
+
   const verifyAdmin = async () => {
     try {
       const checkAdmin = await axios.post(
@@ -33,10 +44,10 @@ export default function Berita({dataBerita}) {
     }
   };
 
-
   useEffect(() => {
+    getBerita();
     verifyAdmin();
-  }, []);
+  }, [limit, page]);
 
   const btnDelete = async (beritaId) => {
     Swal.fire({
@@ -97,7 +108,10 @@ export default function Berita({dataBerita}) {
           <h1 className="font-Poppins text-2xl text-[#112883] font-extrabold">
             Berita
           </h1>
-          <h1 className="font-Poppins font-light text-lg text-black" onClick={logoutHandle}>
+          <h1
+            className="font-Poppins font-light text-lg text-black"
+            onClick={logoutHandle}
+          >
             LogOut
           </h1>
         </div>
@@ -177,6 +191,21 @@ export default function Berita({dataBerita}) {
                       );
                     })}
                   </div>
+                  <a
+                    href="#"
+                    onClick={() => setPage - 1}
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  >
+                    Previous
+                  </a>
+                  {/* Next Button */}
+                  <a
+                    href="#"
+                    onClick={() => setPage + 1}
+                    className="inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  >
+                    Next
+                  </a>
                 </div>
               </div>
             </div>
@@ -186,16 +215,4 @@ export default function Berita({dataBerita}) {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps(){
-  const rBerita = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/berita`
-  );
-
-  return{
-    props: {
-      dataBerita: rBerita.data
-    }
-  }
 }

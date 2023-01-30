@@ -1,7 +1,6 @@
 import axios from "axios";
-import Link from "next/link";
 import Router from "next/router";
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import Swal from "sweetalert2";
 
 export default function Login() {
@@ -14,11 +13,11 @@ export default function Login() {
         username: inputUsername,
         password: inputPassword,
       });
-      sessionStorage.setItem('accessToken', res.data.token)
+      // console.log(res)
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "Berhasil LogIn!",
+        title: "Berhasil LoggIn!",
         showConfirmButton: false,
         timer: 2000,
       });

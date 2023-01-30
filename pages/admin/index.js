@@ -7,56 +7,79 @@ import Router from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export default function Home({dataPengaduan, dataAspirasi, dataInformasi}) {
-  const verifyAdmin = async () => {
-    try {
-      const checkAdmin = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/check`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
-    } catch (error) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Gagal Login!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      setTimeout(() => {
-        Router.push("/admin/login");
-      }, 2100);
-    }
-  };
+export default function Home({ dataAspirasi, dataInformasi }) {
+  const [token, setToken] = useState("");
+  // const [pengaduan, setPengaduan] = useState([])
 
   useEffect(() => {
-    verifyAdmin();
+    refreshToken();
+    // getPengaduan();
   }, []);
 
-  const logoutHandle = async () => {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Anda Telah Berhasil Logout",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-    setTimeout(() => {
-      Router.push("/admin/login");
-    }, 2100);
+  const refreshToken = async () => {
     try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/logout`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
-      sessionStorage.clear();
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/token`);
+      setToken(response.data.accessToken);
     } catch (error) {
-      console.log(error);
+      // if (error.response) {
+      //   Router.push("/admin/login");
+      // }
     }
   };
+
+  console.log(token)
+
+  const axiosJWT = axios.create();
+
+  axiosJWT.interceptors.request.use(
+    async (config) => {
+      const currentDate = new Date();
+        if (expire * 1000 < currentDate.getTime()) {
+            const response = await axios.get('http://localhost:5000/token');
+            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+            setToken(response.data.accessToken);
+            // const decoded = jwt_decode(response.data.accessToken);
+        }
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+
+  // const getPengaduan = async () => {
+  //   const results = await axiosJWT.post(
+  //     `${process.env.NEXT_PUBLIC_API_URL}/pengaduan`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     }
+  //   );
+  //   setPengaduan(results)
+  // }
+
+  // const logoutHandle = async () => {
+  //   Swal.fire({
+  //     position: "center",
+  //     icon: "success",
+  //     title: "Anda Telah Berhasil Logout",
+  //     showConfirmButton: false,
+  //     timer: 2000,
+  //   });
+  //   setTimeout(() => {
+  //     Router.push("/admin/login");
+  //   }, 2100);
+  //   try {
+  //     const res = await axios.post(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/logout`,
+  //       {
+  //         token: sessionStorage.getItem("accessToken"),
+  //       }
+  //     );
+  //     sessionStorage.clear();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <div className="flex">
       <Sidebar />
@@ -65,12 +88,12 @@ export default function Home({dataPengaduan, dataAspirasi, dataInformasi}) {
           <h1 className="font-Poppins font-extrabold text-2xl text-[#112883]">
             Dashboard
           </h1>
-          <h1
+          {/* <h1
             className="font-Poppins font-light text-lg text-black"
             onClick={logoutHandle}
           >
             LogOut
-          </h1>
+          </h1> */}
         </div>
         <div className="p-1">
           {/* Kontenna Disini */}
@@ -96,7 +119,7 @@ export default function Home({dataPengaduan, dataAspirasi, dataInformasi}) {
                 <div className="flex justify-between items-center w-full h-full">
                   <div className="flex-col">
                     <h1 className="font-Poppins text-2xl font-extrabold text-white">
-                      {dataPengaduan}
+                      {/* {console.log(pengaduan)} */}
                     </h1>
                     <h1 className="font-Poppins text-xl font-extrabold text-white">
                       Total Pengaduan
@@ -165,21 +188,16 @@ export default function Home({dataPengaduan, dataAspirasi, dataInformasi}) {
 }
 
 export async function getServerSideProps() {
-  const resPengaduan = await axios.post(
-    `${process.env.NEXT_PUBLIC_API_URL}/pengaduan`
-  );
-
   const resAspirasi = await axios.post(
     `${process.env.NEXT_PUBLIC_API_URL}/aspirasi`
   );
-  
+
   const resInformasi = await axios.post(
     `${process.env.NEXT_PUBLIC_API_URL}/informasi`
   );
 
   return {
     props: {
-      dataPengaduan: resPengaduan.data.totalRows,
       dataAspirasi: resAspirasi.data.totalRows,
       dataInformasi: resInformasi.data.totalRows,
     },
