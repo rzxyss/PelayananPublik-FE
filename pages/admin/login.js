@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setCookie } from "cookies-next";
 import Router from "next/router";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
@@ -9,11 +10,11 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/signin`, {
         username: inputUsername,
         password: inputPassword,
       });
-      // console.log(res)
+      setCookie('accessToken', res.data.accessToken)
       Swal.fire({
         position: "center",
         icon: "success",
@@ -23,6 +24,7 @@ export default function Login() {
       });
       setTimeout(() => {
         Router.push("/admin");
+        console.log()
       }, 2100);
     } catch (error) {
       console.log(error);

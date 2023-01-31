@@ -6,45 +6,36 @@ import { HiOutlineSpeakerphone, HiViewBoards } from "react-icons/hi";
 import Router from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { getCookie } from "cookies-next";
 
-export default function Home({ dataAspirasi, dataInformasi }) {
-  const [token, setToken] = useState("");
-  // const [pengaduan, setPengaduan] = useState([])
-
+export default function Home({ dataAspirasi, dataInformasi, dataPengaduan }) {
   useEffect(() => {
     refreshToken();
-    // getPengaduan();
   }, []);
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/token`);
-      setToken(response.data.accessToken);
+      await axios.post("http://localhost:5000/token", {
+        accessToken: getCookie("accessToken"),
+      });
     } catch (error) {
-      // if (error.response) {
-      //   Router.push("/admin/login");
-      // }
+      if (error.response) {
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "Silahkan Login Terlebih Dahulu!",
+          showConfirmButton: false,
+          timer: 2000,
+          backdrop: `
+          rgba(40,44,52, 0.99)
+      `,
+        });
+        setTimeout(() => {
+          Router.push("/admin/login");
+        }, 2100);
+      }
     }
   };
-
-  console.log(token)
-
-  const axiosJWT = axios.create();
-
-  axiosJWT.interceptors.request.use(
-    async (config) => {
-      const currentDate = new Date();
-        if (expire * 1000 < currentDate.getTime()) {
-            const response = await axios.get('http://localhost:5000/token');
-            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-            setToken(response.data.accessToken);
-            // const decoded = jwt_decode(response.data.accessToken);
-        }
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
 
   // const getPengaduan = async () => {
   //   const results = await axiosJWT.post(
@@ -119,7 +110,7 @@ export default function Home({ dataAspirasi, dataInformasi }) {
                 <div className="flex justify-between items-center w-full h-full">
                   <div className="flex-col">
                     <h1 className="font-Poppins text-2xl font-extrabold text-white">
-                      {/* {console.log(pengaduan)} */}
+                      {dataPengaduan}
                     </h1>
                     <h1 className="font-Poppins text-xl font-extrabold text-white">
                       Total Pengaduan
@@ -188,6 +179,10 @@ export default function Home({ dataAspirasi, dataInformasi }) {
 }
 
 export async function getServerSideProps() {
+  const resPengaduan = await axios.post(
+    `${process.env.NEXT_PUBLIC_API_URL}/pengaduan`
+  );
+
   const resAspirasi = await axios.post(
     `${process.env.NEXT_PUBLIC_API_URL}/aspirasi`
   );
@@ -198,6 +193,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
+      dataPengaduan: resPengaduan.data.totalRows,
       dataAspirasi: resAspirasi.data.totalRows,
       dataInformasi: resInformasi.data.totalRows,
     },
