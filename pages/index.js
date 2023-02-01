@@ -18,74 +18,34 @@ import BeritaPopular from "../components/BeritaPopular";
 import BeritaBaru from "../components/BeritaBaru";
 
 import axios from "axios";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const [berita, setBerita] = useState([]);
   const [program, setProgram] = useState([]);
+  const [tabBerita, setTabBerita] = useState("popular");
+  const [limit, setLimit] = useState(6);
+  const [page, setPage] = useState(0);
 
   const getBerita = async () => {
-    const resBerita = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/getBerita`,
-      {
-        limit: 0
-      }
+    const berita = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/berita?limit=${limit}&page=${page}`
     );
-    setBerita(resBerita.data.results);
+    setBerita(berita.data.results);
   };
 
   const getProgram = async () => {
-    const resProgram = await axios.get(
+    const program = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/program`
     );
-    setProgram(resProgram.data);
+    setProgram(program.data.results);
   };
 
-  const faq = [
-    {
-      id: 1,
-      tanya: "Apa Itu Tikomdik?",
-      jawab: "Tikomdik Adalah perusahaan yang bekerja di bidang IT",
-    },
-    {
-      id: 2,
-      tanya: "Tikomdik Berada Dimana?",
-      jawab:
-        "Tikomdik Berada di jalan Radjiman di sebelah Gedung Dinas Pendidikan Provinsi Jawa Barat",
-    },
-    {
-      id: 3,
-      tanya: "Jam Berapa Tikomdik Melayani Tamu?",
-      jawab: "Senin Hingga Kamis Dari Pukul 07.30 hingga 12.00",
-    },
-  ];
-
-  const [question, setQuestion] = useState();
-  const [datas, setDatas] = useState([]);
-  const [idFaq, setIdFaq] = useState();
-  const [tabBerita, setTabBerita] = useState("popular");
-  const [chat, setChat] = useState(true);
-
   useEffect(() => {
-    setDatas(faq);
     getBerita();
     getProgram();
   }, []);
 
-  function handleSubmit() {
-    setIdFaq(id);
-  }
-
-  // console.log(program);
-
-  function showChat() {
-    setChat(!chat);
-    setIdFaq("");
-    setQuestion(0);
-  }
-
-  const id = faq.find((val) => {
-    return val.id === parseInt(question);
-  });
   return (
     <>
       <Navbar />
@@ -262,8 +222,25 @@ export default function Home() {
                   );
                 })}
               </div>
-              <button className="mt-10 bg-[#112883] text-white font-Poppins font-semibold text-lg py-3 px-10 rounded-2xl">
+              <button
+                className={`${
+                  limit == 50
+                    ? "hidden"
+                    : "mt-10 bg-[#112883] text-white font-Poppins font-semibold text-lg py-3 px-10 rounded-2xl "
+                }`}
+                onClick={() => setLimit(50)}
+              >
                 Muat Lebih Banyak
+              </button>
+              <button
+                className={`${
+                  limit == 6
+                    ? "hidden"
+                    : "mt-10 bg-[#112883] text-white font-Poppins font-semibold text-lg py-3 px-10 rounded-2xl "
+                }`}
+                onClick={() => setLimit(6)}
+              >
+                Perkecil
               </button>
             </div>
           </div>
@@ -343,54 +320,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-2 right-2 lg:bottom-5 lg:right-5 bg-[#112883] p-3 rounded-full cursor-pointer">
-        <BsChatDotsFill className="w-7 h-7 text-white" onClick={showChat} />
-      </div>
-      <div
-        className={`${
-          chat
-            ? "hidden"
-            : "bg-white fixed bottom-16 lg:bottom-20 right-2 lg:right-5 p-5 w-10/12 lg:w-2/12 h-auto"
-        } shadow-[0px_0px_10px] rounded-lg `}
-      >
-        <div className="flex flex-col gap-5">
-          <div className="flex justify-end">
-            {!idFaq ? null : (
-              <h1 className="outline outline-1 rounded-md p-1 w-9/12">
-                {idFaq.tanya}
-              </h1>
-            )}
-          </div>
-          <div className="flex justify-start">
-            {!idFaq ? null : (
-              <h1 className="outline outline-1 rounded-md p-1 w-9/12">
-                {idFaq.jawab}
-              </h1>
-            )}
-          </div>
-          <div className="flex flex-row w-full gap-1">
-            <select
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 outline-none block w-full p-2.5"
-            >
-              {datas.map((quest, index) => {
-                return (
-                  <option key={index} value={quest.id}>
-                    {quest.tanya}
-                  </option>
-                );
-              })}
-            </select>
-            <button
-              className="bg-[#112883] text-white p-2 rounded-md"
-              onClick={handleSubmit}
-            >
-              Kirim
-            </button>
-          </div>
-        </div>
-      </div>
+      <Footer />
     </>
   );
 }

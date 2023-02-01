@@ -9,17 +9,16 @@ import axios from "axios";
 
 export default function Berita() {
   const [tabBerita, setTabBerita] = useState("popular");
-  // const [berita, setBerita] = useState([]);
+  const [berita, setBerita] = useState([]);
+  const [limit, setLimit] = useState(50)
 
-  // const getBerita = async () => {
-  //   const resBerita = await axios.get(
-  //     `${process.env.NEXT_PUBLIC_API_URL}/berita`
-  //   );
-  //   setBerita(resBerita.data);
-  // };
+  const getBerita = async () => {
+    const berita = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/berita?limit=${limit}`);
+    setBerita(berita.data.results);
+  };
 
   useEffect(() => {
-    // getBerita();
+    getBerita();
   }, []);
   return (
     <div className="w-full h-auto">
@@ -59,31 +58,7 @@ export default function Berita() {
               </div>
               <div className="w-full flex flex-col lg:flex-row p-10">
                 <div className="grid lg:grid-cols-3 gap-5 w-full lg:w-8/12">
-                  <div className="hover:scale-105 hover:bg-black/10 p-3 rounded-lg duration-500">
-                    <Image
-                      src={"/image/berita.jpg"}
-                      width={100}
-                      height={80}
-                      layout="responsive"
-                      alt="Berita"
-                      className="rounded-lg"
-                    />
-                    <div className="px-3 py-2 flex-wrap">
-                      <h1 className="font-Poppins font-semibold text-lg">
-                        Judul
-                      </h1>
-                      <h1 className="font-DMSans text-lg text-black/50 font-medium">
-                        Deskripsi
-                      </h1>
-                    </div>
-                    <div className="flex flex-row items-center text-black/60 mt-2">
-                      <MdHistory className="w-5 h-5" />
-                      <h1 className="font-Poppins font-light text-sm">
-                        CreatedAt
-                      </h1>
-                    </div>
-                  </div>
-                  {/* {berita.map((data, index) => {
+                  {berita.map((data, index) => {
                     return (
                       <div
                         className="hover:scale-105 hover:bg-black/10 p-3 rounded-lg duration-500"
@@ -113,7 +88,7 @@ export default function Berita() {
                         </div>
                       </div>
                     );
-                  })} */}
+                  })}
                 </div>
                 <div className="w-full lg:w-4/12 mt-20">
                   <div className="w-full flex flex-col justify-center items-center gap-4 p-5">
