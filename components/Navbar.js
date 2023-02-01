@@ -10,7 +10,6 @@ export default function Navbar() {
   const router = useRouter();
   return (
     <>
-      {/* {console.log(open)} */}
       <div className="w-full shadow-md sticky top-0 z-30 bg-white">
         <div className="flex flex-wrap justify-between items-center p-3 lg:px-14 px-5">
           <Link href={"/"}>
@@ -78,7 +77,7 @@ export default function Navbar() {
                   : "text-black/50"
               }`}
             >
-              FaQ
+              <Link href={'/faq'}>FaQ</Link>
             </li>
           </ul>
         </div>
