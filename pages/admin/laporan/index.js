@@ -7,52 +7,51 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
 
-export default function Laporan({dataLaporan}) {
-  const verifyAdmin = async () => {
+export default function Laporan({ laporan }) {
+  const verifyToken = async () => {
     try {
-      const checkAdmin = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/check`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
-    } catch (error) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Gagal Login!",
-        showConfirmButton: false,
-        timer: 1500,
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
+        accessToken: sessionStorage.getItem("accessToken"),
       });
-      setTimeout(() => {
-        Router.push("/admin/login");
-      }, 2100);
+    } catch (error) {
+      if (error.response) {
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "Silahkan Login Terlebih Dahulu!",
+          showConfirmButton: false,
+          timer: 2000,
+          backdrop: `
+          rgba(40,44,52, 0.99)
+      `,
+        });
+        setTimeout(() => {
+          Router.push("/admin/login");
+        }, 2100);
+      }
     }
   };
 
   useEffect(() => {
-    verifyAdmin();
+    verifyToken();
   }, []);
 
   const logoutHandle = async () => {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Anda Telah Berhasil Logout",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-    setTimeout(() => {
-      Router.push("/admin/login");
-    }, 2100);
     try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/logout`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
-      sessionStorage.clear();
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/signout`, {
+        accessToken: sessionStorage.getItem("accessToken"),
+      });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Anda Telah Berhasil Logout",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setTimeout(() => {
+        sessionStorage.clear();
+        Router.push("/admin/login");
+      }, 2100);
     } catch (error) {
       console.log(error);
     }
@@ -96,14 +95,14 @@ export default function Laporan({dataLaporan}) {
             Laporan
           </h1>
           <h1
-            className="font-Poppins font-light text-lg text-black"
+            className="font-Poppins font-light text-lg text-black cursor-pointer"
             onClick={logoutHandle}
           >
             LogOut
           </h1>
         </div>
         <div className="p-1">
-          {/* Kontenna Disini */}
+          {/* StartKonten */}
           <div className="lg:p-5">
             <div className="w-full h-full flex flex-col tes">
               <div>
@@ -114,7 +113,7 @@ export default function Laporan({dataLaporan}) {
                   Ini merupakan pengaduan terkini silahkan cek dan konfirmasi
                 </h1>
               </div>
-              {dataLaporan.map((laporan, index) => {
+              {laporan.map((laporan, index) => {
                 return (
                   <div className="mt-5" key={index}>
                     <div className="w-full h-auto bg-white p-2 rounded-xl shadow-[0_0_5px]">
@@ -169,13 +168,13 @@ export default function Laporan({dataLaporan}) {
 }
 
 export async function getServerSideProps() {
-  const rLaporan = await axios.get(
+  const result = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}/laporan`
   );
 
-  return{
+  return {
     props: {
-      dataLaporan: rLaporan.data
-    }
-  }
+      laporan: result.data.results,
+    },
+  };
 }

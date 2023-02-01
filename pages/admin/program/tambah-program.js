@@ -11,25 +11,52 @@ export default function TambahProgram() {
   const [imageProgram, setImageProgram] = useState("");
   const [preview, setPreview] = useState("");
 
-  const verifyAdmin = async () => {
+  const verifyToken = async () => {
     try {
-      const checkAdmin = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/check`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
+        accessToken: sessionStorage.getItem("accessToken"),
+      });
     } catch (error) {
+      if (error.response) {
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "Silahkan Login Terlebih Dahulu!",
+          showConfirmButton: false,
+          timer: 2000,
+          backdrop: `
+          rgba(40,44,52, 0.99)
+      `,
+        });
+        setTimeout(() => {
+          Router.push("/admin/login");
+        }, 2100);
+      }
+    }
+  };
+
+  useEffect(() => {
+    verifyToken();
+  }, []);
+
+  const logoutHandle = async () => {
+    try {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/signout`, {
+        accessToken: sessionStorage.getItem("accessToken"),
+      });
       Swal.fire({
         position: "center",
-        icon: "error",
-        title: "Gagal Login!",
+        icon: "success",
+        title: "Anda Telah Berhasil Logout",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       setTimeout(() => {
+        sessionStorage.clear();
         Router.push("/admin/login");
       }, 2100);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -56,33 +83,6 @@ export default function TambahProgram() {
     }
   };
 
-  useEffect(() => {
-    verifyAdmin();
-  }, []);
-
-  const logoutHandle = async () => {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Anda Telah Berhasil Logout",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-    setTimeout(() => {
-      Router.push("/admin/login");
-    }, 2100);
-    try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/logout`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
-      sessionStorage.clear();
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <div className="flex">
       <Sidebar />
@@ -91,7 +91,7 @@ export default function TambahProgram() {
           <h1 className="font-Poppins font-extrabold text-2xl text-black">
             Tambah Program
           </h1>
-          <h1 className="font-Poppins font-light text-lg text-black" onClick={logoutHandle}>
+          <h1 className="font-Poppins font-light text-lg text-black cursor-pointer" onClick={logoutHandle}>
             LogOut
           </h1>
         </div>

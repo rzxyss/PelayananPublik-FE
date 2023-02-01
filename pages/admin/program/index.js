@@ -9,32 +9,55 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
 
-export default function Program({dataProgram}) {
-  const verifyAdmin = async () => {
+export default function Program({ program }) {
+  const verifyToken = async () => {
     try {
-      const checkAdmin = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/check`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
-    } catch (error) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Gagal Login!",
-        showConfirmButton: false,
-        timer: 1500,
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
+        accessToken: sessionStorage.getItem("accessToken"),
       });
-      setTimeout(() => {
-        Router.push("/admin/login");
-      }, 2100);
+    } catch (error) {
+      if (error.response) {
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "Silahkan Login Terlebih Dahulu!",
+          showConfirmButton: false,
+          timer: 2000,
+          backdrop: `
+          rgba(40,44,52, 0.99)
+      `,
+        });
+        setTimeout(() => {
+          Router.push("/admin/login");
+        }, 2100);
+      }
     }
   };
 
   useEffect(() => {
-    verifyAdmin();
+    verifyToken();
   }, []);
+
+  const logoutHandle = async () => {
+    try {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/signout`, {
+        accessToken: sessionStorage.getItem("accessToken"),
+      });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Anda Telah Berhasil Logout",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setTimeout(() => {
+        sessionStorage.clear();
+        Router.push("/admin/login");
+      }, 2100);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const btnDelete = async (programId) => {
     Swal.fire({
@@ -65,30 +88,6 @@ export default function Program({dataProgram}) {
     });
   };
 
-  const logoutHandle = async () => {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Anda Telah Berhasil Logout",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-    setTimeout(() => {
-      Router.push("/admin/login");
-    }, 2100);
-    try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/logout`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
-      sessionStorage.clear();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="flex">
       <Sidebar />
@@ -97,12 +96,14 @@ export default function Program({dataProgram}) {
           <h1 className="font-Poppins font-extrabold text-2xl text-[#112883]">
             Program
           </h1>
-          <h1 className="font-Poppins font-light text-lg text-black" onClick={logoutHandle}>
+          <h1
+            className="font-Poppins font-light text-lg text-black cursor-pointer"
+            onClick={logoutHandle}
+          >
             LogOut
           </h1>
         </div>
         <div className="p-1">
-          
           <div className="lg:p-5">
             <div className="w-full h-full flex flex-col tes">
               <div className="flex flex-row justify-end items-end">
@@ -117,7 +118,7 @@ export default function Program({dataProgram}) {
                 </Link>
               </div>
               <div className="mt-5">
-                {dataProgram.map((program, index) => {
+                {program.map((program, index) => {
                   return (
                     <div
                       className="w-full h-full hover:bg-black/10 p-3 rounded-xl duration-200 gap-5"
@@ -161,22 +162,20 @@ export default function Program({dataProgram}) {
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
   );
 }
 
-export async function getServerSideProps(){
-  const rProgram = await axios.get(
+export async function getServerSideProps() {
+  const results = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}/program`
   );
-  
 
   return {
     props: {
-      dataProgram: rProgram.data,
-    }
-  }
+      program: results.data.results,
+    },
+  };
 }

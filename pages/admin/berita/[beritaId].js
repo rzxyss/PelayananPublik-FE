@@ -13,38 +13,66 @@ export default function EditBerita({ beritaId }) {
   const [imageBerita, setImageBerita] = useState("");
   const [preview, setPreview] = useState("");
 
-  const verifyAdmin = async () => {
+  const verifyToken = async () => {
     try {
-      const checkAdmin = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/check`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
+        accessToken: sessionStorage.getItem("accessToken"),
+      });
     } catch (error) {
+      if (error.response) {
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "Silahkan Login Terlebih Dahulu!",
+          showConfirmButton: false,
+          timer: 2000,
+          backdrop: `
+          rgba(40,44,52, 0.99)
+      `,
+        });
+        setTimeout(() => {
+          Router.push("/admin/login");
+        }, 2100);
+      }
+    }
+  };
+
+  useEffect(() => {
+    verifyToken();
+    getBerita();
+  }, []);
+
+  const logoutHandle = async () => {
+    try {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/signout`, {
+        accessToken: sessionStorage.getItem("accessToken"),
+      });
       Swal.fire({
         position: "center",
-        icon: "error",
-        title: "Gagal Login!",
+        icon: "success",
+        title: "Anda Telah Berhasil Logout",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 2000,
       });
       setTimeout(() => {
+        sessionStorage.clear();
         Router.push("/admin/login");
       }, 2100);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   const getBerita = async (e) => {
     try {
-      const rBerita = await axios.get(
+      const results = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/berita/${beritaId}`
       );
-      setJudulBerita(rBerita.data.judul_berita);
-      setDeskripsiBerita(rBerita.data.deskripsi_berita);
-      setIsiBerita(rBerita.data.isi_berita);
-      setImageBerita(rBerita.data.image);
-      setPreview(rBerita.data.url);
+      setJudulBerita(results.data.judul_berita);
+      setDeskripsiBerita(results.data.deskripsi_berita);
+      setIsiBerita(results.data.isi_berita);
+      setImageBerita(results.data.image);
+      setPreview(results.data.url);
     } catch (error) {
       console.log(error);
     }
@@ -79,35 +107,6 @@ export default function EditBerita({ beritaId }) {
     }
   };
 
-  useEffect(() => {
-    verifyAdmin();
-    getBerita();
-  }, []);
-
-  const logoutHandle = async () => {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Anda Telah Berhasil Logout",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-    setTimeout(() => {
-      Router.push("/admin/login");
-    }, 2100);
-    try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/logout`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
-      sessionStorage.clear();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="flex">
       <Sidebar />
@@ -116,12 +115,15 @@ export default function EditBerita({ beritaId }) {
           <h1 className="font-Poppins text-2xl text-black font-extrabold">
             Tambah Berita
           </h1>
-          <h1 className="font-Poppins font-light text-lg text-black" onClick={logoutHandle}>
+          <h1
+            className="font-Poppins font-light text-lg text-black cursor-pointer"
+            onClick={logoutHandle}
+          >
             LogOut
           </h1>
         </div>
         <div className="p-1">
-          {/* Kontenna Disini */}
+          {/* StartKonten */}
           <div className="p-5">
             <div className="lg:grid lg:grid-cols-2">
               <div className="lg:w-full lg:px-20 flex flex-col">

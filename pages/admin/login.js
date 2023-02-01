@@ -1,20 +1,22 @@
 import axios from "axios";
-import { setCookie } from "cookies-next";
 import Router from "next/router";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 
 export default function Login() {
-  const [inputUsername, setUsername] = useState('')
-  const [inputPassword, setPassword] = useState('')
+  const [inputUsername, setUsername] = useState("");
+  const [inputPassword, setPassword] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/signin`, {
-        username: inputUsername,
-        password: inputPassword,
-      });
-      setCookie('accessToken', res.data.accessToken)
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/signin`,
+        {
+          username: inputUsername,
+          password: inputPassword,
+        }
+      );
+      sessionStorage.setItem("accessToken", res.data.accessToken);
       Swal.fire({
         position: "center",
         icon: "success",
@@ -24,7 +26,7 @@ export default function Login() {
       });
       setTimeout(() => {
         Router.push("/admin");
-        console.log()
+        console.log();
       }, 2100);
     } catch (error) {
       console.log(error);
@@ -49,7 +51,7 @@ export default function Login() {
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
-                <label htmlFor="username" className="sr-only">
+                <label className="sr-only">
                   Username
                 </label>
                 <input
@@ -59,7 +61,7 @@ export default function Login() {
                   className="relative block w-full appearance-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#112883] focus:outline-none focus:ring-[#112883] sm:text-sm"
                   placeholder="Username"
                 />
-                <label htmlFor="password" className="sr-only">
+                <label className="sr-only">
                   Password
                 </label>
                 <input

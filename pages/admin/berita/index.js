@@ -11,43 +11,69 @@ import Swal from "sweetalert2";
 import Router from "next/router";
 
 export default function Berita() {
-  const [dataBerita, setDataBerita] = useState([]);
+  const [berita, setBerita] = useState([]);
   const [limit, setLimit] = useState(1);
   const [page, setPage] = useState(0);
+  const [search, setSearch] = useState('')
+  const [pages, setPages] = useState(0)
 
   const getBerita = async () => {
-    const rBerita = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/berita?limit=${limit}&page=${page}`
+    const results = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/berita?page=${page}&search_query=${search}`
     );
-    setDataBerita(rBerita.data.results);
+    setBerita(results.data.results);
+    setPages(results.data.totalPage);
   };
 
-  const verifyAdmin = async () => {
+  const verifyToken = async () => {
     try {
-      const checkAdmin = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/check`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
-    } catch (error) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Gagal Login!",
-        showConfirmButton: false,
-        timer: 1500,
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
+        accessToken: sessionStorage.getItem("accessToken"),
       });
-      setTimeout(() => {
-        Router.push("/admin/login");
-      }, 2100);
+    } catch (error) {
+      if (error.response) {
+        Swal.fire({
+          position: "center",
+          icon: "warning",
+          title: "Silahkan Login Terlebih Dahulu!",
+          showConfirmButton: false,
+          timer: 2000,
+          backdrop: `
+          rgba(40,44,52, 0.99)
+      `,
+        });
+        setTimeout(() => {
+          Router.push("/admin/login");
+        }, 2100);
+      }
     }
   };
 
   useEffect(() => {
     getBerita();
-    verifyAdmin();
-  }, [limit, page]);
+    verifyToken();
+  }, [limit, page, search]);
+
+  const logoutHandle = async () => {
+    try {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/signout`, {
+        accessToken: sessionStorage.getItem("accessToken"),
+      });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Anda Telah Berhasil Logout",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setTimeout(() => {
+        sessionStorage.clear();
+        Router.push("/admin/login");
+      }, 2100);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const btnDelete = async (beritaId) => {
     Swal.fire({
@@ -76,30 +102,6 @@ export default function Berita() {
     });
   };
 
-  const logoutHandle = async () => {
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Anda Telah Berhasil Logout",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-    setTimeout(() => {
-      Router.push("/admin/login");
-    }, 2100);
-    try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/logout`,
-        {
-          token: sessionStorage.getItem("accessToken"),
-        }
-      );
-      sessionStorage.clear();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="flex">
       <Sidebar />
@@ -109,16 +111,16 @@ export default function Berita() {
             Berita
           </h1>
           <h1
-            className="font-Poppins font-light text-lg text-black"
+            className="font-Poppins font-light text-lg text-black cursor-pointer"
             onClick={logoutHandle}
           >
             LogOut
           </h1>
         </div>
         <div className="p-1">
-          {/* Kontenna Disini */}
+          {/* StartKonten */}
           <div className="p-5">
-            <div className="w-full h-auto flex flex-col">
+            <div className="w-full h-auto flex flex-col justify-center">
               <div className="flex flex-row justify-between items-center">
                 <Link
                   href={"berita/tambah-berita"}
@@ -135,6 +137,8 @@ export default function Berita() {
                       type="search"
                       className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-black focus:border-black focus:outline-none"
                       placeholder="Cari ..."
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
                     />
                     <button
                       type="submit"
@@ -148,7 +152,7 @@ export default function Berita() {
               <div className="mt-5">
                 <div className="w-auto">
                   <div className="grid lg:grid-cols-3 gap-5">
-                    {dataBerita.map((berita, index) => {
+                    {berita.map((berita, index) => {
                       return (
                         <div
                           className="hover:bg-black/10 p-3 rounded-lg duration-500"
@@ -191,21 +195,23 @@ export default function Berita() {
                       );
                     })}
                   </div>
-                  <a
-                    href="#"
-                    onClick={() => setPage - 1}
-                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    Previous
-                  </a>
-                  {/* Next Button */}
-                  <a
-                    href="#"
-                    onClick={() => setPage + 1}
-                    className="inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    Next
-                  </a>
+                  <div className="w-full flex justify-center items-center gap-2 mt-10">
+                    <button
+                      onClick={() => setPage(page - 1)}
+                      disabled={page < 1}
+                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    >
+                      Previous
+                    </button>
+                    <h1>Page {page + 1} of {pages}</h1>
+                    <button
+                      onClick={() => setPage(page + 1)}
+                      disabled={page === (pages - 1)}
+                      className="inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    >
+                      Next
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
