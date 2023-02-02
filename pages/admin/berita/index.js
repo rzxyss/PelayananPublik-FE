@@ -12,14 +12,14 @@ import Router from "next/router";
 
 export default function Berita() {
   const [berita, setBerita] = useState([]);
-  const [limit, setLimit] = useState(1);
+  const [limit, setLimit] = useState(6);
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState('')
   const [pages, setPages] = useState(0)
 
   const getBerita = async () => {
     const results = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/berita?page=${page}&search_query=${search}`
+      `${process.env.NEXT_PUBLIC_API_URL}/berita?page=${page}&search_query=${search}&limit=${limit}`
     );
     setBerita(results.data.results);
     setPages(results.data.totalPage);
