@@ -10,9 +10,10 @@ import { Navigation, Autoplay } from "swiper";
 
 import { MdHistory, MdPeople } from "react-icons/md";
 import { BiLineChart } from "react-icons/bi";
-import { BsChatDotsFill } from "react-icons/bs";
 import { TbNotes } from "react-icons/tb";
 import { useEffect, useState } from "react";
+import { BsChatDotsFill } from "react-icons/bs";
+import { GrFormClose } from "react-icons/gr";
 
 import BeritaPopular from "../components/BeritaPopular";
 import BeritaBaru from "../components/BeritaBaru";
@@ -26,6 +27,12 @@ export default function Home() {
   const [tabBerita, setTabBerita] = useState("popular");
   const [limit, setLimit] = useState(6);
   const [page, setPage] = useState(0);
+  const [chat, setChat] = useState(false);
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [logQuestion, setLogQuestion] = useState("");
+  const [logAnswer, setLogAnswer] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const getBerita = async () => {
     const berita = await axios.get(
@@ -46,9 +53,76 @@ export default function Home() {
     getProgram();
   }, []);
 
+  const handleSubmit = async (e) => {
+    setLogQuestion(question);
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/chat`,
+        {
+          question: question,
+        }
+      );
+      setAnswer(response.data.results);
+      setQuestion("");
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const closeChat = async (e) => {
+    setChat(!chat);
+    setQuestion("");
+    setAnswer("");
+    setLogQuestion("");
+  };
+
   return (
     <>
       <Navbar />
+      <div
+        className={`w-14 h-14 bg-[#25D366] rounded-full justify-center items-center fixed bottom-2 right-2 cursor-pointer ${
+          chat ? "hidden" : "flex"
+        }`}
+        onClick={() => setChat(!chat)}
+      >
+        <BsChatDotsFill className="w-7 h-7 text-white" />
+      </div>
+      <div
+        className={`bottom-2 right-2 w-64 bg-white border ${
+          !chat ? "hidden" : "fixed"
+        }`}
+      >
+        <div className="flex justify-between items-center p-1 px-2 cursor-pointer">
+          <h1 className="font-Poppins font-light">Tikomdiks BOTS</h1>
+          <GrFormClose className="w-7 h-7" onClick={closeChat} />
+        </div>
+        <div className="px-6 py-2 space-y-2">
+          <div className={`${logQuestion === '' ? 'hidden' : 'font-Poppins font-normal text-base bg-green-500/20 p-2 rounded-lg'}`}>
+            <h1 className="flex justify-end">{logQuestion}</h1>
+          </div>
+          <div className={`${answer === '' && !loading ? 'hidden' : 'font-Poppins font-normal text-base bg-red-500/20 p-2 rounded-lg'}`}>
+            {loading ? <h1>Loading.....</h1> : <h1>{answer}</h1>}
+          </div>
+          <form className="flex gap-2 items-end" onSubmit={handleSubmit}>
+            <input
+              className="w-full p-2 rounded border focus:outline-none"
+              type="text"
+              placeholder="Type your message..."
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+            />
+            <button
+              className="p-2 rounded bg-blue-500 text-white"
+              type="submit"
+            >
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
       <div className="w-full h-auto">
         <div className="flex flex-col items-center lg:grid lg:grid-cols-2">
           <div className="mx-auto py-10 lg:py-20">
@@ -87,7 +161,7 @@ export default function Home() {
         <div className="grid lg:grid-cols-4 -mt-60">
           {/* Card */}
           <div className="flex justify-center 2xl:p-20 p-10">
-            <div className="bg-white w-full p-10 shadow-md rounded-lg hover:bg-[#FBFBFB] hover:scale-105 duration-500">
+            <div className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 ${chat ? '' : 'hover:bg-[#FBFBFB] hover:scale-105'}`}>
               <div className="grid grid-rows-1">
                 <div className="flex justify-center mb-5">
                   <MdHistory className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
@@ -111,7 +185,7 @@ export default function Home() {
           </div>
           {/* Card */}
           <div className="flex justify-center 2xl:p-20 p-10">
-            <div className="bg-white w-full p-10 shadow-md rounded-lg hover:bg-[#FBFBFB] hover:scale-105 duration-500">
+            <div className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 ${chat ? '' : 'hover:bg-[#FBFBFB] hover:scale-105'}`}>
               <div className="grid grid-rows-1">
                 <div className="flex justify-center mb-5">
                   <TbNotes className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
@@ -135,7 +209,7 @@ export default function Home() {
           </div>
           {/* Card */}
           <div className="flex justify-center 2xl:p-20 p-10">
-            <div className="bg-white w-full p-10 shadow-md rounded-lg hover:bg-[#FBFBFB] hover:scale-105 duration-500">
+            <div className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 ${chat ? '' : 'hover:bg-[#FBFBFB] hover:scale-105'}`}>
               <div className="grid grid-rows-1">
                 <div className="flex justify-center mb-5">
                   <BiLineChart className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
@@ -159,7 +233,7 @@ export default function Home() {
           </div>
           {/* Card */}
           <div className="flex justify-center 2xl:p-20 p-10">
-            <div className="bg-white w-full p-10 shadow-md rounded-lg hover:bg-[#FBFBFB] hover:scale-105 duration-500">
+            <div className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 ${chat ? '' : 'hover:bg-[#FBFBFB] hover:scale-105'}`}>
               <div className="grid grid-rows-1">
                 <div className="flex justify-center mb-5">
                   <MdPeople className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
@@ -168,7 +242,7 @@ export default function Home() {
                   <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-[#112883]">
                     team project
                   </h1>
-                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
+                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-black/50">
                     Menampilkan Bagian dan Tugas dalam UPTD TIKOMDIK
                   </h1>
                 </div>
@@ -193,7 +267,7 @@ export default function Home() {
                 {berita.map((data, index) => {
                   return (
                     <div
-                      className="hover:scale-105 hover:bg-black/10 p-3 rounded-lg duration-500"
+                      className={`p-3 rounded-lg duration-500 ${chat ? '' : 'hover:scale-105 hover:bg-black/10'}`}
                       key={index}
                     >
                       <Image
@@ -222,26 +296,6 @@ export default function Home() {
                   );
                 })}
               </div>
-              <button
-                className={`${
-                  limit == 50
-                    ? "hidden"
-                    : "mt-10 bg-[#112883] text-white font-Poppins font-semibold text-lg py-3 px-10 rounded-2xl "
-                }`}
-                onClick={() => setLimit(50)}
-              >
-                Muat Lebih Banyak
-              </button>
-              <button
-                className={`${
-                  limit == 6
-                    ? "hidden"
-                    : "mt-10 bg-[#112883] text-white font-Poppins font-semibold text-lg py-3 px-10 rounded-2xl "
-                }`}
-                onClick={() => setLimit(6)}
-              >
-                Perkecil
-              </button>
             </div>
           </div>
 
@@ -287,17 +341,6 @@ export default function Home() {
               modules={[Navigation, Autoplay]}
               className="mySwiper"
             >
-              {/* <SwiperSlide>
-                <div className="w-full aspect-[16/7]">
-                  <div className="bg-[url('/image/berita2.jpg')] h-full bg-cover bg-center">
-                    <div className="bg-black/50 w-full h-full p-2 flex flex-col justify-end items-center">
-                      <h1 className="font-bold text-3xl text-white mb-5">
-                        judul
-                      </h1>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide> */}
               {program.map((program, index) => {
                 return (
                   <SwiperSlide key={index}>
