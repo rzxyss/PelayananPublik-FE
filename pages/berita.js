@@ -6,16 +6,22 @@ import BeritaBaru from "../components/BeritaBaru";
 import { MdHistory, MdPeople } from "react-icons/md";
 import { BiSearch } from "react-icons/bi";
 import axios from "axios";
+import Footer from "../components/Footer";
 
 export default function Berita() {
   const [tabBerita, setTabBerita] = useState("popular");
   const [berita, setBerita] = useState([]);
-  const [limit, setLimit] = useState(50)
+  const [limit, setLimit] = useState(9);
 
   const getBerita = async () => {
-    const berita = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/berita?limit=${limit}`);
+    const berita = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/berita?limit=${limit}`
+    );
     setBerita(berita.data.results);
   };
+
+  // console.log(limit)
+  // onClick={() => setLimit(50)}
 
   useEffect(() => {
     getBerita();
@@ -57,7 +63,7 @@ export default function Berita() {
                 </form>
               </div>
               <div className="w-full flex flex-col lg:flex-row p-10">
-                <div className="grid lg:grid-cols-3 gap-5 w-full lg:w-8/12">
+                <div className="grid lg:grid-cols-3 gap-5 w-full">
                   {berita.map((data, index) => {
                     return (
                       <div
@@ -90,39 +96,15 @@ export default function Berita() {
                     );
                   })}
                 </div>
-                <div className="w-full lg:w-4/12 mt-20">
-                  <div className="w-full flex flex-col justify-center items-center gap-4 p-5">
-                    <div className="inline-flex">
-                      <button
-                        type="button"
-                        className={`py-2 px-4 text-sm font-medium bg-transparent ${
-                          tabBerita == "popular"
-                            ? "border-b-4 border-[#112883]"
-                            : ""
-                        }`}
-                        onClick={() => setTabBerita("popular")}
-                      >
-                        Terpopuler
-                      </button>
-                      <button
-                        type="button"
-                        className={`py-2 px-4 text-sm font-medium bg-transparent ${
-                          tabBerita == "baru"
-                            ? "border-b-4 border-[#112883]"
-                            : ""
-                        }`}
-                        onClick={() => setTabBerita("baru")}
-                      >
-                        Terbaru
-                      </button>
-                    </div>
-                    {tabBerita === "popular" && <BeritaPopular />}
-                    {tabBerita === "baru" && <BeritaBaru />}
-                  </div>
-                </div>
+              </div>
+              <div className="w-full flex justify-center pb-5">
+                <button className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded" onClick={() => setLimit(50)}>
+                  Muat Lebih Banyak
+                </button>
               </div>
             </div>
           </div>
+          <Footer />
         </div>
       </div>
     </div>
