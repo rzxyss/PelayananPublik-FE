@@ -1,7 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import Navbar from "../components/Navbar";
-import { BsInstagram, BsWhatsapp } from "react-icons/bs";
+import { BsInstagram, BsWhatsapp, BsGithub } from "react-icons/bs";
+import Footer from "../components/Footer";
+import Link from "next/link";
 
 export default function Profile() {
   return (
@@ -159,7 +161,10 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div id="tugas-pokok-dan-fungsi" className="my-10 px-7 lg:px-20 2xl:px-56">
+              <div
+                id="tugas-pokok-dan-fungsi"
+                className="my-10 px-7 lg:px-20 2xl:px-56"
+              >
                 <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
                   Tugas Pokok Dan Fungsi
                 </h1>
@@ -224,11 +229,200 @@ export default function Profile() {
                 <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
                   Team Project
                 </h1>
-                <h1 className="text-center">Coming Soon......</h1>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10"></div>
+                {/* <h1 className="text-center">Coming Soon......</h1>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10"></div> */}
+                <section>
+                  <div className="px-4 mx-auto max-w-screen-xl lg:px-6">
+                    <div className="grid gap-8 mb-6 md:grid-cols-2 pb-5 lg:pb-10">
+                      <div className="items-center bg-gray-50 rounded-lg border sm:flex">
+                        <Image
+                          width={200}
+                          height={0}
+                          className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
+                          src="/image/pp.png"
+                          alt="Bonnie Avatar"
+                        />
+                        <div className="p-5">
+                          <h3 className="text-xl font-bold tracking-tight text-gray-900">
+                            Rizki Saepul Aziz
+                          </h3>
+                          <span className="text-gray-500">
+                            Frontend Developer
+                          </span>
+                          <p className="mt-3 mb-4 font-light text-gray-500">
+                            Responsible for creating Landing Pages
+                          </p>
+                          <ul className="flex space-x-4 sm:mt-0">
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsInstagram />
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsWhatsapp />
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsGithub />
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="items-center bg-gray-50 rounded-lg border sm:flex">
+                        <Image
+                          width={200}
+                          height={0}
+                          className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
+                          src="/image/pp.png"
+                          alt="Bonnie Avatar"
+                        />
+                        <div className="p-5">
+                          <h3 className="text-xl font-bold tracking-tight text-gray-900">
+                            M Ilham Hardiana
+                          </h3>
+                          <span className="text-gray-500">
+                            Frontend Developer
+                          </span>
+                          <p className="mt-3 mb-4 font-light text-gray-500">
+                            Responsible for creating Admin Pages
+                          </p>
+                          <ul className="flex space-x-4 sm:mt-0">
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsInstagram />
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsWhatsapp />
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsGithub />
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="items-center bg-gray-50 rounded-lg border sm:flex">
+                        <Image
+                          width={200}
+                          height={0}
+                          className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
+                          src="/image/pp.png"
+                          alt="Bonnie Avatar"
+                        />
+                        <div className="p-5">
+                          <h3 className="text-xl font-bold tracking-tight text-gray-900">
+                            Fajar Muhammad
+                          </h3>
+                          <span className="text-gray-500">UI/UX Design</span>
+                          <p className="mt-3 mb-4 font-light text-gray-500">
+                            Responsible for creating UI/UX Design
+                          </p>
+                          <ul className="flex space-x-4 sm:mt-0">
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsInstagram />
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsWhatsapp />
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsGithub />
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="items-center bg-gray-50 rounded-lg border sm:flex">
+                        <Image
+                          width={200}
+                          height={0}
+                          className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
+                          src="/image/pp.png"
+                          alt="Bonnie Avatar"
+                        />
+                        <div className="p-5">
+                          <h3 className="text-xl font-bold tracking-tight text-gray-900">
+                            Izza Zaki Z
+                          </h3>
+                          <span className="text-gray-500">
+                            Backend Developer
+                          </span>
+                          <p className="mt-3 mb-4 font-light text-gray-500">
+                            Responsible for creating Backend Pelayanan Publik
+                          </p>
+                          <ul className="flex space-x-4 sm:mt-0">
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsInstagram />
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsWhatsapp />
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="#"
+                                className="text-gray-500 hover:text-gray-900"
+                              >
+                                <BsGithub />
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
               </div>
             </div>
           </div>
+          <Footer />
         </div>
       </div>
     </div>
