@@ -2,6 +2,7 @@ import axios from "axios";
 import Router from "next/router";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 export default function Laporan() {
@@ -128,6 +129,7 @@ export default function Laporan() {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
