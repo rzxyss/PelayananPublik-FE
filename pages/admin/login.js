@@ -29,7 +29,15 @@ export default function Login() {
         console.log();
       }, 2100);
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Username atau Password salah!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setUsername('');
+      setPassword('');
     }
   };
 
@@ -51,9 +59,7 @@ export default function Login() {
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
-                <label className="sr-only">
-                  Username
-                </label>
+                <label className="sr-only">Username</label>
                 <input
                   value={inputUsername}
                   onChange={(e) => setUsername(e.target.value)}
@@ -61,9 +67,7 @@ export default function Login() {
                   className="relative block w-full appearance-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-[#112883] focus:outline-none focus:ring-[#112883] sm:text-sm"
                   placeholder="Username"
                 />
-                <label className="sr-only">
-                  Password
-                </label>
+                <label className="sr-only">Password</label>
                 <input
                   value={inputPassword}
                   onChange={(e) => setPassword(e.target.value)}
