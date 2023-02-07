@@ -20,7 +20,7 @@ export default function Profile() {
             </h1>
           </div>
           <div className="w-full h-auto lg:mt-14 px-5 lg:px-20 2xl:px-60">
-            <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg">
+            <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg my-10">
               <div id="tentang-tikomdik" className="my-10">
                 <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
                   UPTD TIKomDik
@@ -229,196 +229,68 @@ export default function Profile() {
                 <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
                   Team Project
                 </h1>
-                {/* <h1 className="text-center">Coming Soon......</h1>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10"></div> */}
-                <section>
-                  <div className="px-4 mx-auto max-w-screen-xl lg:px-6">
-                    <div className="grid gap-8 mb-6 md:grid-cols-2 pb-5 lg:pb-10">
-                      <div className="items-center bg-gray-50 rounded-lg border sm:flex">
-                        <Image
-                          width={200}
-                          height={0}
-                          className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
-                          src="/image/pp.png"
-                          alt="Bonnie Avatar"
-                        />
-                        <div className="p-5">
-                          <h3 className="text-xl font-bold tracking-tight text-gray-900">
-                            Rizki Saepul Aziz
-                          </h3>
-                          <span className="text-gray-500">
-                            Frontend Developer
-                          </span>
-                          <p className="mt-3 mb-4 font-light text-gray-500">
-                            Responsible for creating Landing Pages
-                          </p>
-                          <ul className="flex space-x-4 sm:mt-0">
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsInstagram />
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsWhatsapp />
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsGithub />
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="items-center bg-gray-50 rounded-lg border sm:flex">
-                        <Image
-                          width={200}
-                          height={0}
-                          className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
-                          src="/image/pp.png"
-                          alt="Bonnie Avatar"
-                        />
-                        <div className="p-5">
-                          <h3 className="text-xl font-bold tracking-tight text-gray-900">
-                            M Ilham Hardiana
-                          </h3>
-                          <span className="text-gray-500">
-                            Frontend Developer
-                          </span>
-                          <p className="mt-3 mb-4 font-light text-gray-500">
-                            Responsible for creating Admin Pages
-                          </p>
-                          <ul className="flex space-x-4 sm:mt-0">
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsInstagram />
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsWhatsapp />
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsGithub />
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="items-center bg-gray-50 rounded-lg border sm:flex">
-                        <Image
-                          width={200}
-                          height={0}
-                          className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
-                          src="/image/pp.png"
-                          alt="Bonnie Avatar"
-                        />
-                        <div className="p-5">
-                          <h3 className="text-xl font-bold tracking-tight text-gray-900">
-                            Fajar Muhammad
-                          </h3>
-                          <span className="text-gray-500">UI/UX Design</span>
-                          <p className="mt-3 mb-4 font-light text-gray-500">
-                            Responsible for creating UI/UX Design
-                          </p>
-                          <ul className="flex space-x-4 sm:mt-0">
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsInstagram />
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsWhatsapp />
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsGithub />
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="items-center bg-gray-50 rounded-lg border sm:flex">
-                        <Image
-                          width={200}
-                          height={0}
-                          className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
-                          src="/image/pp.png"
-                          alt="Bonnie Avatar"
-                        />
-                        <div className="p-5">
-                          <h3 className="text-xl font-bold tracking-tight text-gray-900">
-                            Izza Zaki Z
-                          </h3>
-                          <span className="text-gray-500">
-                            Backend Developer
-                          </span>
-                          <p className="mt-3 mb-4 font-light text-gray-500">
-                            Responsible for creating Backend Pelayanan Publik
-                          </p>
-                          <ul className="flex space-x-4 sm:mt-0">
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsInstagram />
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsWhatsapp />
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                href="#"
-                                className="text-gray-500 hover:text-gray-900"
-                              >
-                                <BsGithub />
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10 pb-8 px-5">
+                  <div className="bg-gray-300 p-6 rounded-lg">
+                    <Image
+                      src={"/image/Fajar.jpeg"}
+                      alt="Fajar Muhammad"
+                      width={500}
+                      height={500}
+                      className="w-40 h-40 rounded-full mx-auto mb-4"
+                    />
+                    <h3 className="text-lg font-bold mb-2 text-center md:text-left">
+                      Fajar Muhammad
+                    </h3>
+                    <p className="text-gray-600 text-center md:text-left">
+                      UI/UX Design
+                    </p>
                   </div>
-                </section>
+                  <div className="bg-gray-300 p-6 rounded-lg">
+                    <Image
+                      src={"/image/Izza.jpeg"}
+                      alt="Izza Zaki Z"
+                      width={500}
+                      height={500}
+                      className="w-40 h-40 rounded-full mx-auto mb-4"
+                    />
+                    <h3 className="text-lg font-bold mb-2 text-center md:text-left">
+                      Izza Zaki Zarkasyi
+                    </h3>
+                    <p className="text-gray-600 text-center md:text-left">
+                      Backend
+                    </p>
+                  </div>
+                  <div className="bg-gray-300 p-6 rounded-lg">
+                    <Image
+                      src={"/image/Ilham.jpg"}
+                      alt="M Ilham Hardiana"
+                      width={500}
+                      height={500}
+                      className="w-40 h-40 rounded-full mx-auto mb-4"
+                    />
+                    <h3 className="text-lg font-bold mb-2 text-center md:text-left">
+                      M Ilham Hardiana
+                    </h3>
+                    <p className="text-gray-600 text-center md:text-left">
+                      Frontend (Admin Page)
+                    </p>
+                  </div>
+                  <div className="bg-gray-300 p-6 rounded-lg">
+                    <Image
+                      src={"/image/Rizki.jpg"}
+                      alt="Rizki Saepul Aziz"
+                      width={500}
+                      height={500}
+                      className="w-40 h-40 rounded-full mx-auto mb-4"
+                    />
+                    <h3 className="text-lg font-bold mb-2 text-center md:text-left">
+                      Rizki Saepul Aziz
+                    </h3>
+                    <p className="text-gray-600 text-center md:text-left">
+                      Frontend (Landing Page)
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
