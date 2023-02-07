@@ -138,7 +138,7 @@ export default function Home() {
             <h1 className="uppercase text-[#112883] font-Lato font-extrabold text-4xl text-center">
               uptd tikomdik <span className="text-black">jawa barat</span>
             </h1>
-            <p className="font-Poppins font-normal text-sm lg:w-10/12 text-center mt-10 opacity-50">
+            <p className="font-Poppins font-normal text-sm lg:w-10/12 text-center mt-10 text-black/50">
               TIKOMDIK tidak hanya berkaitan dengan teknologi tetapi bagaimana
               dapat berbagi pengetahuan dan informasi, meningkatkan komunikasi
               yang efisien dan efektif, dapat membangun komunitas belajar serta
@@ -170,7 +170,7 @@ export default function Home() {
                   <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-[#112883]">
                     sekilas sejarah
                   </h1>
-                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
+                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-black/50">
                     Menampilkan sekilas sejarah tentang UPTD TIKOMDIK
                   </h1>
                 </div>
@@ -194,7 +194,7 @@ export default function Home() {
                   <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-[#112883]">
                     visi dan misi
                   </h1>
-                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
+                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-black/50">
                     Memahi Visi dan Misi UPTD TIKOMDIK
                   </h1>
                 </div>
@@ -218,7 +218,7 @@ export default function Home() {
                   <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-[#112883]">
                     tupoksi
                   </h1>
-                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center opacity-50">
+                  <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-black/50">
                     Menampilkan Tugas Pokok dan Fungsi UPTD TIKOMDIK
                   </h1>
                 </div>
