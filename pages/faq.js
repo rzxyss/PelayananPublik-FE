@@ -29,9 +29,9 @@ export default function FaQ() {
   }, []);
   return (
     <>
-    <Navbar />
-      <div className="p-10 max-w-md mx-auto">
-        <h1 className="text-2xl font-medium mb-4 font-Poppins">FaQ</h1>
+      <Navbar />
+      <div className="pt-10 container mx-auto">
+        <h1 className="text-2xl font-medium mb-4 font-Poppins">FAQ</h1>
         {faq.map((faq, i) => {
           return (
             <div className="border-t border-gray-200" key={i}>

@@ -15,13 +15,13 @@ export default function Berita() {
   const {page} = router.query
   const [berita, setBerita] = useState([]);
   const [limit, setLimit] = useState(6);
-  const [defPage, setPage] = useState(0);
   const [search, setSearch] = useState('')
   const [pages, setPages] = useState(0)
+  const convert = parseInt(page) || 0
 
   const getBerita = async () => {
     const results = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/berita?page=${page || defPage}&search_query=${search}&limit=${limit}`
+      `${process.env.NEXT_PUBLIC_API_URL}/berita?page=${page || 0}&search_query=${search}&limit=${limit}`
     );
     setBerita(results.data.results);
     setPages(results.data.totalPage);
@@ -199,16 +199,16 @@ export default function Berita() {
                   </div>
                   <div className="w-full flex justify-center items-center gap-2 mt-10">
                     <button
-                      onClick={() => Router.push(`/page${defPage + 1}`)}
-                      disabled={page < 1}
+                      onClick={() => Router.push(`?page=${page - 1}`)}
+                      disabled={convert < 1}
                       className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                       Previous
                     </button>
-                    <h1>Page {page || defPage} of {pages}</h1>
+                    <h1>Page {page || 1} of {pages}</h1>
                     <button
-                      onClick={() => setPage(page + 1)}
-                      disabled={page === (pages - 1)}
+                      onClick={() => Router.push(`?page=${convert + 1}`)}
+                      disabled={convert === (pages - 1)}
                       className="inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                       Next

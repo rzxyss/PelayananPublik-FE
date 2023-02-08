@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper";
 
 import { MdHistory, MdPeople } from "react-icons/md";
-import { BiLineChart } from "react-icons/bi";
+import { BiLineChart, BiArrowToTop } from "react-icons/bi";
 import { TbNotes } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import { BsChatDotsFill } from "react-icons/bs";
@@ -33,6 +33,7 @@ export default function Home() {
   const [logQuestion, setLogQuestion] = useState("");
   const [logAnswer, setLogAnswer] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   const getBerita = async () => {
     const berita = await axios.get(
@@ -51,7 +52,22 @@ export default function Home() {
   useEffect(() => {
     getBerita();
     getProgram();
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    });
   }, []);
+
+  const scrollTop = async () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
 
   const handleSubmit = async (e) => {
     setLogQuestion(question);
@@ -82,6 +98,16 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      {showButton && (
+        <button
+          className={`fixed w-14 h-14 bg-indigo-500 text-white rounded-full text-sm font-medium focus:outline-none focus:shadow-outline items-center justify-center ${
+            !chat ? "bottom-2 right-20 flex" : "bottom-2 right-72 flex"
+          }`}
+          onClick={scrollTop}
+        >
+          <BiArrowToTop className="w-6 h-6 text-white" />
+        </button>
+      )}
       <div
         className={`w-14 h-14 bg-[#25D366] rounded-full justify-center items-center fixed bottom-2 right-2 cursor-pointer ${
           chat ? "hidden" : "flex"
@@ -100,10 +126,22 @@ export default function Home() {
           <GrFormClose className="w-7 h-7" onClick={closeChat} />
         </div>
         <div className="px-6 py-2 space-y-2">
-          <div className={`${logQuestion === '' ? 'hidden' : 'font-Poppins font-normal text-base bg-green-500/20 p-2 rounded-lg'}`}>
+          <div
+            className={`${
+              logQuestion === ""
+                ? "hidden"
+                : "font-Poppins font-normal text-base bg-green-500/20 p-2 rounded-lg"
+            }`}
+          >
             <h1 className="flex justify-end">{logQuestion}</h1>
           </div>
-          <div className={`${answer === '' && !loading ? 'hidden' : 'font-Poppins font-normal text-base bg-red-500/20 p-2 rounded-lg'}`}>
+          <div
+            className={`${
+              answer === "" && !loading
+                ? "hidden"
+                : "font-Poppins font-normal text-base bg-red-500/20 p-2 rounded-lg"
+            }`}
+          >
             {loading ? <h1>Loading.....</h1> : <h1>{answer}</h1>}
           </div>
           <form className="flex gap-2 items-end" onSubmit={handleSubmit}>
@@ -145,7 +183,7 @@ export default function Home() {
               menciptakan budaya profesionalime di lingkungan Pendidikan.
             </p>
             <Link
-              href={"/profile"}
+              href={"/about"}
               className="bg-[#112883] text-white p-2 px-7 rounded-lg font-Poppins text-xl font-semibold mt-5"
             >
               Read More
@@ -158,10 +196,12 @@ export default function Home() {
             tentang uptd tikomdik jawa barat
           </h1>
         </div>
-        <div className="grid lg:grid-cols-4 -mt-60">
+        <div className="grid lg:grid-cols-4 -mt-40 lg:-mt-60">
           {/* Card */}
           <div className="flex justify-center 2xl:p-20 p-10">
-            <div className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 ${chat ? '' : 'hover:bg-[#FBFBFB] hover:scale-105'}`}>
+            <div
+              className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 hover:bg-[#FBFBFB]`}
+            >
               <div className="grid grid-rows-1">
                 <div className="flex justify-center mb-5">
                   <MdHistory className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
@@ -175,7 +215,7 @@ export default function Home() {
                   </h1>
                 </div>
                 <Link
-                  href={"/profile"}
+                  href={"/about"}
                   className="font-Poppins font-semibold text-base text-center"
                 >
                   Baca Selengkapnya
@@ -185,7 +225,9 @@ export default function Home() {
           </div>
           {/* Card */}
           <div className="flex justify-center 2xl:p-20 p-10">
-            <div className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 ${chat ? '' : 'hover:bg-[#FBFBFB] hover:scale-105'}`}>
+            <div
+              className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 hover:bg-[#FBFBFB]`}
+            >
               <div className="grid grid-rows-1">
                 <div className="flex justify-center mb-5">
                   <TbNotes className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
@@ -199,7 +241,7 @@ export default function Home() {
                   </h1>
                 </div>
                 <Link
-                  href={"/profile#visi-misi"}
+                  href={"/about#visi-misi"}
                   className="font-Poppins font-semibold text-base text-center"
                 >
                   Baca Selengkapnya
@@ -209,7 +251,9 @@ export default function Home() {
           </div>
           {/* Card */}
           <div className="flex justify-center 2xl:p-20 p-10">
-            <div className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 ${chat ? '' : 'hover:bg-[#FBFBFB] hover:scale-105'}`}>
+            <div
+              className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 hover:bg-[#FBFBFB]`}
+            >
               <div className="grid grid-rows-1">
                 <div className="flex justify-center mb-5">
                   <BiLineChart className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
@@ -223,7 +267,7 @@ export default function Home() {
                   </h1>
                 </div>
                 <Link
-                  href={"/profile#tugas-pokok-dan-fungsi"}
+                  href={"/about#tugas-pokok-dan-fungsi"}
                   className="font-Poppins font-semibold text-base text-center"
                 >
                   Baca Selengkapnya
@@ -233,7 +277,9 @@ export default function Home() {
           </div>
           {/* Card */}
           <div className="flex justify-center 2xl:p-20 p-10">
-            <div className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 ${chat ? '' : 'hover:bg-[#FBFBFB] hover:scale-105'}`}>
+            <div
+              className={`bg-white w-full p-10 shadow-md rounded-lg duration-500 hover:bg-[#FBFBFB]`}
+            >
               <div className="grid grid-rows-1">
                 <div className="flex justify-center mb-5">
                   <MdPeople className="w-20 h-20 text-white bg-[#112883] rounded-full p-2" />
@@ -247,7 +293,7 @@ export default function Home() {
                   </h1>
                 </div>
                 <Link
-                  href={"/profile#tugas-pokok-dan-fungsi"}
+                  href={"/about#tugas-pokok-dan-fungsi"}
                   className="font-Poppins font-semibold text-base text-center"
                 >
                   Baca Selengkapnya
@@ -267,7 +313,9 @@ export default function Home() {
                 {berita.map((data, index) => {
                   return (
                     <div
-                      className={`p-3 rounded-lg duration-500 ${chat ? '' : 'hover:scale-105 hover:bg-black/10'}`}
+                      className={`p-3 rounded-lg duration-500 ${
+                        chat ? "" : "hover:bg-black/10"
+                      }`}
                       key={index}
                     >
                       <Image
@@ -344,9 +392,9 @@ export default function Home() {
               {program.map((program, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <div className="w-full aspect-[16/7]">
+                    <div className="w-full aspect-[16/7] bg-black">
                       <div
-                        className="h-full bg-cover bg-center"
+                        className="h-full bg-contain bg-no-repeat bg-center"
                         style={{ backgroundImage: `url(${program.url})` }}
                       >
                         <div className="bg-black/50 w-full h-full p-2 flex flex-col justify-end items-center">

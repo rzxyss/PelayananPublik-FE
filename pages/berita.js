@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { MdHistory, MdPeople } from "react-icons/md";
-import { BiSearch } from "react-icons/bi";
+import { BiSearch, BiArrowToTop } from "react-icons/bi";
 import { AiOutlineLike } from "react-icons/ai";
 import axios from "axios";
 import Footer from "../components/Footer";
@@ -13,6 +13,7 @@ export default function Berita() {
   const [limit, setLimit] = useState(9);
   const [query, setQuery] = useState("");
   const [likeCount, setLike] = useState();
+  const [showButton, setShowButton] = useState(false);
 
   const getBerita = async () => {
     const berita = await axios.get(
@@ -58,14 +59,38 @@ export default function Berita() {
 
   useEffect(() => {
     getBerita();
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    });
   }, [query, likeCount]);
+
+  const scrollTop = async () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="w-full h-auto">
       <Navbar />
+      {showButton && (
+        <button
+          className={`fixed w-14 h-14 bg-indigo-500 text-white rounded-full text-sm font-medium focus:outline-none focus:shadow-outline items-center justify-center bottom-2 right-2 flex`}
+          onClick={scrollTop}
+        >
+          <BiArrowToTop className="w-6 h-6 text-white" />
+        </button>
+      )}
       <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
         <div className="bg-black/60 w-full h-full">
           <div className="flex flex-col p-10">
-            <h1 className="font-Poppins font-extrabold text-2xl lg:text-3xl xl:text-4xl text-white">
+            <h1 className="font-Poppins font-extrabold text-2xl lg:text-3xl xl:text-5xl text-white">
               Berita UPTD TIKomDik
             </h1>
             <h1 className="font-Poppins font-light text-xl text-white">
@@ -75,7 +100,7 @@ export default function Berita() {
           <div className="w-full h-auto lg:mt-14 lg:px-28">
             <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg">
               <div className="w-full flex flex-row justify-between items-center px-2">
-                <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
+                <h1 className="font-Poppins font-extrabold text-xl 2xl:text-3xl p-5 text-center text-[#112883]">
                   Berita Terkini
                 </h1>
 

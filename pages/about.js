@@ -1,18 +1,46 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { BsInstagram, BsWhatsapp, BsGithub } from "react-icons/bs";
+import { BiArrowToTop } from "react-icons/bi";
 import Footer from "../components/Footer";
 import Link from "next/link";
 
 export default function Profile() {
+  const [showButton, setShowButton] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    });
+  }, []);
+
+  const scrollTop = async () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="w-full h-auto">
       <Navbar />
+      {showButton && (
+        <button
+          className={`fixed w-14 h-14 bg-indigo-500 text-white rounded-full text-sm font-medium focus:outline-none focus:shadow-outline items-center justify-center bottom-2 right-2 flex`}
+          onClick={scrollTop}
+        >
+          <BiArrowToTop className="w-6 h-6 text-white" />
+        </button>
+      )}
       <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
         <div className="bg-black/60 w-full h-full">
           <div className="flex flex-col p-10">
-            <h1 className="font-Poppins font-extrabold text-2xl lg:text-3xl xl:text-4xl text-white">
+            <h1 className="font-Poppins font-extrabold text-2xl lg:text-3xl xl:text-5xl text-white">
               Tentang TIKomDik
             </h1>
             <h1 className="font-Poppins font-light text-xl text-white">
@@ -86,11 +114,11 @@ export default function Profile() {
                 <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
                   Visi dan Misi
                 </h1>
-                <div className="grid lg:grid-cols-3 gap-2 lg:px-16 py-5 lg:py-0 lg:items-center">
+                <div className="grid lg:grid-cols-3 gap-2 py-5 lg:py-0 lg:items-center">
                   <div className="col-span-2">
                     <div className="flex flex-col space-y-3">
                       <div className="flex-col space-y-2">
-                        <h1 className="font-Lato font-extrabold text-3xl px-5 lg:px-10 text-[#112883]">
+                        <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
                           Visi
                         </h1>
                         <h1 className="font-Poppins font-medium text-lg text-black/50">
@@ -100,7 +128,7 @@ export default function Profile() {
                         </h1>
                       </div>
                       <div className="flex-col space-y-2">
-                        <h1 className="font-Lato font-extrabold text-3xl px-5 lg:px-10 text-[#112883]">
+                        <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
                           Misi
                         </h1>
                         <ul className="list-disc list-outside text-black/50">
@@ -170,7 +198,7 @@ export default function Profile() {
                 </h1>
                 <div className="flex flex-col space-y-3">
                   <div className="flex flex-col space-y-2">
-                    <h1 className="font-Lato font-extrabold text-3xl px-5 lg:px-10 text-[#112883]">
+                    <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
                       Tugas Pokok
                     </h1>
                     <h1 className="font-Poppins font-medium text-lg text-black/50">
@@ -183,7 +211,7 @@ export default function Profile() {
                     </h1>
                   </div>
                   <div className="flex flex-col space-y-2">
-                    <h1 className="font-Lato font-extrabold text-3xl px-5 lg:px-10 text-[#112883]">
+                    <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
                       Fungsi
                     </h1>
                     <ul className="list-disc list-outside text-black/50">

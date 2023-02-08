@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import logo from "../public/image/logo.png";
+// import logo from "../public/image/logo.png";
 import { useRouter } from "next/router";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
 
   const router = useRouter();
+  console.log(show);
   return (
     <>
       <div className="w-full shadow-md sticky top-0 z-30 bg-white">
@@ -62,13 +64,41 @@ export default function Navbar() {
               <Link href="/berita">Berita</Link>
             </li>
             <li
+              className={`font-Poppins font-semibold text-xl text-black/50 cursor-pointer`}
+            >
+              <h1
+                onMouseEnter={() => setShow(true)}
+                onMouseLeave={() => setShow(false)}
+              >
+                Profile
+              </h1>
+              <ul
+                className={`bg-white border p-2 ${
+                  !show ? "hidden" : "absolute"
+                }`}
+                onMouseEnter={() => setShow(true)}
+                onMouseLeave={() => setShow(false)}
+              >
+                <li>
+                  <Link href="/about" className="text-lg font-medium">
+                    Tentang Kami
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about" className="text-lg font-medium">
+                    Portofolio
+                  </Link>
+                </li>
+              </ul>
+            </li>
+            <li
               className={`font-Poppins font-semibold text-xl ${
                 router.pathname === "/laporan"
                   ? "lg:underline underline-offset-8 text-[#112883]"
                   : "text-black/50"
               }`}
             >
-              <Link href={'/laporan'}>Laporan</Link>
+              <Link href={"/laporan"}>Laporan</Link>
             </li>
             <li
               className={`font-Poppins font-semibold text-xl ${
@@ -77,7 +107,7 @@ export default function Navbar() {
                   : "text-black/50"
               }`}
             >
-              <Link href={'/faq'}>FaQ</Link>
+              <Link href={"/faq"}>FAQ</Link>
             </li>
           </ul>
         </div>

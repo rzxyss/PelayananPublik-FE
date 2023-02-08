@@ -5,7 +5,7 @@ import { BsFacebook, BsInstagram, BsTwitter, BsGlobe } from 'react-icons/bs'
 
 export default function Footer() {
   return (
-    <footer className="p-4 bg-white sm:p-6 dark:bg-gray-900">
+    <footer className="p-4 bg-[#111827]">
       <div className="md:flex md:justify-between">
         <div className="mb-6 md:mb-0">
           <Link href={"https://tikomdik.jabarprov.go.id/"} className="flex items-center">
@@ -17,6 +17,7 @@ export default function Footer() {
               height={0}
             />
           </Link>
+          <h1 className="lg:w-2/5 font-Poppins font-normal text-white/50 p-7">TIKomDik UPTD TIKOMDIK (Teknologi Informasi dan Komunikasi Pendidikan) Dinas Pendidikan Provinsi Jawa Barat.</h1>
         </div>
         <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
           <div>
