@@ -47,14 +47,14 @@ export default function Profile() {
               Ketahui segalanya tentang UPTD TIKOMDIK.
             </h1>
           </div>
-          <div className="w-full h-auto lg:mt-14 px-5 lg:px-20 2xl:px-60">
+          <div className="w-full h-auto container mx-auto px-5 md:px-20 lg:px-0">
             <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg my-10">
-              <div id="tentang-tikomdik" className="my-10">
+              <div id="tentang-tikomdik" className="m-10">
                 <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
                   UPTD TIKomDik
                 </h1>
-                <div className="flex flex-col lg:flex-row gap-5 px-5 lg:px-16 py-10">
-                  <div className="lg:w-10/12 lg:mx-auto">
+                <div className="flex flex-col lg:flex-row gap-5">
+                  <div className="w-full">
                     <Image
                       src={"/image/TulisanTikomdik.jpg"}
                       responsive="true"
@@ -110,7 +110,7 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div id="visi-misi" className="my-10 px-7 lg:px-20 2xl:px-56">
+              <div id="visi-misi" className="m-10">
                 <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
                   Visi dan Misi
                 </h1>
@@ -131,7 +131,7 @@ export default function Profile() {
                         <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
                           Misi
                         </h1>
-                        <ul className="list-disc list-outside text-black/50">
+                        <ul className="list-disc list-inside text-black/50">
                           <li className="font-Poppins font-medium text-lg">
                             Mempersiapkan Sumber Daya Manusia yang literat
                             terhadap Teknologi Informasi.
@@ -191,7 +191,7 @@ export default function Profile() {
               </div>
               <div
                 id="tugas-pokok-dan-fungsi"
-                className="my-10 px-7 lg:px-20 2xl:px-56"
+                className="m-10"
               >
                 <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
                   Tugas Pokok Dan Fungsi
@@ -214,7 +214,7 @@ export default function Profile() {
                     <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
                       Fungsi
                     </h1>
-                    <ul className="list-disc list-outside text-black/50">
+                    <ul className="list-disc list-inside text-black/50">
                       <li className="font-Poppins font-medium text-lg">
                         Penyiapan bahan kebijaksanaan teknis di bidang teknologi
                         informasi dan komunikasi pendidikan.
@@ -253,11 +253,11 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div className="mt-10" id="team-project">
+              <div className="m-10" id="team-project">
                 <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
                   Team Project
                 </h1>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10 pb-8 px-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pb-10">
                   <div className="bg-gray-300 p-6 rounded-lg">
                     <Image
                       src={"/image/Fajar.jpeg"}

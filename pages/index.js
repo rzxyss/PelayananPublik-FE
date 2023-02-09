@@ -100,9 +100,7 @@ export default function Home() {
       <Navbar />
       {showButton && (
         <button
-          className={`fixed w-14 h-14 bg-indigo-500 text-white rounded-full text-sm font-medium focus:outline-none focus:shadow-outline items-center justify-center ${
-            !chat ? "bottom-2 right-20 flex" : "bottom-2 right-72 flex"
-          }`}
+          className={`fixed w-14 h-14 bg-indigo-500 text-white rounded-full text-sm font-medium focus:outline-none focus:shadow-outline items-center justify-center bottom-2 right-2 flex`}
           onClick={scrollTop}
         >
           <BiArrowToTop className="w-6 h-6 text-white" />
@@ -111,7 +109,7 @@ export default function Home() {
       <div
         className={`w-14 h-14 bg-[#25D366] rounded-full justify-center items-center fixed bottom-2 right-2 cursor-pointer ${
           chat ? "hidden" : "flex"
-        }`}
+        } ${showButton ? "hidden" : "flex"}`}
         onClick={() => setChat(!chat)}
       >
         <BsChatDotsFill className="w-7 h-7 text-white" />
