@@ -9,6 +9,7 @@ import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Router, { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 export default function Berita() {
   const router = useRouter();
@@ -59,7 +60,7 @@ export default function Berita() {
   const logoutHandle = async () => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/signout`, {
-        accessToken: sessionStorage.getItem("accessToken"),
+        accessToken: Cookies.get('accessToken'),
       });
       Swal.fire({
         position: "center",

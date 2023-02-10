@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
           <BiArrowToTop className="w-6 h-6 text-white" />
         </button>
       )}
-      <div className="w-full h-auto container mx-auto px-10 md:px-20">
+      <div className="w-full h-auto mx-auto px-5 md:px-16 lg:container">
         <div className="my-10">
           <div id="tentang-tikomdik" className="my-10">
             <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">

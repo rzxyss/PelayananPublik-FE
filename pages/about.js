@@ -47,7 +47,7 @@ export default function Profile() {
               Ketahui segalanya tentang UPTD TIKOMDIK.
             </h1>
           </div>
-          <div className="w-full h-auto container mx-auto px-5 md:px-20 lg:px-0">
+          <div className="w-full h-auto mx-auto px-5 md:px-16 lg:container">
             <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg my-10">
               <div id="tentang-tikomdik" className="m-10">
                 <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-// import logo from "../public/image/logo.png";
 import { useRouter } from "next/router";
+import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -42,7 +42,7 @@ export default function Navbar() {
             className={`${
               !open
                 ? "hidden lg:mt-0 lg:space-y-0 lg:flex lg:w-auto lg:gap-10"
-                : "text-center mt-5 w-full space-y-3"
+                : "lg:text-center mt-5 w-full space-y-3"
             }`}
           >
             <li
@@ -66,15 +66,18 @@ export default function Navbar() {
             <li
               className={`font-Poppins font-semibold text-xl text-black/50 cursor-pointer`}
             >
-              <h1
-                onMouseEnter={() => setShow(true)}
-                onMouseLeave={() => setShow(false)}
-              >
-                Profile
-              </h1>
+              <div className="flex items-center">
+                <h1
+                  onMouseEnter={() => setShow(true)}
+                  onMouseLeave={() => setShow(false)}
+                >
+                  Profile
+                </h1>
+                <AiFillCaretDown onClick={() => setShow(!show)} />
+              </div>
               <ul
-                className={`bg-white border p-2 ${
-                  !show ? "hidden" : "absolute"
+                className={`bg-white lg:border p-2 ${
+                  !show ? "hidden" : "lg:absolute"
                 }`}
                 onMouseEnter={() => setShow(true)}
                 onMouseLeave={() => setShow(false)}

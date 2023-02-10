@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import Router from "next/router";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
@@ -16,7 +17,7 @@ export default function Login() {
           password: inputPassword,
         }
       );
-      sessionStorage.setItem("accessToken", res.data.accessToken);
+      Cookies.set('accessToken', res.data.accessToken)
       Swal.fire({
         position: "center",
         icon: "success",

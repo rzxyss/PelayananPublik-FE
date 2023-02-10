@@ -30,7 +30,7 @@ export default function FaQ() {
   return (
     <>
       <Navbar />
-      <div className="pt-10 container mx-auto">
+      <div className="py-10 mx-auto px-5 md:px-16 lg:container">
         <h1 className="text-2xl font-medium mb-4 font-Poppins">FAQ</h1>
         {faq.map((faq, i) => {
           return (
@@ -51,7 +51,7 @@ export default function FaQ() {
           );
         })}
       </div>
-      <div className="w-full fixed bottom-0">
+      <div className="w-full lg:fixed bottom-0">
         <Footer />
       </div>
     </>

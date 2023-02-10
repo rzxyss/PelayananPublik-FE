@@ -6,12 +6,13 @@ import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Router from "next/router";
+import Cookies from "js-cookie";
 
 export default function Laporan({ laporan }) {
   const verifyToken = async () => {
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
-        accessToken: sessionStorage.getItem("accessToken"),
+        accessToken: Cookies.get('accessToken'),
       });
     } catch (error) {
       if (error.response) {

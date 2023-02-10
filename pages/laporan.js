@@ -39,11 +39,11 @@ export default function Laporan() {
   return (
     <>
       <Navbar />
-      <div className="w-full min-h-full px-10 xl:px-60 py-10">
+      <div className="w-full min-h-full mx-auto px-5 md:px-16 lg:container py-10">
         <div className="border border-collapse rounded-md p-2">
           <h1 className="text-center">Laporan Pelayanan Publik</h1>
           <form className="mt-10" onSubmit={kirimLaporan}>
-            <fieldset className="flex gap-10 justify-center my-10">
+            <fieldset className="flex flex-wrap gap-5 md:gap-10 lg:gap-14 justify-center my-10">
               <div className="flex gap-1">
                 <input
                   type="radio"

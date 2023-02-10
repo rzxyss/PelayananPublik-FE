@@ -6,12 +6,13 @@ import { HiOutlineSpeakerphone, HiViewBoards } from "react-icons/hi";
 import Router from "next/router";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 export default function Home({ aspirasi, informasi, pengaduan, berita }) {
   const verifyToken = async () => {
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/token`, {
-        accessToken: sessionStorage.getItem("accessToken"),
+        accessToken: Cookies.get('accessToken'),
       });
     } catch (error) {
       if (error.response) {
