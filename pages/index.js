@@ -196,7 +196,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col items-center mt-20">
           <h1 className="uppercase font-Lora font-bold text-2xl md:text-3xl lg:text-4xl text-center text-black">
-            tentang uptd tikomdik
+            tentang uptd tikomdik{" "}
             <span className="text-primary">jawa barat</span>
           </h1>
           <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg w-11/12 lg:w-10/12 xl:w-9/12 text-center mt-5 text-black/50">
@@ -349,12 +349,51 @@ export default function Home() {
                       >
                   
                       </div> */}
-                      <Image src={program.url} layout='fill' />
+                      <Image src={program.url} layout="fill" />
                     </div>
                   </SwiperSlide>
                 );
               })}
             </Swiper>
+          </div>
+        </div>
+
+        <div className="w-full p-10 flex gap-5">
+          <div className="w-3/12 flex flex-col rounded-xl">
+            <div className="flex flex-col bg-primary p-8 rounded-t-2xl">
+              <h1 className="font-Poppins font-semibold text-white text-lg lg:text-xl xl:text-2xl">
+                AGENDA UPTD TIKOMDIK
+              </h1>
+              <h1 className="font-Poppins font-semibold text-white/50 text-base lg:text-lg xl:text-xl">
+                Dapatkan informasi terkait semua kegiatan yang dilakukan di UPTD
+                TIKOMDIK.
+              </h1>
+            </div>
+            <div className="flex flex-col p-8">
+              <div className="flex justify-center">
+              </div>
+              <ol className="relative border-l border-primary">
+                <li className="mb-10 ml-4">
+                  <div className="absolute w-3 h-3 bg-white rounded-full mt-1.5 -left-1.5 border border-primary" />
+                  <time className="mb-1 text-sm font-normal leading-none text-gray-400">
+                    February 2022
+                  </time>
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    Application UI code in Tailwind CSS
+                  </h3>
+                </li>
+              </ol>
+            </div>
+          </div>
+          <div className="w-9/12 flex flex-col rounded-xl">
+            <div className="flex-col flex items-center space-y-8">
+              <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+                STATISTIK KUNJUNGAN
+              </h1>
+              <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl text-black/50">
+                Perhitungan jumlah kunjungan website
+              </h1>
+            </div>
           </div>
         </div>
 
