@@ -2,26 +2,25 @@ import Image from "next/image";
 import Navbar from "../components/Navbar";
 import hero from "../public/image/hero.png";
 import Link from "next/link";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper";
-
 import { MdHistory, MdPeople } from "react-icons/md";
 import { RxCounterClockwiseClock } from "react-icons/rx";
-import { BiLineChart, BiArrowToTop } from "react-icons/bi";
+import { BiArrowToTop } from "react-icons/bi";
 import { FiActivity } from "react-icons/fi";
 import { TbNotes } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import { BsChatDotsFill } from "react-icons/bs";
 import { GrFormClose } from "react-icons/gr";
-
 import BeritaPopular from "../components/BeritaPopular";
 import BeritaBaru from "../components/BeritaBaru";
-
 import axios from "axios";
 import Footer from "../components/Footer";
+import { format } from "date-fns";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 
 export default function Home() {
   const [berita, setBerita] = useState([]);
@@ -33,10 +32,18 @@ export default function Home() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [logQuestion, setLogQuestion] = useState("");
-  const [logAnswer, setLogAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingBerita, setLoadingBerita] = useState(true);
   const [showButton, setShowButton] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const getDate = new Date()
+  const aFormat = format(getDate, 'yyyy, M, dd')
+  console.log(format(getDate, 'yyyy, M, dd'))
+
+  const bookedDays = [new Date(aFormat)];
+  const bookedStyle = { border: '2px solid #16A75C' }
+  const [booked, setBooked] = useState(false);
 
   const getBerita = async () => {
     const berita = await axios.get(
@@ -371,6 +378,11 @@ export default function Home() {
             </div>
             <div className="flex flex-col p-8">
               <div className="flex justify-center">
+                <DayPicker
+                  defaultMonth={new Date()}
+                  modifiers={{ booked: bookedDays }}
+                  modifiersStyles={{ booked: bookedStyle }}
+                />
               </div>
               <ol className="relative border-l border-primary">
                 <li className="mb-10 ml-4">
