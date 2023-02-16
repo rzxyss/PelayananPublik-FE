@@ -14,7 +14,8 @@ module.exports = {
         'Lora': ['Lora', 'serif'],
       },
       colors: {
-        'primary': '#16A75C'
+        'primary': '#16A75C',
+        'outline': '#9E9E9E',
       }
     },
   },
