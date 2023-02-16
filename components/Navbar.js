@@ -48,7 +48,7 @@ export default function Navbar() {
             <li
               className={`font-Poppins font-semibold text-xl ${
                 router.pathname === "/"
-                  ? "lg:underline underline-offset-8 text-[#112883]"
+                  ? "text-primary"
                   : "text-black/50"
               }`}
             >
@@ -57,7 +57,7 @@ export default function Navbar() {
             <li
               className={`font-Poppins font-semibold text-xl ${
                 router.pathname === "/berita"
-                  ? "lg:underline underline-offset-8 text-[#112883]"
+                  ? "text-primary"
                   : "text-black/50"
               }`}
             >
@@ -97,7 +97,7 @@ export default function Navbar() {
             <li
               className={`font-Poppins font-semibold text-xl ${
                 router.pathname === "/laporan"
-                  ? "lg:underline underline-offset-8 text-[#112883]"
+                  ? "text-primary"
                   : "text-black/50"
               }`}
             >
@@ -105,8 +105,17 @@ export default function Navbar() {
             </li>
             <li
               className={`font-Poppins font-semibold text-xl ${
+                router.pathname === "/kegiatan"
+                  ? "text-primary"
+                  : "text-black/50"
+              }`}
+            >
+              <Link href={"/kegiatan"}>Kegiatan</Link>
+            </li>
+            <li
+              className={`font-Poppins font-semibold text-xl ${
                 router.pathname === "/faq"
-                  ? "lg:underline underline-offset-8 text-[#112883]"
+                  ? "text-primary"
                   : "text-black/50"
               }`}
             >
