@@ -40,13 +40,26 @@ export default function Home() {
   const [loadingBerita, setLoadingBerita] = useState(true);
   const [showButton, setShowButton] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [agenda, setAgenda] = useState([]);
 
-  const getDate = new Date("2023-02-20");
-  const aFormat = format(getDate, "yyyy, M, dd");
-  console.log(format(getDate, "yyyy, M, dd"));
+  // const getDate = new Date("2023-02-20");
+  // const aFormat = format(getDate, "yyyy, M, dd");
+  // console.log(format(getDate, "yyyy, M, dd"));
 
-  const bookedDays = [new Date(aFormat)];
-  const [booked, setBooked] = useState(true);
+  // const bookedDays = [new Date(aFormat)];
+  // const [booked, setBooked] = useState(true);
+
+  const getAgenda = async () => {
+    const tglAcara = format(selectedDate, "yyyy-M-d");
+    const agenda = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/tglAgenda`,
+      {
+        tgl_acara: tglAcara,
+      }
+    );
+    setAgenda(agenda.data);
+    // console.log(agenda.data)
+  };
 
   const getBerita = async () => {
     const berita = await axios.get(
@@ -68,6 +81,7 @@ export default function Home() {
   };
 
   useEffect(() => {
+    getAgenda();
     getBerita();
     getProgram();
     window.addEventListener("scroll", () => {
@@ -77,7 +91,7 @@ export default function Home() {
         setShowButton(false);
       }
     });
-  }, []);
+  }, [selectedDate]);
 
   const scrollTop = async () => {
     window.scrollTo({
@@ -381,28 +395,39 @@ export default function Home() {
             </div>
             <div className="flex flex-col p-8">
               <div className="flex justify-center">
-                {console.log(selectedDate)}
+                {/* {console.log(selectedDate)} */}
                 <DayPicker
+                  mode="single"
                   selected={selectedDate}
-                  onDayClick={setSelectedDate}
+                  onSelect={setSelectedDate}
                   // defaultMonth={new Date()}
-                  modifiers={{ booked: bookedDays }}
-                  modifiersClassNames={{
-                    booked: "text-[#1976D2] font-bold",
-                    selected: "text-red-500 font-extrabold",
-                  }}
+                  // modifiers={{ booked: bookedDays }}
+                  // modifiersClassNames={{
+                  //   booked: "text-[#1976D2] font-bold",
+                  //   selected: "text-red-500 font-extrabold",
+                  // }}
                 />
               </div>
-              <ol className="relative border-l border-primary">
-                <li className="mb-10 ml-4">
-                  <div className="absolute w-3 h-3 bg-white rounded-full mt-1.5 -left-1.5 border border-primary" />
-                  <time className="mb-1 text-sm font-normal leading-none text-gray-400">
-                    {new Date().getDate()}
-                  </time>
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    Application UI code in Tailwind CSS
-                  </h3>
-                </li>
+              <ol className="relative">
+                {agenda.map((agenda, index) => {
+                  return (
+                    <li className="mb-10 ml-4" key={index}>
+                      <div className="absolute w-3 h-3 bg-white rounded-full mt-1.5 -left-1.5 border border-primary" />
+                      <time className="mb-1 text-sm font-normal leading-none text-gray-400">
+                        {agenda.tgl_acara}
+                      </time>
+                      <h3 className="text-lg font-semibold text-gray-900">
+                        {agenda.nama_acara}
+                      </h3>
+                      <h3 className="text-lg font-semibold text-gray-900">
+                        {agenda.peserta}
+                      </h3>
+                      <h3 className="text-lg font-semibold text-gray-900">
+                        {agenda.jam_mulai} - {agenda.jam_selesai} WIB
+                      </h3>
+                    </li>
+                  );
+                })}
               </ol>
             </div>
           </div>
