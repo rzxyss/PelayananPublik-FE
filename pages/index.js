@@ -9,11 +9,15 @@ import { Pagination, Autoplay } from "swiper";
 import { MdHistory, MdPeople } from "react-icons/md";
 import { RxCounterClockwiseClock } from "react-icons/rx";
 import { BiArrowToTop } from "react-icons/bi";
-import { FiActivity } from "react-icons/fi";
+import { FiActivity, FiMonitor } from "react-icons/fi";
+import { HiOutlineUserGroup } from "react-icons/hi";
 import { TbNotes } from "react-icons/tb";
 import { useEffect, useState } from "react";
-import { BsChatDotsFill } from "react-icons/bs";
-import { GrFormClose } from "react-icons/gr";
+import { BsApple, BsChatDotsFill } from "react-icons/bs";
+import { GrFormClose, GrGroup } from "react-icons/gr";
+import { GiProgression } from "react-icons/gi";
+import { IoRadio } from "react-icons/io5";
+import { CgMediaPodcast } from "react-icons/cg";
 import BeritaPopular from "../components/BeritaPopular";
 import BeritaBaru from "../components/BeritaBaru";
 import axios from "axios";
@@ -37,13 +41,12 @@ export default function Home() {
   const [showButton, setShowButton] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const getDate = new Date()
-  const aFormat = format(getDate, 'yyyy, M, dd')
-  console.log(format(getDate, 'yyyy, M, dd'))
+  const getDate = new Date("2023-02-20");
+  const aFormat = format(getDate, "yyyy, M, dd");
+  console.log(format(getDate, "yyyy, M, dd"));
 
   const bookedDays = [new Date(aFormat)];
-  const bookedStyle = { border: '2px solid #16A75C' }
-  const [booked, setBooked] = useState(false);
+  const [booked, setBooked] = useState(true);
 
   const getBerita = async () => {
     const berita = await axios.get(
@@ -365,8 +368,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full p-10 flex gap-5">
-          <div className="w-3/12 flex flex-col rounded-xl">
+        <div className="w-full p-10 flex flex-col lg:flex-row gap-5">
+          <div className="w-full lg:w-3/12 flex flex-col rounded-xl">
             <div className="flex flex-col bg-primary p-8 rounded-t-2xl">
               <h1 className="font-Poppins font-semibold text-white text-lg lg:text-xl xl:text-2xl">
                 AGENDA UPTD TIKOMDIK
@@ -378,17 +381,23 @@ export default function Home() {
             </div>
             <div className="flex flex-col p-8">
               <div className="flex justify-center">
+                {console.log(selectedDate)}
                 <DayPicker
-                  defaultMonth={new Date()}
+                  selected={selectedDate}
+                  onDayClick={setSelectedDate}
+                  // defaultMonth={new Date()}
                   modifiers={{ booked: bookedDays }}
-                  modifiersStyles={{ booked: bookedStyle }}
+                  modifiersClassNames={{
+                    booked: "text-[#1976D2] font-bold",
+                    selected: "text-red-500 font-extrabold",
+                  }}
                 />
               </div>
               <ol className="relative border-l border-primary">
                 <li className="mb-10 ml-4">
                   <div className="absolute w-3 h-3 bg-white rounded-full mt-1.5 -left-1.5 border border-primary" />
                   <time className="mb-1 text-sm font-normal leading-none text-gray-400">
-                    February 2022
+                    {new Date().getDate()}
                   </time>
                   <h3 className="text-lg font-semibold text-gray-900">
                     Application UI code in Tailwind CSS
@@ -397,14 +406,170 @@ export default function Home() {
               </ol>
             </div>
           </div>
-          <div className="w-9/12 flex flex-col rounded-xl">
-            <div className="flex-col flex items-center space-y-8">
+          <div className="w-full lg:w-9/12 flex flex-col rounded-xl">
+            <div className="flex-col flex space-y-8">
               <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-                STATISTIK KUNJUNGAN
+                UTILITAS KELAS TIKOMDIK
               </h1>
-              <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl text-black/50">
-                Perhitungan jumlah kunjungan website
-              </h1>
+            </div>
+            <div className="grid lg:grid-cols-2">
+              {/* Card */}
+              <div className="flex justify-center p-5">
+                <div className={`w-full rounded-lg duration-500`}>
+                  <div className="w-full h-full flex gap-7 items-stretch">
+                    <div>
+                      <FiMonitor className="w-20 h-20 text-primary" />
+                    </div>
+                    <div className="flex flex-col">
+                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
+                        Kelas
+                      </h1>
+                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
+                        RND (Research & Development)
+                      </h1>
+                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50 py-5">
+                        Lorem ipsum dolor sit amet consectetur. Pulvinar viverra
+                        dictumst eleifend sed suspendisse quis. Habitasse sit
+                        ornare sed neque.
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Card */}
+              <div className="flex justify-center p-5">
+                <div className={`w-full rounded-lg duration-500`}>
+                  <div className="w-full h-full flex gap-7 items-stretch">
+                    <div>
+                      <CgMediaPodcast className="w-20 h-20 text-primary" />
+                    </div>
+                    <div className="flex flex-col">
+                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
+                        Kelas
+                      </h1>
+                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
+                        TIKOMPEDIA (Tikomdik Media)
+                      </h1>
+                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50 py-5">
+                        Lorem ipsum dolor sit amet consectetur. Pulvinar viverra
+                        dictumst eleifend sed suspendisse quis. Habitasse sit
+                        ornare sed neque.
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Card */}
+              <div className="flex justify-center p-5">
+                <div className={`w-full rounded-lg duration-500`}>
+                  <div className="w-full h-full flex gap-7 items-stretch">
+                    <div>
+                      <BsApple className="w-20 h-20 text-primary" />
+                    </div>
+                    <div className="flex flex-col">
+                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
+                        Kelas
+                      </h1>
+                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
+                        IOS (iPhone Operating System)
+                      </h1>
+                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50 py-5">
+                        Lorem ipsum dolor sit amet consectetur. Pulvinar viverra
+                        dictumst eleifend sed suspendisse quis. Habitasse sit
+                        ornare sed neque.
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Card */}
+              <div className="flex justify-center p-5">
+                <div className={`w-full rounded-lg duration-500`}>
+                  <div className="w-full h-full flex gap-7 items-stretch">
+                    <div>
+                      <IoRadio className="w-20 h-20 text-primary" />
+                    </div>
+                    <div className="flex flex-col">
+                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
+                        Kelas
+                      </h1>
+                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
+                        Phi Radio Streaming
+                      </h1>
+                      <h1 className="font-Poppins font-medium text-base md:text-lg lg:text-xl xl:text-2xl text-black/50 py-5">
+                        Lorem ipsum dolor sit amet consectetur. Pulvinar viverra
+                        dictumst eleifend sed suspendisse quis. Habitasse sit
+                        ornare sed neque.
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center mt-20">
+          <h1 className="uppercase font-Lora font-bold text-2xl md:text-3xl lg:text-4xl text-center text-black">
+            STATISTIK KUNJUNGAN
+          </h1>
+          <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg w-11/12 lg:w-10/12 xl:w-9/12 text-center mt-5 text-black/50">
+            Perhitungan jumlah kunjungan website
+          </h1>
+          <div className="grid lg:grid-cols-3">
+            {/* Card */}
+            <div className="flex justify-center items-center p-10">
+              <div
+                className={`bg-primary w-full h-full p-10 shadow-md rounded-lg duration-500`}
+              >
+                <div className="w-full h-full flex justify-center items-center gap-5">
+                  <div className="flex flex-col items-center gap-3">
+                    <GiProgression className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
+                    <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white/50 text-center">
+                      Total Kunjungan Hari ini
+                    </h1>
+                  </div>
+                  <h1 className="font-Poppins font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-white">
+                    12
+                  </h1>
+                </div>
+              </div>
+            </div>
+            {/* Card */}
+            <div className="flex justify-center items-center p-10">
+              <div
+                className={`bg-primary w-full h-full p-10 shadow-md rounded-lg duration-500`}
+              >
+                <div className="w-full h-full flex justify-center items-center gap-5">
+                  <div className="flex flex-col items-center gap-3">
+                    <HiOutlineUserGroup className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
+                    <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white/50 text-center">
+                      Total Visitors
+                    </h1>
+                  </div>
+                  <h1 className="font-Poppins font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-white">
+                    3.500
+                  </h1>
+                </div>
+              </div>
+            </div>
+            {/* Card */}
+            <div className="flex justify-center items-center p-10">
+              <div
+                className={`bg-primary w-full h-full p-10 shadow-md rounded-lg duration-500`}
+              >
+                <div className="w-full h-full flex justify-center items-center gap-5">
+                  <div className="flex flex-col items-center gap-3">
+                    <HiOutlineUserGroup className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
+                    <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white/50 text-center">
+                      Total Visitors
+                    </h1>
+                  </div>
+                  <h1 className="font-Poppins font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-white">
+                    3.500
+                  </h1>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -412,15 +577,15 @@ export default function Home() {
         <div className="w-full h-auto flex flex-col lg:flex-row">
           <div className="w-full lg:w-8/12 p-5">
             <div className="w-full flex flex-col justify-center items-center p-5">
-              <h1 className="font-Lato font-extrabold uppercase text-3xl lg:underline underline-offset-8 mb-10">
-                berita terkini
+              <h1 className="uppercase font-Lora font-bold text-2xl md:text-3xl lg:text-4xl text-center text-black">
+                BERITA TERKINI
               </h1>
             </div>
             <div className="grid lg:grid-cols-3 gap-5">
               {berita.map((data, index) => {
                 return (
                   <div
-                    className={`p-3 rounded-lg duration-500 ${
+                    className={`rounded-2xl duration-500 shadow-md ${
                       chat ? "" : "hover:bg-black/10"
                     }`}
                     key={index}
@@ -431,7 +596,7 @@ export default function Home() {
                       height={80}
                       layout="responsive"
                       alt="Berita"
-                      className="rounded-lg"
+                      className="rounded-t-2xl"
                     />
                     <div className="px-3 py-2 flex-wrap">
                       <h1 className="font-Poppins font-semibold text-lg">
@@ -441,7 +606,7 @@ export default function Home() {
                         {data.deskripsi_berita}
                       </h1>
                     </div>
-                    <div className="flex flex-row items-center text-black/60 mt-2">
+                    <div className="px-3 py-2 flex flex-row items-center text-black/60 mt-2">
                       <MdHistory className="w-5 h-5" />
                       <h1 className="font-Poppins font-light text-sm">
                         {data.createdAt}
@@ -459,7 +624,7 @@ export default function Home() {
                 <button
                   type="button"
                   className={`py-2 px-4 text-sm font-medium bg-transparent ${
-                    tabBerita == "popular" ? "border-b-4 border-[#112883]" : ""
+                    tabBerita == "popular" ? "border-b-4 border-primary" : ""
                   }`}
                   onClick={() => setTabBerita("popular")}
                 >
@@ -468,7 +633,7 @@ export default function Home() {
                 <button
                   type="button"
                   className={`py-2 px-4 text-sm font-medium bg-transparent ${
-                    tabBerita == "baru" ? "border-b-4 border-[#112883]" : ""
+                    tabBerita == "baru" ? "border-b-4 border-primary" : ""
                   }`}
                   onClick={() => setTabBerita("baru")}
                 >

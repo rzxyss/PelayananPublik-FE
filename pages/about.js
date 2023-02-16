@@ -31,7 +31,7 @@ export default function Profile() {
       <Navbar />
       {showButton && (
         <button
-          className={`fixed w-14 h-14 bg-indigo-500 text-white rounded-full text-sm font-medium focus:outline-none focus:shadow-outline items-center justify-center bottom-2 right-2 flex`}
+          className={`fixed w-14 h-14 bg-primary shadow text-white rounded-full text-sm font-medium focus:outline-none focus:shadow-outline items-center justify-center bottom-2 right-2 flex`}
           onClick={scrollTop}
         >
           <BiArrowToTop className="w-6 h-6 text-white" />
@@ -39,21 +39,21 @@ export default function Profile() {
       )}
       <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
         <div className="bg-black/60 w-full h-full">
-          <div className="flex flex-col p-10">
-            <h1 className="font-Poppins font-extrabold text-2xl lg:text-3xl xl:text-5xl text-white">
-              Tentang TIKomDik
+          <div className="flex flex-col p-10 space-y-1">
+            <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
+              TENTANG UPTD TIKOMDIK
             </h1>
-            <h1 className="font-Poppins font-light text-xl text-white">
-              Ketahui segalanya tentang UPTD TIKOMDIK.
+            <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg text-white/50">
+              Ketahui segalanya tentang UPTD TIKOMDIK Provinsi Jawa Barat.
             </h1>
           </div>
-          <div className="w-full h-auto mx-auto px-5 md:px-16 lg:container">
+          <div className="w-full h-auto mx-auto px-2 md:px-16 lg:container">
             <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg my-10">
-              <div id="tentang-tikomdik" className="m-10">
-                <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
-                  UPTD TIKomDik
+              <div id="tentang-tikomdik" className="p-10">
+                <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary">
+                  TENTANG UPTD TIKOMDIK
                 </h1>
-                <div className="flex flex-col lg:flex-row gap-5">
+                <div className="flex flex-col lg:flex-row gap-5 mt-10">
                   <div className="w-full">
                     <Image
                       src={"/image/TulisanTikomdik.jpg"}
@@ -61,9 +61,9 @@ export default function Profile() {
                       alt="Hero Image"
                       width={350}
                       height={0}
-                      className="rounded-xl float-none lg:mb-5 lg:mr-5 mx-auto lg:float-left"
+                      className="rounded-xl float-none lg:mb-5 lg:mr-10 mx-auto lg:float-right"
                     />
-                    <h1 className="font-Poppins font-medium text-lg text-black/50 indent-5 lg:indent-8 mb-5">
+                    <h1 className="font-Poppins font-medium text-lg text-black/50 mb-5">
                       Disrupsi Teknologi 4.0 mempengaruhi dunia pendidikan
                       secara eksponensial. Di sisi lain peserta didik saat ini
                       adalah Generasi Neo Milenial atau dikenal juga sebagai
@@ -75,7 +75,7 @@ export default function Profile() {
                       belajar dan mengakses informasi melalui kanal-kanal yang
                       tersedia secara online.
                     </h1>
-                    <h1 className="font-Poppins font-medium text-lg text-black/50 indent-5 lg:indent-8 mb-5">
+                    <h1 className="font-Poppins font-medium text-lg text-black/50 mb-5">
                       Sehingga mereka menjadi data-literate (melek data). Mereka
                       sangat paham dan piawai berselancar di mesin-mesin pencari
                       online, mendapatkan, memahami, memproses, mengurasi, dan
@@ -87,7 +87,7 @@ export default function Profile() {
                       bertransformasi dan menyesuaikan diri dengan kebutuhan
                       peserta didiknya.
                     </h1>
-                    <h1 className="font-Poppins font-medium text-lg text-black/50 indent-5 lg:indent-8 mb-5">
+                    <h1 className="font-Poppins font-medium text-lg text-black/50 mb-5">
                       Dunia Pendidikan harus mampu mendorong pembelajaran secara
                       kolaboratif dengan pendekatan peer-to-peer diantaranya
                       dengan memanfaatkan social learning platform. Dunia
@@ -111,66 +111,66 @@ export default function Profile() {
                 </div>
               </div>
               <div id="visi-misi" className="m-10">
-                <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
-                  Visi dan Misi
-                </h1>
-                <div className="grid lg:grid-cols-3 gap-2 py-5 lg:py-0 lg:items-center">
+                <div className="grid lg:grid-cols-3 gap-2 lg:items-center">
                   <div className="col-span-2">
+                    <div className="w-full border text-black/20 my-4" />
                     <div className="flex flex-col space-y-3">
                       <div className="flex-col space-y-2">
-                        <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
+                        <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
                           Visi
                         </h1>
-                        <h1 className="font-Poppins font-medium text-lg text-black/50">
+                        <h1 className="font-Poppins font-medium text-lg lg:text-xl text-black/50">
                           Menuju Lembaga kreatif inovatif dalam memberikan
                           layanan pembelajaran, Pendidikan, dan system tata
                           kelola Pendidikan di era milenial.
                         </h1>
                       </div>
+                      <div className="w-full border text-black/20 my-4" />
                       <div className="flex-col space-y-2">
-                        <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
+                        <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
                           Misi
                         </h1>
                         <ul className="list-disc list-inside text-black/50">
-                          <li className="font-Poppins font-medium text-lg">
+                          <li className="font-Poppins font-medium text-lg lg:text-xl">
                             Mempersiapkan Sumber Daya Manusia yang literat
                             terhadap Teknologi Informasi.
                           </li>
-                          <li className="font-Poppins font-medium text-lg">
+                          <li className="font-Poppins font-medium text-lg lg:text-xl">
                             Membangun Kultur Pemanfaatan TIK Pendidikan di
                             Lingkungan Satuan Pendidikan.
                           </li>
-                          <li className="font-Poppins font-medium text-lg">
+                          <li className="font-Poppins font-medium text-lg lg:text-xl">
                             Menghasilkan Produk TIK yang berkualitas bagi
                             Pendidikan.
                           </li>
-                          <li className="font-Poppins font-medium text-lg">
+                          <li className="font-Poppins font-medium text-lg lg:text-xl">
                             Memberikan pelayanan profesional dengan menggunakan
                             teknologi informasi dan komunikasi di berbagai
                             sektor Pendidikan.
                           </li>
-                          <li className="font-Poppins font-medium text-lg">
+                          <li className="font-Poppins font-medium text-lg lg:text-xl">
                             Mewujudkan Layanan Pendidikan Terintegrasi berbasis
                             TIK di Jawa Barat.
                           </li>
-                          <li className="font-Poppins font-medium text-lg">
+                          <li className="font-Poppins font-medium text-lg lg:text-xl">
                             Menjadi pusat pembangunan dan pengembangan TIK
                             Pendidikan.
                           </li>
                         </ul>
                       </div>
+                      <div className="w-full border text-black/20 my-4" />
                     </div>
                   </div>
                   <div className="hidden lg:grid lg:grid-cols-2">
-                    <div className="col-start-1 row-start-1 flex justify-end p-2">
+                    <div className="col-start-1 row-start-1 flex justify-end p-2 w-52 h-40">
                       <Image
                         src={"/image/visi-misi1.jpg"}
-                        width={200}
+                        width={400}
                         height={0}
                         className="rounded-lg"
                       />
                     </div>
-                    <div className="col-start-2 row-start-2 flex justify-start p-2">
+                    <div className="col-start-2 row-start-2 flex justify-start p-2 w-52 h-40">
                       <Image
                         src={"/image/visi-misi2.jpg"}
                         width={200}
@@ -178,7 +178,7 @@ export default function Profile() {
                         className="rounded-lg"
                       />
                     </div>
-                    <div className="col-start-1 row-start-3 flex justify-end p-2">
+                    <div className="col-start-1 row-start-3 flex justify-end p-2 w-52 h-40">
                       <Image
                         src={"/image/visi-misi3.jpg"}
                         width={200}
@@ -189,134 +189,116 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div
-                id="tugas-pokok-dan-fungsi"
-                className="m-10"
-              >
-                <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
-                  Tugas Pokok Dan Fungsi
-                </h1>
-                <div className="flex flex-col space-y-3">
-                  <div className="flex flex-col space-y-2">
-                    <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
-                      Tugas Pokok
-                    </h1>
-                    <h1 className="font-Poppins font-medium text-lg text-black/50">
-                      UPTD Teknologi Informasi dan Komunikasi Pendidikan
-                      mempunyai tugas pokok melaksanakan kegiatan teknis
-                      operasional dan/atau kegiatan teknis penunjang tertentu
-                      dibidang teknologi informasi dan komunikasi pendidikan,
-                      meliputi pengembangan dan produksi serta pelayanan dan
-                      promosi.
-                    </h1>
-                  </div>
-                  <div className="flex flex-col space-y-2">
-                    <h1 className="font-Lato font-extrabold text-3xl text-[#112883]">
-                      Fungsi
-                    </h1>
-                    <ul className="list-disc list-inside text-black/50">
-                      <li className="font-Poppins font-medium text-lg">
-                        Penyiapan bahan kebijaksanaan teknis di bidang teknologi
-                        informasi dan komunikasi pendidikan.
-                      </li>
-                      <li className="font-Poppins font-medium text-lg">
-                        Penyusunan program pengembangan teknologi informasi dan
-                        komunikasi pendidikan.
-                      </li>
-                      <li className="font-Poppins font-medium text-lg">
-                        Penyusunan program tentang pemanfaatan Teknlogi
-                        Informasi dan Komunikasi Pendidikan untuk satuan Sekolah
-                        Menengah Atas (SMA), Sekolah Menengah Kejuruan (SMK) dan
-                        Pendidikan Khusus dan Pendidikan Layanan Khusus (PKPLK).
-                      </li>
-                      <li className="font-Poppins font-medium text-lg">
-                        Pemberian pelayanan teknologi informasi dan komunikasi
-                        dalam bidang pendidikan.
-                      </li>
-                      <li className="font-Poppins font-medium text-lg">
-                        Pengelolaan e-layanan bidang pendidikan.
-                      </li>
-                      <li className="font-Poppins font-medium text-lg">
-                        Pelaksanaan kerjasama pemanfaatan teknologi informasi
-                        dan komunikasi pendidikan.
-                      </li>
-                      <li className="font-Poppins font-medium text-lg">
-                        Pengembangan kompetensi pendidik di bidang pemanfaatan
-                        teknologi informasi dan komunikasi untuk pembelajaran.
-                      </li>
-                      <li className="font-Poppins font-medium text-lg">
-                        Pengembangan kompetensi tenaga kependidikan dibidang
-                        pemanfaatan teknologi informasi dan komunikasi
-                        pendidikan.
-                      </li>
-                    </ul>
-                  </div>
+              <div className="flex justify-center flex-col lg:flex-row items-center gap-10 m-10">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.884767821528!2d107.59763201595032!3d-6.904381069491416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e7527b1d6913%3A0xad04e4b7ff8c2657!2sTIKomDik%20Disdik%20Jabar!5e0!3m2!1sid!2sid!4v1676527554995!5m2!1sid!2sid"
+                  className="border lg:w-[640px] lg:h-[400px] rounded-2xl"
+                  allowfullscreen="true"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                />
+                <div className="flex flex-col items-center">
+                  <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary">
+                    ALAMAT TIKOMDIK
+                  </h1>
+                  <h1 className="font-Poppins font-medium text-lg text-black/50 mb-5 lg:w-9/12">
+                    Dinas Pendidikan, Jl. Dr. Rajiman No.6, Pasir Kaliki, Kec.
+                    Cicendo, Kota Bandung, Jawa Barat 40171
+                  </h1>
                 </div>
               </div>
               <div className="m-10" id="team-project">
-                <h1 className="font-Poppins font-extrabold text-3xl p-5 text-center text-[#112883]">
-                  Team Project
+                <h1 className="font-Lora font-bold text-center py-5 text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary">
+                  Project Team
                 </h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pb-10">
-                  <div className="bg-gray-300 p-6 rounded-lg">
-                    <Image
-                      src={"/image/Fajar.jpeg"}
-                      alt="Fajar Muhammad"
-                      width={500}
-                      height={500}
-                      className="w-40 h-40 rounded-full mx-auto mb-4"
-                    />
-                    <h3 className="text-lg font-bold mb-2 text-center md:text-left">
-                      Fajar Muhammad
-                    </h3>
-                    <p className="text-gray-600 text-center md:text-left">
-                      UI/UX Design
-                    </p>
+                  <div className="bg-primary p-6 lg:p-10 rounded-lg flex flex-col lg:justify-between items-center">
+                    <div className="flex flex-col lg:flex-row justify-center items-center gap-5 lg:gap-10">
+                      <Image
+                        src={"/image/Fajar.jpeg"}
+                        alt="Fajar Muhammad"
+                        width={500}
+                        height={500}
+                        className="w-40 h-40 rounded-full"
+                      />
+                      <div className="flex flex-col items-center justify-center">
+                        <h3 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl">
+                          Fajar Muhammad
+                        </h3>
+                        <h3 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white">
+                          UI / UX DESIGN
+                        </h3>
+                      </div>
+                    </div>
+                    <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white">
+                      SMKN 13 Bandung
+                    </h1>
                   </div>
-                  <div className="bg-gray-300 p-6 rounded-lg">
-                    <Image
-                      src={"/image/Izza.jpeg"}
-                      alt="Izza Zaki Z"
-                      width={500}
-                      height={500}
-                      className="w-40 h-40 rounded-full mx-auto mb-4"
-                    />
-                    <h3 className="text-lg font-bold mb-2 text-center md:text-left">
-                      Izza Zaki Zarkasyi
-                    </h3>
-                    <p className="text-gray-600 text-center md:text-left">
-                      Backend
-                    </p>
+                  <div className="bg-primary p-6 lg:p-10 rounded-lg flex flex-col lg:justify-between items-center">
+                    <div className="flex flex-col lg:flex-row justify-center items-center gap-5 lg:gap-10">
+                      <Image
+                        src={"/image/Izza.jpeg"}
+                        alt="Izza Zaki Z"
+                        width={500}
+                        height={500}
+                        className="w-40 h-40 rounded-full"
+                      />
+                      <div className="flex flex-col items-center justify-center">
+                        <h3 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl">
+                          Izza Zaki Z
+                        </h3>
+                        <h3 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white">
+                          Back End Developer
+                        </h3>
+                      </div>
+                    </div>
+                    <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white">
+                      SMKN 13 Bandung
+                    </h1>
                   </div>
-                  <div className="bg-gray-300 p-6 rounded-lg">
-                    <Image
-                      src={"/image/Ilham.jpg"}
-                      alt="M Ilham Hardiana"
-                      width={500}
-                      height={500}
-                      className="w-40 h-40 rounded-full mx-auto mb-4"
-                    />
-                    <h3 className="text-lg font-bold mb-2 text-center md:text-left">
-                      M Ilham Hardiana
-                    </h3>
-                    <p className="text-gray-600 text-center md:text-left">
-                      Frontend (Admin Page)
-                    </p>
+                  <div className="bg-primary p-6 lg:p-10 rounded-lg flex flex-col lg:justify-between items-center">
+                    <div className="flex flex-col lg:flex-row justify-center items-center gap-5 lg:gap-10">
+                      <Image
+                        src={"/image/Ilham.jpg"}
+                        alt="M Ilham Hardiana"
+                        width={500}
+                        height={500}
+                        className="w-40 h-40 rounded-full"
+                      />
+                      <div className="flex flex-col items-center justify-center">
+                        <h3 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl">
+                          M.Ilham Hardiana
+                        </h3>
+                        <h3 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white">
+                          Front End Developer
+                        </h3>
+                      </div>
+                    </div>
+                    <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white">
+                      SMKN 13 Bandung
+                    </h1>
                   </div>
-                  <div className="bg-gray-300 p-6 rounded-lg">
-                    <Image
-                      src={"/image/Rizki.jpg"}
-                      alt="Rizki Saepul Aziz"
-                      width={500}
-                      height={500}
-                      className="w-40 h-40 rounded-full mx-auto mb-4"
-                    />
-                    <h3 className="text-lg font-bold mb-2 text-center md:text-left">
-                      Rizki Saepul Aziz
-                    </h3>
-                    <p className="text-gray-600 text-center md:text-left">
-                      Frontend (Landing Page)
-                    </p>
+                  <div className="bg-primary p-6 lg:p-10 rounded-lg flex flex-col lg:justify-between items-center">
+                    <div className="flex flex-col lg:flex-row justify-center items-center gap-5 lg:gap-10">
+                      <Image
+                        src={"/image/Rizki.jpg"}
+                        alt="Rizki Saepul Aziz"
+                        width={500}
+                        height={500}
+                        className="w-40 h-40 rounded-full"
+                      />
+                      <div className="flex flex-col items-center justify-center">
+                        <h3 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl">
+                          Rizki Saepul A
+                        </h3>
+                        <h3 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white">
+                          Front End Developer
+                        </h3>
+                      </div>
+                    </div>
+                    <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white">
+                      SMKN 13 Bandung
+                    </h1>
                   </div>
                 </div>
               </div>
