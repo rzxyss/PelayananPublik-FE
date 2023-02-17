@@ -52,7 +52,7 @@ export default function Home() {
   const getAgenda = async () => {
     const tglAcara = format(selectedDate, "yyyy-M-d");
     const agenda = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/tglAgenda`,
+      `${process.env.NEXT_PUBLIC_API_URL}/acara`,
       {
         tgl_acara: tglAcara,
       }
