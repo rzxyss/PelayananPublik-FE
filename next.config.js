@@ -3,9 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["pelayanan-publik-backend.glitch.me", "localhost"],
+    domains: ["192.168.100.93", "localhost"],
     remotePatterns: [
-      { protocol: "https", hostname: "pelayanan-publik-backend.glitch.me" },
+      { protocol: "https", hostname: "192.168.100.93" },
     ],
   },
 };

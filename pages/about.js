@@ -193,9 +193,9 @@ export default function Profile() {
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.884767821528!2d107.59763201595032!3d-6.904381069491416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e7527b1d6913%3A0xad04e4b7ff8c2657!2sTIKomDik%20Disdik%20Jabar!5e0!3m2!1sid!2sid!4v1676527554995!5m2!1sid!2sid"
                   className="border lg:w-[640px] lg:h-[400px] rounded-2xl"
-                  allowfullscreen="true"
+                  allowFullScreen={true}
                   loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
+                  referrerPolicy="no-referrer-when-downgrade"
                 />
                 <div className="flex flex-col items-center">
                   <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary">
