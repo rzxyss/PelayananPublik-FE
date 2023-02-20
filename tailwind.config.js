@@ -17,6 +17,7 @@ module.exports = {
         'primary': '#16A75C',
         'second': '#1E88E5',
         'outline': '#9E9E9E',
+        'tikomdik': '#2d5091'
       }
     },
   },
