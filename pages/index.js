@@ -6,15 +6,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper";
-import { MdHistory, MdPeople } from "react-icons/md";
+import { MdHistory, MdPeople, MdOutlineMonitor } from "react-icons/md";
 import { RxCounterClockwiseClock } from "react-icons/rx";
 import { BiArrowToTop } from "react-icons/bi";
 import { FiActivity, FiMonitor } from "react-icons/fi";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { TbNotes } from "react-icons/tb";
 import { useEffect, useState } from "react";
-import { BsApple, BsCalendar2X, BsChatDotsFill } from "react-icons/bs";
-import { GrFormClose, GrGroup } from "react-icons/gr";
+import { BsApple, BsCalendar2X, BsChatDotsFill, BsArrowRightShort } from "react-icons/bs";
+import { GrFormClose } from "react-icons/gr";
 import { GiProgression } from "react-icons/gi";
 import { IoRadio } from "react-icons/io5";
 import { CgMediaPodcast } from "react-icons/cg";
@@ -25,6 +25,7 @@ import Footer from "../components/Footer";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import Calendar from '../components/Calendar.tsx'
 
 export default function Home() {
   const [berita, setBerita] = useState([]);
@@ -41,12 +42,13 @@ export default function Home() {
   const [showButton, setShowButton] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [agenda, setAgenda] = useState([]);
+  const [available, setAvailable] = useState(false)
 
-  // const getDate = new Date("2023-02-20");
+  // const getDate = new Date("2023-02-22");
   // const aFormat = format(getDate, "yyyy, M, dd");
   // console.log(format(getDate, "yyyy, M, dd"));
 
-  // const bookedDays = [new Date(aFormat)];
+  // const availabeEvent = [new Date(aFormat)];
   // const [booked, setBooked] = useState(true);
 
   const getAgenda = async () => {
@@ -212,9 +214,10 @@ export default function Home() {
             </p>
             <Link
               href={"/about"}
-              className="bg-primary text-white p-2 px-7 rounded-lg font-Poppins text-base md:text-lg lg:text-xl font-semibold mt-5"
+              className="bg-primary text-white p-2 px-7 rounded-lg font-Poppins text-base md:text-lg lg:text-xl font-semibold mt-5 flex justify-center items-center"
             >
               Selengkapnya
+              <BsArrowRightShort className="w-10 h-10" />
             </Link>
           </div>
         </div>
@@ -243,15 +246,16 @@ export default function Home() {
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       sekilas sejarah
                     </h1>
-                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-black/50">
+                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-white">
                       Menampilkan sekilas sejarah tentang UPTD TIKOMDIK
                     </h1>
                   </div>
                   <Link
                     href={"/about"}
-                    className="font-Poppins font-semibold text-base text-center text-white"
+                    className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
+                    <BsArrowRightShort className="w-10 h-10" />
                   </Link>
                 </div>
               </div>
@@ -269,15 +273,16 @@ export default function Home() {
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       visi dan misi
                     </h1>
-                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-black/50">
+                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-white">
                       Memahi Visi dan Misi UPTD TIKOMDIK
                     </h1>
                   </div>
                   <Link
-                    href={"/about#visi-misi"}
-                    className="font-Poppins font-semibold text-base text-center text-white"
+                    href={"/about"}
+                    className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
+                    <BsArrowRightShort className="w-10 h-10" />
                   </Link>
                 </div>
               </div>
@@ -295,15 +300,16 @@ export default function Home() {
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       kegiatan
                     </h1>
-                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-black/50">
+                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-white">
                       Menampilkan kegiatan tentang UPTD TIKOMDIK
                     </h1>
                   </div>
                   <Link
-                    href={"/about#tugas-pokok-dan-fungsi"}
-                    className="font-Poppins font-semibold text-base text-center text-white"
+                    href={"/about"}
+                    className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
+                    <BsArrowRightShort className="w-10 h-10" />
                   </Link>
                 </div>
               </div>
@@ -321,15 +327,16 @@ export default function Home() {
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       team project
                     </h1>
-                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-black/50">
+                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-white">
                       Menampilkan Bagian dan Tugas dalam UPTD TIKOMDIK
                     </h1>
                   </div>
                   <Link
-                    href={"/about#tugas-pokok-dan-fungsi"}
-                    className="font-Poppins font-semibold text-base text-center text-white"
+                    href={"/about"}
+                    className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
+                    <BsArrowRightShort className="w-10 h-10" />
                   </Link>
                 </div>
               </div>
@@ -395,18 +402,18 @@ export default function Home() {
             </div>
             <div className="flex flex-col p-8">
               <div className="flex justify-center">
-                {/* {console.log(selectedDate)} */}
-                <DayPicker
-                  mode="single"
+                {/* <DayPicker
+                  // mode="single"
                   selected={selectedDate}
-                  onSelect={setSelectedDate}
-                  // defaultMonth={new Date()}
-                  // modifiers={{ booked: bookedDays }}
-                  // modifiersClassNames={{
-                  //   booked: "text-[#1976D2] font-bold",
-                  //   selected: "text-red-500 font-extrabold",
-                  // }}
-                />
+                  // onSelect={setSelectedDate}
+                  modifiers={{available: availabeEvent}}
+                  modifiersClassNames={{
+                    available: "text-[#1976D2] font-bold",
+                    selected: "text-red-500 font-extrabold",
+                  }}
+                  showOutsideDays
+                /> */}
+                <Calendar />
               </div>
               <ol
                 className={`relative ${
@@ -449,7 +456,7 @@ export default function Home() {
           <div className="w-full lg:w-9/12 flex flex-col rounded-xl">
             <div className="flex-col flex space-y-8">
               <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-                UTILITAS KELAS TIKOMDIK
+                UTILITAS TEAM TIKOMDIK
               </h1>
             </div>
             <div className="grid lg:grid-cols-2">
@@ -462,7 +469,7 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
-                        Kelas
+                        Team
                       </h1>
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
                         RND (Research & Development)
@@ -485,7 +492,7 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
-                        Kelas
+                        Team
                       </h1>
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
                         TIKOMPEDIA (Tikomdik Media)
@@ -504,14 +511,14 @@ export default function Home() {
                 <div className={`w-full rounded-lg duration-500`}>
                   <div className="w-full h-full flex gap-7 items-stretch">
                     <div>
-                      <BsApple className="w-20 h-20 text-primary" />
+                      <MdOutlineMonitor className="w-20 h-20 text-primary" />
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
-                        Kelas
+                        Team
                       </h1>
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
-                        IOS (iPhone Operating System)
+                        TV Streaming
                       </h1>
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50 py-5">
                         Lorem ipsum dolor sit amet consectetur. Pulvinar viverra
@@ -531,7 +538,7 @@ export default function Home() {
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
-                        Kelas
+                        Team
                       </h1>
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
                         Phi Radio Streaming
