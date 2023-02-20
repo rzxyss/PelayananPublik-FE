@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 export default function FaQ() {
   const [faq, setFaq] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [type, setType] = useState('')
   const getFaq = async () => {
     try {
       const response = await axios.get(
@@ -32,6 +33,35 @@ export default function FaQ() {
       <Navbar />
       <div className="py-10 mx-auto px-5 md:px-16 lg:container">
         <h1 className="text-2xl font-medium mb-4 font-Poppins">FAQ</h1>
+        <div className="inline-flex w-full justify-center">
+          <button
+            type="button"
+            className={`py-2 px-4 text-sm font-medium bg-transparent ${
+              type == "popular" ? "border-b-4 border-primary" : ""
+            }`}
+            onClick={() => setType("popular")}
+          >
+            Seputar Pendaftaran Prakerin
+          </button>
+          <button
+            type="button"
+            className={`py-2 px-4 text-sm font-medium bg-transparent ${
+              type == "baru" ? "border-b-4 border-primary" : ""
+            }`}
+            onClick={() => setType("baru")}
+          >
+            Seputar Program Tikomdik
+          </button>
+          <button
+            type="button"
+            className={`py-2 px-4 text-sm font-medium bg-transparent ${
+              type == "apa" ? "border-b-4 border-primary" : ""
+            }`}
+            onClick={() => setType("apa")}
+          >
+            Seputar Program Tikomdik
+          </button>
+        </div>
         {faq.map((faq, i) => {
           return (
             <div className="border-t border-gray-200" key={i}>
