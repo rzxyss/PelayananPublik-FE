@@ -5,19 +5,10 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination, Autoplay } from "swiper";
-import { MdHistory, MdPeople, MdOutlineMonitor } from "react-icons/md";
-import { RxCounterClockwiseClock } from "react-icons/rx";
-import { BiArrowToTop } from "react-icons/bi";
-import { FiActivity, FiMonitor } from "react-icons/fi";
-import { HiOutlineUserGroup } from "react-icons/hi";
-import { TbNotes } from "react-icons/tb";
+import "swiper/css/navigation";
+import "swiper/css/effect-fade";
+import { Pagination, Autoplay, EffectFade, Navigation } from "swiper";
 import { useEffect, useState } from "react";
-import { BsApple, BsCalendar2X, BsChatDotsFill, BsArrowRightShort } from "react-icons/bs";
-import { GrFormClose } from "react-icons/gr";
-import { GiProgression } from "react-icons/gi";
-import { IoRadio } from "react-icons/io5";
-import { CgMediaPodcast } from "react-icons/cg";
 import BeritaPopular from "../components/BeritaPopular";
 import BeritaBaru from "../components/BeritaBaru";
 import axios from "axios";
@@ -25,7 +16,10 @@ import Footer from "../components/Footer";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import Calendar from '../components/Calendar.tsx'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp, faChartLine, faChevronRight, faClipboardList, faClockRotateLeft, faCommentDots, faComputer, faPodcast, faRadio, faTv, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faAddressBook, faCalendarXmark, faClockFour } from "@fortawesome/free-regular-svg-icons";
+import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const [berita, setBerita] = useState([]);
@@ -42,17 +36,17 @@ export default function Home() {
   const [showButton, setShowButton] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [agenda, setAgenda] = useState([]);
-  const [available, setAvailable] = useState(false)
 
-  // const getDate = new Date("2023-02-22");
-  // const aFormat = format(getDate, "yyyy, M, dd");
-  // console.log(format(getDate, "yyyy, M, dd"));
-
-  // const availabeEvent = [new Date(aFormat)];
-  // const [booked, setBooked] = useState(true);
+  const selectInfo = selectedDate ? (
+    <h1 className="font-Poppins font-semibold text-second text-base lg:text-lg xl:text-xl px-5 py-2">
+      {format(selectedDate, "MMMM d, yyyy")}
+    </h1>
+  ) : (
+    setSelectedDate(new Date())
+  );
 
   const getAgenda = async () => {
-    const tglAcara = format(selectedDate, "yyyy-M-d");
+    const tglAcara = format(selectedDate || new Date(), "yyyy-M-d");
     const agenda = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/acara`,
       {
@@ -60,7 +54,7 @@ export default function Home() {
       }
     );
     setAgenda(agenda.data);
-    // console.log(agenda.data)
+    console.log(agenda.data);
   };
 
   const getBerita = async () => {
@@ -137,7 +131,7 @@ export default function Home() {
           className={`fixed w-14 h-14 bg-primary text-white rounded-full text-sm font-medium focus:outline-none focus:shadow-outline items-center justify-center bottom-2 right-2 flex`}
           onClick={scrollTop}
         >
-          <BiArrowToTop className="w-6 h-6 text-white" />
+          <FontAwesomeIcon icon={faArrowUp} className="w-6 h-6 text-white" />
         </button>
       )}
       <div
@@ -146,7 +140,7 @@ export default function Home() {
         } ${showButton ? "hidden" : "flex"}`}
         onClick={() => setChat(!chat)}
       >
-        <BsChatDotsFill className="w-7 h-7 text-white" />
+        <FontAwesomeIcon icon={faCommentDots} className="w-7 h-7 text-white" />
       </div>
       <div
         className={`bottom-2 right-2 w-64 bg-white border ${
@@ -155,7 +149,7 @@ export default function Home() {
       >
         <div className="flex justify-between items-center p-1 px-2 cursor-pointer">
           <h1 className="font-Poppins font-light">Tikomdiks BOTS</h1>
-          <GrFormClose className="w-7 h-7" onClick={closeChat} />
+          <FontAwesomeIcon icon={faXmark} className="w-7 h-7" onClick={closeChat} />
         </div>
         <div className="px-6 py-2 space-y-2">
           <div
@@ -217,7 +211,7 @@ export default function Home() {
               className="bg-primary text-white p-2 px-7 rounded-lg font-Poppins text-base md:text-lg lg:text-xl font-semibold mt-5 flex justify-center items-center"
             >
               Selengkapnya
-              <BsArrowRightShort className="w-10 h-10" />
+              <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />
             </Link>
           </div>
         </div>
@@ -240,7 +234,9 @@ export default function Home() {
               >
                 <div className="w-full h-full flex flex-col justify-between">
                   <div className="flex justify-center mb-5">
-                    <RxCounterClockwiseClock className="w-20 h-20 text-primary bg-white rounded-full p-2" />
+                    <div className="bg-white rounded-full p-2 w-24 h-24 flex justify-center items-center">
+                      <FontAwesomeIcon icon={faClockRotateLeft} className="w-16 h-16 text-primary" />
+                    </div>
                   </div>
                   <div className="flex flex-col items-center mb-5">
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
@@ -255,7 +251,7 @@ export default function Home() {
                     className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
-                    <BsArrowRightShort className="w-10 h-10" />
+                    <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />
                   </Link>
                 </div>
               </div>
@@ -267,7 +263,9 @@ export default function Home() {
               >
                 <div className="w-full h-full flex flex-col justify-between">
                   <div className="flex justify-center mb-5">
-                    <TbNotes className="w-20 h-20 text-primary bg-white rounded-full p-2" />
+                    <div className="bg-white rounded-full p-2 w-24 h-24 flex justify-center items-center">
+                      <FontAwesomeIcon icon={faClipboardList} className="w-16 h-16 text-primary" />
+                    </div>
                   </div>
                   <div className="flex flex-col items-center justify-between mb-5">
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
@@ -282,7 +280,7 @@ export default function Home() {
                     className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
-                    <BsArrowRightShort className="w-10 h-10" />
+                    <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />
                   </Link>
                 </div>
               </div>
@@ -294,7 +292,9 @@ export default function Home() {
               >
                 <div className="w-full h-full flex flex-col justify-between">
                   <div className="flex justify-center mb-5">
-                    <FiActivity className="w-20 h-20 text-primary bg-white rounded-full p-2" />
+                    <div className="bg-white rounded-full p-2 w-24 h-24 flex justify-center items-center">
+                      <FontAwesomeIcon icon={faChartLine} className="w-16 h-16 text-primary" />
+                    </div>
                   </div>
                   <div className="flex flex-col items-center mb-5">
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
@@ -309,7 +309,7 @@ export default function Home() {
                     className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
-                    <BsArrowRightShort className="w-10 h-10" />
+                    <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />
                   </Link>
                 </div>
               </div>
@@ -321,7 +321,9 @@ export default function Home() {
               >
                 <div className="w-full h-full flex flex-col justify-between">
                   <div className="flex justify-center mb-5">
-                    <MdPeople className="w-20 h-20 text-primary bg-white rounded-full p-2" />
+                    <div className="bg-white rounded-full p-2 w-24 h-24 flex justify-center items-center">
+                      <FontAwesomeIcon icon={faUserGroup} className="w-16 h-16 text-primary" />
+                    </div>
                   </div>
                   <div className="flex flex-col items-center mb-5">
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
@@ -336,7 +338,7 @@ export default function Home() {
                     className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
-                    <BsArrowRightShort className="w-10 h-10" />
+                    <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />
                   </Link>
                 </div>
               </div>
@@ -363,23 +365,20 @@ export default function Home() {
               pagination={{
                 clickable: true,
               }}
+              loop={true}
+              navigation={true}
+              effect={"fade"}
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
               }}
-              modules={[Pagination, Autoplay]}
+              modules={[EffectFade, Pagination, Autoplay, Navigation]}
               className="mySwiper"
             >
               {program.map((program, index) => {
                 return (
                   <SwiperSlide key={index}>
                     <div className="w-full aspect-video">
-                      {/* <div
-                        className="h-full bg-contain bg-no-repeat bg-center"
-                        style={{ backgroundImage: `url(${program.url})` }}
-                      >
-                  
-                      </div> */}
                       <Image src={program.url} layout="fill" />
                     </div>
                   </SwiperSlide>
@@ -400,20 +399,26 @@ export default function Home() {
                 TIKOMDIK.
               </h1>
             </div>
-            <div className="flex flex-col p-8">
+            <div className="flex flex-col">
+              {selectInfo}
               <div className="flex justify-center">
-                {/* <DayPicker
-                  // mode="single"
+                <DayPicker
+                  mode="single"
                   selected={selectedDate}
-                  // onSelect={setSelectedDate}
-                  modifiers={{available: availabeEvent}}
-                  modifiersClassNames={{
-                    available: "text-[#1976D2] font-bold",
-                    selected: "text-red-500 font-extrabold",
+                  onSelect={setSelectedDate}
+                  modifiersStyles={{
+                    selected: {
+                      background: "#16A75C",
+                      color: "#FFFFFF",
+                      fontWeight: "bold",
+                    },
                   }}
-                  showOutsideDays
-                /> */}
-                <Calendar />
+                  styles={{
+                    caption: { color: "#1E88E5" },
+                    head: { color: "GrayText", fontSize: "19px" },
+                    day: { color: "#1E88E5", fontSize: "20px" },
+                  }}
+                />
               </div>
               <ol
                 className={`relative ${
@@ -422,7 +427,10 @@ export default function Home() {
               >
                 {agenda.length < 1 ? (
                   <div className="w-full flex flex-col justify-center items-center space-y-5">
-                    <BsCalendar2X className="w-20 h-20 text-primary" />
+                    <FontAwesomeIcon
+                      icon={faCalendarXmark}
+                      className="w-20 h-20 text-primary"
+                    />
                     <h1 className="font-Poppins font-semibold text-second text-lg lg:text-xl xl:text-2xl text-center">
                       Tidak ada kegiatan / event di hari ini
                     </h1>
@@ -435,14 +443,14 @@ export default function Home() {
                         <time className="mb-1 text-sm font-normal leading-none text-gray-400">
                           {agenda.tgl_acara}
                         </time>
-                        <div className="flex flex-col border-2 border-primary p-2 rounded-xl space-y-2">
+                        <div className="flex flex-col border-2 border-primary p-2 rounded-xl">
                           <h3 className="font-semibold text-primary text-sm md:text-base lg:text-lg xl:text-xl">
                             {agenda.nama_acara}
                           </h3>
                           <h3 className="font-medium text-black/50 text-xs md:text-xm lg:text-base xl:text-lg">
                             {agenda.peserta}
                           </h3>
-                          <h3 className="font-normal text-black/50 text-xs md:text-xm lg:text-base xl:text-lg">
+                          <h3 className="font-normal text-black/60 text-xs md:text-xm lg:text-base xl:text-lg mt-5">
                             {agenda.jam_mulai} - {agenda.jam_selesai} WIB
                           </h3>
                         </div>
@@ -465,7 +473,7 @@ export default function Home() {
                 <div className={`w-full rounded-lg duration-500`}>
                   <div className="w-full h-full flex gap-7 items-stretch">
                     <div>
-                      <FiMonitor className="w-20 h-20 text-primary" />
+                      <FontAwesomeIcon icon={faComputer} className="w-20 h-20 text-primary" />
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
@@ -488,7 +496,7 @@ export default function Home() {
                 <div className={`w-full rounded-lg duration-500`}>
                   <div className="w-full h-full flex gap-7 items-stretch">
                     <div>
-                      <CgMediaPodcast className="w-20 h-20 text-primary" />
+                      <FontAwesomeIcon icon={faPodcast} className="w-20 h-20 text-primary" />
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
@@ -511,7 +519,7 @@ export default function Home() {
                 <div className={`w-full rounded-lg duration-500`}>
                   <div className="w-full h-full flex gap-7 items-stretch">
                     <div>
-                      <MdOutlineMonitor className="w-20 h-20 text-primary" />
+                      <FontAwesomeIcon icon={faTv} className="w-20 h-20 text-primary" />
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
@@ -534,7 +542,7 @@ export default function Home() {
                 <div className={`w-full rounded-lg duration-500`}>
                   <div className="w-full h-full flex gap-7 items-stretch">
                     <div>
-                      <IoRadio className="w-20 h-20 text-primary" />
+                      <FontAwesomeIcon icon={faRadio} className="w-20 h-20 text-primary" />
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
@@ -571,7 +579,7 @@ export default function Home() {
               >
                 <div className="w-full h-full flex justify-center items-center gap-5">
                   <div className="flex flex-col items-center gap-3">
-                    <GiProgression className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
+                    <FontAwesomeIcon icon={faAddressBook} className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
                     <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white/50 text-center">
                       Total Kunjungan Hari ini
                     </h1>
@@ -589,7 +597,7 @@ export default function Home() {
               >
                 <div className="w-full h-full flex justify-center items-center gap-5">
                   <div className="flex flex-col items-center gap-3">
-                    <HiOutlineUserGroup className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
+                    <FontAwesomeIcon icon={faUserGroup} className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
                     <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white/50 text-center">
                       Total Visitors
                     </h1>
@@ -607,7 +615,7 @@ export default function Home() {
               >
                 <div className="w-full h-full flex justify-center items-center gap-5">
                   <div className="flex flex-col items-center gap-3">
-                    <HiOutlineUserGroup className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
+                    <FontAwesomeIcon icon={faUserGroup} className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
                     <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white/50 text-center">
                       Total Visitors
                     </h1>
@@ -654,7 +662,7 @@ export default function Home() {
                       </h1>
                     </div>
                     <div className="px-3 py-2 flex flex-row items-center text-black/60 mt-2">
-                      <MdHistory className="w-5 h-5" />
+                      <FontAwesomeIcon icon={faClockFour} className="w-6 h-6" />
                       <h1 className="font-Poppins font-light text-sm">
                         {data.createdAt}
                       </h1>
