@@ -14,8 +14,6 @@ import BeritaBaru from "../components/tab/berita/BeritaBaru";
 import axios from "axios";
 import Footer from "../components/Footer";
 import { format } from "date-fns";
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowUp,
@@ -32,9 +30,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faAddressBook,
-  faCalendarXmark,
 } from "@fortawesome/free-regular-svg-icons";
 import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
+import Calendar from "../components/Calendar";
 
 export default function Home() {
   const [berita, setBerita] = useState([]);
@@ -48,27 +46,6 @@ export default function Home() {
   const [logQuestion, setLogQuestion] = useState("");
   const [loading, setLoading] = useState(false);
   const [showButton, setShowButton] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [agenda, setAgenda] = useState([]);
-
-  const selectInfo = selectedDate ? (
-    <h1 className="font-Poppins font-semibold text-second text-base lg:text-lg xl:text-xl px-5 py-2">
-      {format(selectedDate, "MMMM d, yyyy")}
-    </h1>
-  ) : (
-    setSelectedDate(new Date())
-  );
-
-  const getAgenda = async () => {
-    const tglAcara = format(selectedDate || new Date(), "yyyy-M-d");
-    const agenda = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/acara`,
-      {
-        tgl_acara: tglAcara,
-      }
-    );
-    setAgenda(agenda.data);
-  };
 
   const getBerita = async () => {
     const berita = await axios.get(
@@ -89,7 +66,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    getAgenda();
     getBerita();
     getProgram();
     window.addEventListener("scroll", () => {
@@ -99,7 +75,7 @@ export default function Home() {
         setShowButton(false);
       }
     });
-  }, [selectedDate]);
+  }, []);
 
   const scrollTop = async () => {
     window.scrollTo({
@@ -440,65 +416,7 @@ export default function Home() {
               </h1>
             </div>
             <div className="flex flex-col">
-              {selectInfo}
-              <div className="flex justify-center">
-                <DayPicker
-                  mode="single"
-                  selected={selectedDate}
-                  onSelect={setSelectedDate}
-                  modifiersStyles={{
-                    selected: {
-                      background: "#16A75C",
-                      color: "#FFFFFF",
-                      fontWeight: "bold",
-                    },
-                  }}
-                  styles={{
-                    caption: { color: "#1E88E5" },
-                    head: { color: "GrayText", fontSize: "19px" },
-                    day: { color: "#1E88E5", fontSize: "20px" },
-                  }}
-                />
-              </div>
-              <ol
-                className={`relative ${
-                  agenda.length < 1 ? "border-none" : "border-l border-primary"
-                }`}
-              >
-                {agenda.length < 1 ? (
-                  <div className="w-full flex flex-col justify-center items-center space-y-5">
-                    <FontAwesomeIcon
-                      icon={faCalendarXmark}
-                      className="w-20 h-20 text-primary"
-                    />
-                    <h1 className="font-Poppins font-semibold text-second text-lg lg:text-xl xl:text-2xl text-center">
-                      Tidak ada kegiatan / event di hari ini
-                    </h1>
-                  </div>
-                ) : (
-                  agenda.map((agenda, index) => {
-                    return (
-                      <li className="mb-10 ml-4" key={index}>
-                        <div className="absolute w-3 h-3 bg-white rounded-full mt-1.5 -left-1.5 border border-primary" />
-                        <time className="mb-1 text-sm font-normal leading-none text-gray-400">
-                          {agenda.tgl_acara}
-                        </time>
-                        <div className="flex flex-col border-2 border-primary p-2 rounded-xl">
-                          <h3 className="font-semibold text-primary text-sm md:text-base lg:text-lg xl:text-xl">
-                            {agenda.nama_acara}
-                          </h3>
-                          <h3 className="font-medium text-black/50 text-xs md:text-xm lg:text-base xl:text-lg">
-                            {agenda.peserta}
-                          </h3>
-                          <h3 className="font-normal text-black/60 text-xs md:text-xm lg:text-base xl:text-lg mt-5">
-                            {agenda.jam_mulai} - {agenda.jam_selesai} WIB
-                          </h3>
-                        </div>
-                      </li>
-                    );
-                  })
-                )}
-              </ol>
+              <Calendar />
             </div>
           </div>
           <div className="w-full lg:w-9/12 flex flex-col rounded-xl">
