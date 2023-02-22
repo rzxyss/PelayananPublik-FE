@@ -1,60 +1,21 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { MdHistory, MdPeople } from "react-icons/md";
-import { BiSearch, BiArrowToTop } from "react-icons/bi";
-import { AiOutlineLike } from "react-icons/ai";
 import axios from "axios";
 import Footer from "../components/Footer";
-import Swal from "sweetalert2";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp, faClockRotateLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function Berita() {
   const [berita, setBerita] = useState([]);
-  const [limit, setLimit] = useState(9);
-  const [query, setQuery] = useState("");
-  const [likeCount, setLike] = useState();
   const [showButton, setShowButton] = useState(false);
 
   const getBerita = async () => {
     const berita = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/berita?limit=${limit}&search_query=${query}`
+      `${process.env.NEXT_PUBLIC_API_URL}/kegiatan`
     );
     setBerita(berita.data.results);
-  };
-
-  const likeBerita = async (beritaId) => {
-    try {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/berita/${beritaId}`
-      );
-      setLike(res.data.like);
-      if (!res) {
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: "Gagal Menambahkan Like",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      } else {
-        await axios.patch(
-          `${process.env.NEXT_PUBLIC_API_URL}/likeberita/${beritaId}`,
-          {
-            like: res.data.like + 1,
-          }
-        );
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Berhasil Menambahkan Like",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setLike(berita.like);
+    console.log(berita.data.results);
   };
 
   useEffect(() => {
@@ -66,7 +27,7 @@ export default function Berita() {
         setShowButton(false);
       }
     });
-  }, [query, likeCount, limit]);
+  }, []);
 
   const scrollTop = async () => {
     window.scrollTo({
@@ -84,7 +45,7 @@ export default function Berita() {
           className={`fixed w-14 h-14 bg-primary text-white rounded-full text-sm font-medium focus:outline-none focus:shadow-outline items-center justify-center bottom-2 right-2 flex`}
           onClick={scrollTop}
         >
-          <BiArrowToTop className="w-6 h-6 text-white" />
+          <FontAwesomeIcon icon={faArrowUp} className="w-6 h-6 text-white" />
         </button>
       )}
       <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
@@ -108,11 +69,11 @@ export default function Berita() {
                     type="search"
                     className="block w-full px-2 text-sm focus:outline-none"
                     placeholder="Cari ..."
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    // value={query}
+                    // onChange={(e) => setQuery(e.target.value)}
                   />
                   <button type="submit" className="bg-primary p-4 rounded-xl">
-                    <BiSearch className="w-5 h-5 text-white" />
+                    <FontAwesomeIcon icon={faSearch} className="w-5 h-5 text-white" />
                   </button>
                 </div>
               </div>
@@ -134,11 +95,14 @@ export default function Berita() {
                         />
                         <div className="px-3 py-2 flex-wrap">
                           <h1 className="font-Poppins text-black/50 font-normal text-sm md:text-base lg:text-lg">
-                            {data.deskripsi_berita}
+                            {data.judul_kegiatan}
+                          </h1>
+                          <h1 className="font-Poppins text-black/50 font-normal text-sm md:text-base lg:text-lg">
+                            {data.isi_kegiatan}
                           </h1>
                         </div>
                         <div className="flex flex-row items-center text-black/60 mt-2 gap-1 p-2">
-                          <MdHistory className="w-5 h-5" />
+                          <FontAwesomeIcon icon={faClockRotateLeft} className="w-5 h-5" />
                           <h1 className="font-Poppins font-light text-sm">
                             {data.createdAt}
                           </h1>
@@ -148,7 +112,7 @@ export default function Berita() {
                   })}
                 </div>
               </div>
-              <div className="w-full flex justify-center pb-5">
+              {/* <div className="w-full flex justify-center pb-5">
                 {limit != 50 ? (
                   <button
                     className="bg-primary hover:bg-primary  text-white font-bold py-2 px-4 rounded"
@@ -164,7 +128,7 @@ export default function Berita() {
                     Muat Lebih Sedikit
                   </button>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
           <Footer />

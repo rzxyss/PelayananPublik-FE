@@ -9,16 +9,31 @@ import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import { Pagination, Autoplay, EffectFade, Navigation } from "swiper";
 import { useEffect, useState } from "react";
-import BeritaPopular from "../components/BeritaPopular";
-import BeritaBaru from "../components/BeritaBaru";
+import BeritaPopular from "../components/tab/berita/BeritaPopular";
+import BeritaBaru from "../components/tab/berita/BeritaBaru";
 import axios from "axios";
 import Footer from "../components/Footer";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faChartLine, faChevronRight, faClipboardList, faClockRotateLeft, faCommentDots, faComputer, faPodcast, faRadio, faTv, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { faAddressBook, faCalendarXmark, faClockFour } from "@fortawesome/free-regular-svg-icons";
+import {
+  faArrowUp,
+  faChartLine,
+  faChevronRight,
+  faClipboardList,
+  faClockRotateLeft,
+  faCommentDots,
+  faComputer,
+  faPodcast,
+  faRadio,
+  faTv,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faAddressBook,
+  faCalendarXmark,
+} from "@fortawesome/free-regular-svg-icons";
 import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
@@ -32,7 +47,6 @@ export default function Home() {
   const [answer, setAnswer] = useState("");
   const [logQuestion, setLogQuestion] = useState("");
   const [loading, setLoading] = useState(false);
-  const [loadingBerita, setLoadingBerita] = useState(true);
   const [showButton, setShowButton] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [agenda, setAgenda] = useState([]);
@@ -54,7 +68,6 @@ export default function Home() {
       }
     );
     setAgenda(agenda.data);
-    console.log(agenda.data);
   };
 
   const getBerita = async () => {
@@ -70,7 +83,6 @@ export default function Home() {
         `${process.env.NEXT_PUBLIC_API_URL}/program`
       );
       setProgram(program.data.results);
-      setLoadingBerita(false);
     } catch (error) {
       console.log(error);
     }
@@ -149,7 +161,11 @@ export default function Home() {
       >
         <div className="flex justify-between items-center p-1 px-2 cursor-pointer">
           <h1 className="font-Poppins font-light">Tikomdiks BOTS</h1>
-          <FontAwesomeIcon icon={faXmark} className="w-7 h-7" onClick={closeChat} />
+          <FontAwesomeIcon
+            icon={faXmark}
+            className="w-7 h-7"
+            onClick={closeChat}
+          />
         </div>
         <div className="px-6 py-2 space-y-2">
           <div
@@ -235,14 +251,17 @@ export default function Home() {
                 <div className="w-full h-full flex flex-col justify-between">
                   <div className="flex justify-center mb-5">
                     <div className="bg-white rounded-full p-2 w-24 h-24 flex justify-center items-center">
-                      <FontAwesomeIcon icon={faClockRotateLeft} className="w-16 h-16 text-primary" />
+                      <FontAwesomeIcon
+                        icon={faClockRotateLeft}
+                        className="w-16 h-16 text-primary"
+                      />
                     </div>
                   </div>
                   <div className="flex flex-col items-center mb-5">
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       sekilas sejarah
                     </h1>
-                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-white">
+                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white px-16">
                       Menampilkan sekilas sejarah tentang UPTD TIKOMDIK
                     </h1>
                   </div>
@@ -251,7 +270,10 @@ export default function Home() {
                     className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
-                    <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />
+                    <FontAwesomeIcon
+                      icon={faChevronRight}
+                      className="w-6 h-6"
+                    />
                   </Link>
                 </div>
               </div>
@@ -264,14 +286,17 @@ export default function Home() {
                 <div className="w-full h-full flex flex-col justify-between">
                   <div className="flex justify-center mb-5">
                     <div className="bg-white rounded-full p-2 w-24 h-24 flex justify-center items-center">
-                      <FontAwesomeIcon icon={faClipboardList} className="w-16 h-16 text-primary" />
+                      <FontAwesomeIcon
+                        icon={faClipboardList}
+                        className="w-16 h-16 text-primary"
+                      />
                     </div>
                   </div>
                   <div className="flex flex-col items-center justify-between mb-5">
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       visi dan misi
                     </h1>
-                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-white">
+                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white px-16">
                       Memahi Visi dan Misi UPTD TIKOMDIK
                     </h1>
                   </div>
@@ -280,7 +305,10 @@ export default function Home() {
                     className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
-                    <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />
+                    <FontAwesomeIcon
+                      icon={faChevronRight}
+                      className="w-6 h-6"
+                    />
                   </Link>
                 </div>
               </div>
@@ -293,14 +321,17 @@ export default function Home() {
                 <div className="w-full h-full flex flex-col justify-between">
                   <div className="flex justify-center mb-5">
                     <div className="bg-white rounded-full p-2 w-24 h-24 flex justify-center items-center">
-                      <FontAwesomeIcon icon={faChartLine} className="w-16 h-16 text-primary" />
+                      <FontAwesomeIcon
+                        icon={faChartLine}
+                        className="w-16 h-16 text-primary"
+                      />
                     </div>
                   </div>
                   <div className="flex flex-col items-center mb-5">
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       kegiatan
                     </h1>
-                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-white">
+                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white px-16">
                       Menampilkan kegiatan tentang UPTD TIKOMDIK
                     </h1>
                   </div>
@@ -309,7 +340,10 @@ export default function Home() {
                     className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
-                    <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />
+                    <FontAwesomeIcon
+                      icon={faChevronRight}
+                      className="w-6 h-6"
+                    />
                   </Link>
                 </div>
               </div>
@@ -322,14 +356,17 @@ export default function Home() {
                 <div className="w-full h-full flex flex-col justify-between">
                   <div className="flex justify-center mb-5">
                     <div className="bg-white rounded-full p-2 w-24 h-24 flex justify-center items-center">
-                      <FontAwesomeIcon icon={faUserGroup} className="w-16 h-16 text-primary" />
+                      <FontAwesomeIcon
+                        icon={faUserGroup}
+                        className="w-16 h-16 text-primary"
+                      />
                     </div>
                   </div>
                   <div className="flex flex-col items-center mb-5">
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       team project
                     </h1>
-                    <h1 className="font-Poppins font-semibold text-[11px] lg:text-sm w-2/3 text-center text-white">
+                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white px-16">
                       Menampilkan Bagian dan Tugas dalam UPTD TIKOMDIK
                     </h1>
                   </div>
@@ -338,7 +375,10 @@ export default function Home() {
                     className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
-                    <FontAwesomeIcon icon={faChevronRight} className="w-6 h-6" />
+                    <FontAwesomeIcon
+                      icon={faChevronRight}
+                      className="w-6 h-6"
+                    />
                   </Link>
                 </div>
               </div>
@@ -464,7 +504,7 @@ export default function Home() {
           <div className="w-full lg:w-9/12 flex flex-col rounded-xl">
             <div className="flex-col flex space-y-8">
               <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-                UTILITAS TEAM TIKOMDIK
+                UTILITAS DIVISI TIKOMDIK
               </h1>
             </div>
             <div className="grid lg:grid-cols-2">
@@ -473,11 +513,14 @@ export default function Home() {
                 <div className={`w-full rounded-lg duration-500`}>
                   <div className="w-full h-full flex gap-7 items-stretch">
                     <div>
-                      <FontAwesomeIcon icon={faComputer} className="w-20 h-20 text-primary" />
+                      <FontAwesomeIcon
+                        icon={faComputer}
+                        className="w-20 h-20 text-primary"
+                      />
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
-                        Team
+                        Divisi
                       </h1>
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
                         RND (Research & Development)
@@ -496,11 +539,14 @@ export default function Home() {
                 <div className={`w-full rounded-lg duration-500`}>
                   <div className="w-full h-full flex gap-7 items-stretch">
                     <div>
-                      <FontAwesomeIcon icon={faPodcast} className="w-20 h-20 text-primary" />
+                      <FontAwesomeIcon
+                        icon={faPodcast}
+                        className="w-20 h-20 text-primary"
+                      />
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
-                        Team
+                        Divisi
                       </h1>
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
                         TIKOMPEDIA (Tikomdik Media)
@@ -519,11 +565,14 @@ export default function Home() {
                 <div className={`w-full rounded-lg duration-500`}>
                   <div className="w-full h-full flex gap-7 items-stretch">
                     <div>
-                      <FontAwesomeIcon icon={faTv} className="w-20 h-20 text-primary" />
+                      <FontAwesomeIcon
+                        icon={faTv}
+                        className="w-20 h-20 text-primary"
+                      />
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
-                        Team
+                        Divisi
                       </h1>
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
                         TV Streaming
@@ -542,11 +591,14 @@ export default function Home() {
                 <div className={`w-full rounded-lg duration-500`}>
                   <div className="w-full h-full flex gap-7 items-stretch">
                     <div>
-                      <FontAwesomeIcon icon={faRadio} className="w-20 h-20 text-primary" />
+                      <FontAwesomeIcon
+                        icon={faRadio}
+                        className="w-20 h-20 text-primary"
+                      />
                     </div>
                     <div className="flex flex-col">
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50">
-                        Team
+                        Divisi
                       </h1>
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
                         Phi Radio Streaming
@@ -579,7 +631,10 @@ export default function Home() {
               >
                 <div className="w-full h-full flex justify-center items-center gap-5">
                   <div className="flex flex-col items-center gap-3">
-                    <FontAwesomeIcon icon={faAddressBook} className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
+                    <FontAwesomeIcon
+                      icon={faAddressBook}
+                      className="w-32 h-20 bg-white text-primary p-5 rounded-2xl"
+                    />
                     <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white/50 text-center">
                       Total Kunjungan Hari ini
                     </h1>
@@ -597,7 +652,10 @@ export default function Home() {
               >
                 <div className="w-full h-full flex justify-center items-center gap-5">
                   <div className="flex flex-col items-center gap-3">
-                    <FontAwesomeIcon icon={faUserGroup} className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
+                    <FontAwesomeIcon
+                      icon={faUserGroup}
+                      className="w-32 h-20 bg-white text-primary p-5 rounded-2xl"
+                    />
                     <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white/50 text-center">
                       Total Visitors
                     </h1>
@@ -615,7 +673,10 @@ export default function Home() {
               >
                 <div className="w-full h-full flex justify-center items-center gap-5">
                   <div className="flex flex-col items-center gap-3">
-                    <FontAwesomeIcon icon={faUserGroup} className="w-32 h-20 bg-white text-primary p-5 rounded-2xl" />
+                    <FontAwesomeIcon
+                      icon={faUserGroup}
+                      className="w-32 h-20 bg-white text-primary p-5 rounded-2xl"
+                    />
                     <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white/50 text-center">
                       Total Visitors
                     </h1>
@@ -662,7 +723,10 @@ export default function Home() {
                       </h1>
                     </div>
                     <div className="px-3 py-2 flex flex-row items-center text-black/60 mt-2">
-                      <FontAwesomeIcon icon={faClockFour} className="w-6 h-6" />
+                      <FontAwesomeIcon
+                        icon={faClockRotateLeft}
+                        className="w-6 h-6"
+                      />
                       <h1 className="font-Poppins font-light text-sm">
                         {data.createdAt}
                       </h1>

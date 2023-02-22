@@ -2,14 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
+import { AiFillCaretDown } from "react-icons/ai";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
 
   const router = useRouter();
-  console.log(show);
   return (
     <>
       <div className="w-full shadow-md sticky top-0 z-30 bg-white">
@@ -47,24 +48,20 @@ export default function Navbar() {
           >
             <li
               className={`font-Poppins font-semibold text-xl ${
-                router.pathname === "/"
-                  ? "text-primary"
-                  : "text-black/50"
+                router.pathname === "/" ? "text-primary" : "text-black/50"
               }`}
             >
               <Link href="/">Home</Link>
             </li>
             <li
               className={`font-Poppins font-semibold text-xl ${
-                router.pathname === "/berita"
-                  ? "text-primary"
-                  : "text-black/50"
+                router.pathname === "/berita" ? "text-primary" : "text-black/50"
               }`}
             >
               <Link href="/berita">Berita</Link>
             </li>
             <li
-              className={`font-Poppins font-semibold text-xl text-black/50 cursor-pointer`}
+              className={`font-Poppins font-semibold text-xl text-black/50 lg:cursor-pointer`}
             >
               <div className="flex items-center">
                 <h1
@@ -73,11 +70,17 @@ export default function Navbar() {
                 >
                   Profile
                 </h1>
-                <AiFillCaretDown onClick={() => setShow(!show)} />
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className="w-5 h-5 text-black/50"
+                  onClick={() => setShow(!show)}
+                  onMouseEnter={() => setShow(true)}
+                  onMouseLeave={() => setShow(false)}
+                />
               </div>
               <ul
                 className={`bg-white lg:border p-2 ${
-                  !show ? "hidden" : "lg:absolute"
+                  !show ? "hidden" : "lg:absolute "
                 }`}
                 onMouseEnter={() => setShow(true)}
                 onMouseLeave={() => setShow(false)}
@@ -114,9 +117,7 @@ export default function Navbar() {
             </li>
             <li
               className={`font-Poppins font-semibold text-xl ${
-                router.pathname === "/faq"
-                  ? "text-primary"
-                  : "text-black/50"
+                router.pathname === "/faq" ? "text-primary" : "text-black/50"
               }`}
             >
               <Link href={"/faq"}>FAQ</Link>

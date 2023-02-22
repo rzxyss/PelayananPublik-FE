@@ -1,14 +1,14 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { MdHistory, MdPeople } from "react-icons/md";
-import { BiSearch, BiArrowToTop } from "react-icons/bi";
-import { AiOutlineLike } from "react-icons/ai";
 import axios from "axios";
 import Footer from "../components/Footer";
 import Swal from "sweetalert2";
-import BeritaPopular from "../components/BeritaPopular";
-import BeritaBaru from "../components/BeritaBaru";
+import BeritaPopular from "../components/tab/berita/BeritaPopular";
+import BeritaBaru from "../components/tab/berita/BeritaBaru";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp, faClockRotateLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 
 export default function Berita() {
   const [berita, setBerita] = useState([]);
@@ -87,7 +87,7 @@ export default function Berita() {
           className={`fixed w-14 h-14 bg-primary text-white rounded-full text-sm font-medium focus:outline-none focus:shadow-outline items-center justify-center bottom-2 right-2 flex`}
           onClick={scrollTop}
         >
-          <BiArrowToTop className="w-6 h-6 text-white" />
+          <FontAwesomeIcon icon={faArrowUp} className="w-6 h-6 text-white" />
         </button>
       )}
       <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
@@ -115,7 +115,7 @@ export default function Berita() {
                     onChange={(e) => setQuery(e.target.value)}
                   />
                   <button type="submit" className="bg-primary p-4 rounded-xl">
-                    <BiSearch className="w-5 h-5 text-white" />
+                    <FontAwesomeIcon icon={faSearch} className="w-5 h-5 text-white" />
                   </button>
                 </div>
               </div>
@@ -146,13 +146,13 @@ export default function Berita() {
                           </div>
                           <div className="flex justify-between px-2">
                             <div className="flex flex-row items-center text-black/60 mt-2 gap-1">
-                              <MdHistory className="w-5 h-5" />
+                              <FontAwesomeIcon icon={faClockRotateLeft} className="w-5 h-5" />
                               <h1 className="font-Poppins font-light text-sm">
                                 {data.createdAt}
                               </h1>
                             </div>
                             <div className="flex flex-row items-center text-black/60 mt-2 gap-1 cursor-pointer">
-                              <AiOutlineLike
+                              <FontAwesomeIcon icon={faThumbsUp}
                                 className="w-10 h-10"
                                 onClick={() => likeBerita(data.id)}
                               />

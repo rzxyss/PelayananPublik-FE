@@ -2,11 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import Faq1 from "../components/tab/faq/faq1";
+import Faq2 from "../components/tab/faq/faq2";
+import Faq3 from "../components/tab/faq/faq3";
 
 export default function FaQ() {
   const [faq, setFaq] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [type, setType] = useState('')
+  const [type, setType] = useState('faq1')
   const getFaq = async () => {
     try {
       const response = await axios.get(
@@ -37,49 +40,34 @@ export default function FaQ() {
           <button
             type="button"
             className={`py-2 px-4 text-sm font-medium bg-transparent ${
-              type == "popular" ? "border-b-4 border-primary" : ""
+              type == "faq1" ? "border-b-4 border-primary" : ""
             }`}
-            onClick={() => setType("popular")}
+            onClick={() => setType("faq1")}
           >
             Seputar Pendaftaran Prakerin
           </button>
           <button
             type="button"
             className={`py-2 px-4 text-sm font-medium bg-transparent ${
-              type == "baru" ? "border-b-4 border-primary" : ""
+              type == "faq2" ? "border-b-4 border-primary" : ""
             }`}
-            onClick={() => setType("baru")}
+            onClick={() => setType("faq2")}
           >
             Seputar Program Tikomdik
           </button>
           <button
             type="button"
             className={`py-2 px-4 text-sm font-medium bg-transparent ${
-              type == "apa" ? "border-b-4 border-primary" : ""
+              type == "faq3" ? "border-b-4 border-primary" : ""
             }`}
-            onClick={() => setType("apa")}
+            onClick={() => setType("faq3")}
           >
             Seputar Program Tikomdik
           </button>
         </div>
-        {faq.map((faq, i) => {
-          return (
-            <div className="border-t border-gray-200" key={i}>
-              <button
-                className="w-full text-left p-3 text-gray-700 font-medium hover:bg-gray-100 focus:outline-none"
-                onClick={() => toggle(i)}
-              >
-                {faq.question}
-                <span className="float-right text-gray-400">
-                  {selected === i ? "-" : "+"}
-                </span>
-              </button>
-              {selected === i && (
-                <div className="p-3 text-gray-600">{faq.answer}</div>
-              )}
-            </div>
-          );
-        })}
+        {type == 'faq1' && <Faq1 />}
+        {type == 'faq2' && <Faq2 />}
+        {type == 'faq3' && <Faq3 />}
       </div>
       <div className="w-full lg:fixed bottom-0">
         <Footer />
