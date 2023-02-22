@@ -37,8 +37,6 @@ export default function Calendar() {
     getAgenda();
   }, [selectDate]);
 
-  console.log(selectDate);
-
   const handleDayClick: DayClickEventHandler = (day) => {
     setSelectDate(day);
   };
