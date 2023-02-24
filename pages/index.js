@@ -28,9 +28,7 @@ import {
   faTv,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  faAddressBook,
-} from "@fortawesome/free-regular-svg-icons";
+import { faAddressBook } from "@fortawesome/free-regular-svg-icons";
 import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
 import Calendar from "../components/Calendar";
 
@@ -46,6 +44,7 @@ export default function Home() {
   const [logQuestion, setLogQuestion] = useState("");
   const [loading, setLoading] = useState(false);
   const [showButton, setShowButton] = useState(false);
+  const [totalViews, setTotalViews] = useState(0);
 
   const getBerita = async () => {
     const berita = await axios.get(
@@ -75,6 +74,9 @@ export default function Home() {
         setShowButton(false);
       }
     });
+    const currentViews = parseInt(localStorage.getItem("totalViews"), 10) || 0;
+    localStorage.setItem("totalViews", currentViews + 1);
+    setTotalViews(currentViews);
   }, []);
 
   const scrollTop = async () => {
@@ -112,7 +114,7 @@ export default function Home() {
   };
 
   return (
-    <>
+    <div className="w-full h-full scrollbar-hide md:scrollbar-default">
       <Navbar />
       {showButton && (
         <button
@@ -237,13 +239,13 @@ export default function Home() {
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       sekilas sejarah
                     </h1>
-                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white px-16">
+                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white 2xl:px-16">
                       Menampilkan sekilas sejarah tentang UPTD TIKOMDIK
                     </h1>
                   </div>
                   <Link
                     href={"/about"}
-                    className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
+                    className="font-Poppins font-semibold text-base md:text-sm text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
                     <FontAwesomeIcon
@@ -272,13 +274,13 @@ export default function Home() {
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       visi dan misi
                     </h1>
-                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white px-16">
+                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white 2xl:px-16">
                       Memahi Visi dan Misi UPTD TIKOMDIK
                     </h1>
                   </div>
                   <Link
                     href={"/about"}
-                    className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
+                    className="font-Poppins font-semibold text-base md:text-sm text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
                     <FontAwesomeIcon
@@ -307,13 +309,13 @@ export default function Home() {
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       kegiatan
                     </h1>
-                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white px-16">
+                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white 2xl:px-16">
                       Menampilkan kegiatan tentang UPTD TIKOMDIK
                     </h1>
                   </div>
                   <Link
                     href={"/about"}
-                    className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
+                    className="font-Poppins font-semibold text-base md:text-sm text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
                     <FontAwesomeIcon
@@ -342,13 +344,13 @@ export default function Home() {
                     <h1 className="font-Poppins font-semibold uppercase text-xl lg:text-2xl text-center text-white">
                       team project
                     </h1>
-                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white px-16">
+                    <h1 className="font-Poppins font-medium text-xs md:text-sm lg:text-base text-center text-white 2xl:px-16">
                       Menampilkan Bagian dan Tugas dalam UPTD TIKOMDIK
                     </h1>
                   </div>
                   <Link
                     href={"/about"}
-                    className="font-Poppins font-semibold text-base text-center text-[#f7a76c] flex items-center justify-center"
+                    className="font-Poppins font-semibold text-base md:text-sm text-center text-[#f7a76c] flex items-center justify-center"
                   >
                     Baca Selengkapnya
                     <FontAwesomeIcon
@@ -363,19 +365,19 @@ export default function Home() {
         </div>
 
         <div
-          className="flex flex-col items-center space-y-5 pt-20"
+          className="flex flex-col items-center space-y-5 p-10 container mx-auto"
           id="program"
         >
           <h1 className="uppercase font-Lora font-bold text-2xl md:text-3xl lg:text-4xl text-center text-black">
             program tikomdik
           </h1>
-          <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg w-11/12 lg:w-10/12 xl:w-9/12 text-center mt-5 text-black/50">
+          <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg w-11/12 lg:w-10/12 text-center mt-5 text-black/50">
             Seksi Pengembangan dan produksi mempunyai tugas pokok melaksanakan
             pengem-bangan dan produksi bahan pembelajaran meliputi mata
             pelajaran SMA, SMK, dan SLB berbasis Teknologi Informasi dan
             Komunikasi serta fasilitasi Teknologi Informasi Pendidikan lainnya.
           </h1>
-          <div className="w-full px-5 lg:px-40 pb-20">
+          <div className="w-full">
             <Swiper
               spaceBetween={30}
               pagination={{
@@ -395,7 +397,11 @@ export default function Home() {
                 return (
                   <SwiperSlide key={index}>
                     <div className="w-full aspect-video">
-                      <Image src={program.url} layout="fill" />
+                      <Image
+                        src={program.url}
+                        layout="fill"
+                        alt={`Program ${program.judul_program}`}
+                      />
                     </div>
                   </SwiperSlide>
                 );
@@ -404,8 +410,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full p-10 flex flex-col lg:flex-row gap-5">
-          <div className="w-full lg:w-3/12 flex flex-col rounded-xl">
+        <div className="w-full p-10 flex flex-col lg:flex-row justify-between gap-20 container mx-auto">
+          <div className="flex flex-col rounded-xl">
             <div className="flex flex-col bg-primary p-8 rounded-t-2xl">
               <h1 className="font-Poppins font-semibold text-white text-lg lg:text-xl xl:text-2xl">
                 AGENDA UPTD TIKOMDIK
@@ -419,13 +425,13 @@ export default function Home() {
               <Calendar />
             </div>
           </div>
-          <div className="w-full lg:w-9/12 flex flex-col rounded-xl">
+          <div className="flex flex-col rounded-xl lg:w-8/12">
             <div className="flex-col flex space-y-8">
               <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl">
                 UTILITAS DIVISI TIKOMDIK
               </h1>
             </div>
-            <div className="grid lg:grid-cols-2">
+            <div className="flex flex-col">
               {/* Card */}
               <div className="flex justify-center p-5">
                 <div className={`w-full rounded-lg duration-500`}>
@@ -443,11 +449,13 @@ export default function Home() {
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
                         RND (Research & Development)
                       </h1>
-                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50 py-5">
-                        Lorem ipsum dolor sit amet consectetur. Pulvinar viverra
-                        dictumst eleifend sed suspendisse quis. Habitasse sit
-                        ornare sed neque.
-                      </h1>
+                      <Image
+                        alt="Research & Development"
+                        src={"/image/rnd.jpg"}
+                        width={500}
+                        height={0}
+                        className="rounded-2xl"
+                      />
                     </div>
                   </div>
                 </div>
@@ -469,11 +477,13 @@ export default function Home() {
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
                         TIKOMPEDIA (Tikomdik Media)
                       </h1>
-                      <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-black/50 py-5">
-                        Lorem ipsum dolor sit amet consectetur. Pulvinar viverra
-                        dictumst eleifend sed suspendisse quis. Habitasse sit
-                        ornare sed neque.
-                      </h1>
+                      <Image
+                        alt="Tikompedia"
+                        src={"/image/tikompedia.jpg"}
+                        width={500}
+                        height={0}
+                        className="rounded-2xl"
+                      />
                     </div>
                   </div>
                 </div>
@@ -521,11 +531,13 @@ export default function Home() {
                       <h1 className="font-Poppins font-semibold text-base md:text-lg lg:text-xl xl:text-2xl text-primary">
                         Phi Radio Streaming
                       </h1>
-                      <h1 className="font-Poppins font-medium text-base md:text-lg lg:text-xl xl:text-2xl text-black/50 py-5">
-                        Lorem ipsum dolor sit amet consectetur. Pulvinar viverra
-                        dictumst eleifend sed suspendisse quis. Habitasse sit
-                        ornare sed neque.
-                      </h1>
+                      <Image
+                        alt="Phi Radio"
+                        src={"/image/phiradio.jpg"}
+                        width={500}
+                        height={0}
+                        className="rounded-2xl"
+                      />
                     </div>
                   </div>
                 </div>
@@ -541,7 +553,7 @@ export default function Home() {
           <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg w-11/12 lg:w-10/12 xl:w-9/12 text-center mt-5 text-black/50">
             Perhitungan jumlah kunjungan website
           </h1>
-          <div className="grid lg:grid-cols-3">
+          <div className="grid lg:grid-cols-2">
             {/* Card */}
             <div className="flex justify-center items-center p-10">
               <div
@@ -579,28 +591,7 @@ export default function Home() {
                     </h1>
                   </div>
                   <h1 className="font-Poppins font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-white">
-                    3.500
-                  </h1>
-                </div>
-              </div>
-            </div>
-            {/* Card */}
-            <div className="flex justify-center items-center p-10">
-              <div
-                className={`bg-primary w-full h-full p-10 shadow-md rounded-lg duration-500`}
-              >
-                <div className="w-full h-full flex justify-center items-center gap-5">
-                  <div className="flex flex-col items-center gap-3">
-                    <FontAwesomeIcon
-                      icon={faUserGroup}
-                      className="w-32 h-20 bg-white text-primary p-5 rounded-2xl"
-                    />
-                    <h1 className="font-Poppins font-semibold text-sm md:text-base lg:text-lg xl:text-xl text-white/50 text-center">
-                      Total Visitors
-                    </h1>
-                  </div>
-                  <h1 className="font-Poppins font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-white">
-                    3.500
+                    {totalViews}
                   </h1>
                 </div>
               </div>
@@ -608,82 +599,82 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full h-auto flex flex-col lg:flex-row">
-          <div className="w-full lg:w-8/12 p-5">
-            <div className="w-full flex flex-col justify-center items-center p-5">
-              <h1 className="uppercase font-Lora font-bold text-2xl md:text-3xl lg:text-4xl text-center text-black">
-                BERITA TERKINI
-              </h1>
-            </div>
-            <div className="grid lg:grid-cols-3 gap-5">
-              {berita.map((data, index) => {
-                return (
-                  <div
-                    className={`rounded-2xl duration-500 shadow-md ${
-                      chat ? "" : "hover:bg-black/10"
-                    }`}
-                    key={index}
-                  >
-                    <Image
-                      src={data.url}
-                      width={100}
-                      height={80}
-                      layout="responsive"
-                      alt="Berita"
-                      className="rounded-t-2xl"
-                    />
-                    <div className="px-3 py-2 flex-wrap">
-                      <h1 className="font-Poppins font-semibold text-lg">
-                        {data.judul_berita}
-                      </h1>
-                      <h1 className="font-DMSans text-lg text-black/50 font-medium">
-                        {data.deskripsi_berita}
-                      </h1>
-                    </div>
-                    <div className="px-3 py-2 flex flex-row items-center text-black/60 mt-2">
-                      <FontAwesomeIcon
-                        icon={faClockRotateLeft}
-                        className="w-6 h-6"
+        <div className="flex flex-col w-full py-20">
+          <h1 className="uppercase font-Lora font-bold text-2xl md:text-3xl lg:text-4xl text-center text-black mb-10">
+            BERITA TERKINI
+          </h1>
+          <div className="w-full h-auto flex flex-col lg:flex-row md:px-16 lg:px-20">
+            <div className="w-full lg:w-8/12 p-5">
+              <div className="grid lg:grid-cols-3 gap-5">
+                {berita.map((data, index) => {
+                  return (
+                    <div
+                      className={`rounded-2xl duration-500 shadow-md ${
+                        chat ? "" : "hover:bg-black/10"
+                      }`}
+                      key={index}
+                    >
+                      <Image
+                        src={data.url}
+                        width={100}
+                        height={80}
+                        layout="responsive"
+                        alt="Berita"
+                        className="rounded-t-2xl"
                       />
-                      <h1 className="font-Poppins font-light text-sm">
-                        {data.createdAt}
-                      </h1>
+                      <div className="px-3 py-2 flex-wrap">
+                        <h1 className="font-Poppins font-semibold text-lg">
+                          {data.judul_berita}
+                        </h1>
+                        <h1 className="font-DMSans text-lg text-black/50 font-medium max-h-20 overflow-hidden">
+                          {data.deskripsi_berita}
+                        </h1>
+                      </div>
+                      <div className="px-3 py-2 flex flex-row items-center text-black/60 mt-2">
+                        <FontAwesomeIcon
+                          icon={faClockRotateLeft}
+                          className="w-6 h-6"
+                        />
+                        <h1 className="font-Poppins font-light text-sm">
+                          {data.createdAt}
+                        </h1>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="w-full lg:w-4/12 mt-20">
-            <div className="w-full flex flex-col justify-center items-center gap-4 p-5">
-              <div className="inline-flex">
-                <button
-                  type="button"
-                  className={`py-2 px-4 text-sm font-medium bg-transparent ${
-                    tabBerita == "popular" ? "border-b-4 border-primary" : ""
-                  }`}
-                  onClick={() => setTabBerita("popular")}
-                >
-                  Terpopuler
-                </button>
-                <button
-                  type="button"
-                  className={`py-2 px-4 text-sm font-medium bg-transparent ${
-                    tabBerita == "baru" ? "border-b-4 border-primary" : ""
-                  }`}
-                  onClick={() => setTabBerita("baru")}
-                >
-                  Terbaru
-                </button>
+                  );
+                })}
               </div>
-              {tabBerita === "popular" && <BeritaPopular />}
-              {tabBerita === "baru" && <BeritaBaru />}
+            </div>
+
+            <div className="w-full lg:w-4/12">
+              <div className="w-full flex flex-col justify-center items-center gap-4 p-5">
+                <div className="inline-flex">
+                  <button
+                    type="button"
+                    className={`py-2 px-4 text-sm font-medium bg-transparent ${
+                      tabBerita == "popular" ? "border-b-4 border-primary" : ""
+                    }`}
+                    onClick={() => setTabBerita("popular")}
+                  >
+                    Terpopuler
+                  </button>
+                  <button
+                    type="button"
+                    className={`py-2 px-4 text-sm font-medium bg-transparent ${
+                      tabBerita == "baru" ? "border-b-4 border-primary" : ""
+                    }`}
+                    onClick={() => setTabBerita("baru")}
+                  >
+                    Terbaru
+                  </button>
+                </div>
+                {tabBerita === "popular" && <BeritaPopular />}
+                {tabBerita === "baru" && <BeritaBaru />}
+              </div>
             </div>
           </div>
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

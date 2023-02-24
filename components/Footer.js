@@ -21,15 +21,36 @@ export default function Footer() {
                 height={0}
               />
             </Link>
-            <h1 className="lg:w-2/5 font-Poppins font-normal text-tikomdik/80 p-3 lg:p-7">
+            <h1 className="lg:w-2/5 font-Poppins font-normal text-tikomdik/80 p-3 lg:px-7">
               TIKomDik UPTD TIKOMDIK (Teknologi Informasi dan Komunikasi
               Pendidikan) Dinas Pendidikan Provinsi Jawa Barat.
             </h1>
+            <div className="p-3 lg:px-7">
+              <h2 className="text-lg font-bold text-tikomdik uppercase">
+                Alamat
+              </h2>
+              <h1 className="lg:w-2/5 font-Poppins font-normal text-tikomdik/80">
+                Dinas Pendidikan, Jl. Dr. Rajiman No.6, Pasir Kaliki, Kec.
+                Cicendo, Kota Bandung, Jawa Barat 40171
+              </h1>
+            </div>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 sm:gap-5 sm:grid-cols-2">
             <div>
               <h2 className="mb-6 text-sm font-bold text-tikomdik uppercase">
-                Follow us
+                Bantuan
+              </h2>
+              <ul className="text-tikomdik/80 font-semibold">
+                <li className="mb-4">
+                  <Link href={"/faq"} className="hover:underline ">
+                    FAQ
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h2 className="mb-6 text-sm font-bold text-tikomdik uppercase">
+                Ikuti kami
               </h2>
               <ul className="text-tikomdik/80 font-semibold">
                 <li className="mb-4">
@@ -55,23 +76,6 @@ export default function Footer() {
                   >
                     Facebook
                   </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="mb-6 text-sm font-bold text-tikomdik uppercase">
-                Legal
-              </h2>
-              <ul className="text-tikomdik/80 font-semibold">
-                <li className="mb-4">
-                  <Link href={"/privacy-policy"} className="hover:underline">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline">
-                    Terms &amp; Conditions
-                  </a>
                 </li>
               </ul>
             </div>

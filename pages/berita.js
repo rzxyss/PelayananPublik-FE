@@ -7,8 +7,13 @@ import Swal from "sweetalert2";
 import BeritaPopular from "../components/tab/berita/BeritaPopular";
 import BeritaBaru from "../components/tab/berita/BeritaBaru";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faClockRotateLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowUp,
+  faClockRotateLeft,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
+import Breadcrumb from "../components/Breadcrumb";
 
 export default function Berita() {
   const [berita, setBerita] = useState([]);
@@ -90,42 +95,45 @@ export default function Berita() {
           <FontAwesomeIcon icon={faArrowUp} className="w-6 h-6 text-white" />
         </button>
       )}
-      <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
-        <div className="bg-black/60 w-full h-full">
-          <div className="flex flex-col p-10 space-y-1">
-            <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
-              BERITA UPTD TIKOMDIK
-            </h1>
-            <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg text-white/50">
-              Menyajikan beragam berita seputar UPTD TIKOMDIK
-            </h1>
+      <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80 xl:h-[500px]'>
+        <div className="bg-black/80 w-full h-full">
+          <div className="py-10 xl:py-20">
+            <Breadcrumb />
           </div>
-          <div className="w-full h-auto mx-auto px-5 md:px-16 lg:container">
-            <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg my-10">
-              <div className="w-full flex flex-row justify-between items-center p-5">
-                <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary">
-                  BERITA TERKINI
-                </h1>
-                <div className="lg:w-2/12 border border-outline flex justify-between items-center rounded-xl">
-                  <input
-                    type="search"
-                    className="block w-full px-2 text-sm focus:outline-none"
-                    placeholder="Cari ..."
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                  />
-                  <button type="submit" className="bg-primary p-4 rounded-xl">
-                    <FontAwesomeIcon icon={faSearch} className="w-5 h-5 text-white" />
-                  </button>
+          <div className="w-full h-auto mx-auto px-5 md:px-16 lg:container lg:mt-20">
+            <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg my-10 p-5 lg:px-10">
+              <div className="w-full flex flex-row justify-between items-center">
+                <div className="flex flex-col">
+                  <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary">
+                    BERITA TERKINI
+                  </h1>
+                  <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg text-black/50">
+                    Menyajikan beragam berita seputar UPTD TIKOMDIK
+                  </h1>
                 </div>
               </div>
-              <div className="w-full flex flex-col lg:flex-row p-10">
-                <div className="flex flex-col">
+              <div className="w-full flex flex-col lg:flex-row">
+                <div className="flex flex-col md:w-9/12">
+                  <div className="w-full border border-outline flex justify-between items-center rounded-xl mt-5 p-2">
+                    <input
+                      type="search"
+                      className="block w-full px-2 text-sm focus:outline-none"
+                      placeholder="Cari ..."
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
+                    <button type="submit" className="bg-primary px-6 py-4 rounded-xl">
+                      <FontAwesomeIcon
+                        icon={faSearch}
+                        className="w-5 h-5 text-white"
+                      />
+                    </button>
+                  </div>
                   <div className="grid lg:grid-cols-3 gap-5">
                     {berita.map((data, index) => {
                       return (
                         <div
-                          className="hover:bg-black/10 p-3 rounded-lg duration-500"
+                          className="hover:bg-black/10 rounded-lg duration-500 mt-5"
                           key={index}
                         >
                           <Image
@@ -146,13 +154,17 @@ export default function Berita() {
                           </div>
                           <div className="flex justify-between px-2">
                             <div className="flex flex-row items-center text-black/60 mt-2 gap-1">
-                              <FontAwesomeIcon icon={faClockRotateLeft} className="w-5 h-5" />
+                              <FontAwesomeIcon
+                                icon={faClockRotateLeft}
+                                className="w-5 h-5"
+                              />
                               <h1 className="font-Poppins font-light text-sm">
                                 {data.createdAt}
                               </h1>
                             </div>
                             <div className="flex flex-row items-center text-black/60 mt-2 gap-1 cursor-pointer">
-                              <FontAwesomeIcon icon={faThumbsUp}
+                              <FontAwesomeIcon
+                                icon={faThumbsUp}
                                 className="w-10 h-10"
                                 onClick={() => likeBerita(data.id)}
                               />
@@ -184,7 +196,7 @@ export default function Berita() {
                   </div>
                 </div>
 
-                <div className="w-full lg:w-4/12 mt-20">
+                <div className="w-full md:w-3/12">
                   <div className="w-full flex flex-col justify-center items-center gap-4 p-5">
                     <div className="inline-flex">
                       <button

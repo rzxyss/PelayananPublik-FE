@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { BiArrowToTop } from "react-icons/bi";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import Breadcrumb from "../components/Breadcrumb";
 
 export default function Profile() {
   const [showButton, setShowButton] = useState(false);
@@ -37,21 +38,19 @@ export default function Profile() {
           <BiArrowToTop className="w-6 h-6 text-white" />
         </button>
       )}
-      <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
-        <div className="bg-black/60 w-full h-full">
-          <div className="flex flex-col p-10 space-y-1">
-            <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
-              TENTANG UPTD TIKOMDIK
-            </h1>
-            <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg text-white/50">
-              Ketahui segalanya tentang UPTD TIKOMDIK Provinsi Jawa Barat.
-            </h1>
+      <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80 xl:h-[500px]'>
+        <div className="bg-black/80 w-full h-full">
+          <div className="py-10 xl:py-20">
+            <Breadcrumb />
           </div>
-          <div className="w-full h-auto mx-auto px-2 md:px-16 lg:container">
-            <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg my-10">
-              <div id="tentang-tikomdik" className="p-10">
+          <div className="w-full h-auto mx-auto px-5 md:px-16 lg:container lg:mt-20">
+            <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg mb-10">
+              <div id="tentang-tikomdik" className="p-5 lg:px-10">
                 <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary">
                   TENTANG UPTD TIKOMDIK
+                </h1>
+                <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg text-black/50">
+                  Ketahui segalanya tentang UPTD TIKOMDIK Provinsi Jawa Barat.
                 </h1>
                 <div className="flex flex-col lg:flex-row gap-5 mt-10">
                   <div className="w-full">
@@ -61,7 +60,7 @@ export default function Profile() {
                       alt="Hero Image"
                       width={350}
                       height={0}
-                      className="rounded-xl float-none lg:mb-5 lg:mr-10 mx-auto lg:float-right"
+                      className="rounded-xl float-none md:mb-5 md:mr-10 mx-auto md:float-right"
                     />
                     <h1 className="font-Poppins font-medium text-lg text-black/50 mb-5">
                       Disrupsi Teknologi 4.0 mempengaruhi dunia pendidikan
@@ -110,86 +109,58 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              <div id="visi-misi" className="m-10">
-                <div className="grid lg:grid-cols-3 gap-2 lg:items-center">
-                  <div className="col-span-2">
+              <div id="visi-misi" className="px-5 lg:px-10">
+                <div className="flex flex-col">
+                  <div className="w-full border text-black/20 my-4" />
+                  <div className="flex flex-col space-y-3">
+                    <div className="flex-col space-y-2">
+                      <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
+                        Visi
+                      </h1>
+                      <h1 className="font-Poppins font-medium text-lg lg:text-xl text-black/50">
+                        Menuju Lembaga kreatif inovatif dalam memberikan layanan
+                        pembelajaran, Pendidikan, dan system tata kelola
+                        Pendidikan di era milenial.
+                      </h1>
+                    </div>
                     <div className="w-full border text-black/20 my-4" />
-                    <div className="flex flex-col space-y-3">
-                      <div className="flex-col space-y-2">
-                        <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
-                          Visi
-                        </h1>
-                        <h1 className="font-Poppins font-medium text-lg lg:text-xl text-black/50">
-                          Menuju Lembaga kreatif inovatif dalam memberikan
-                          layanan pembelajaran, Pendidikan, dan system tata
-                          kelola Pendidikan di era milenial.
-                        </h1>
-                      </div>
-                      <div className="w-full border text-black/20 my-4" />
-                      <div className="flex-col space-y-2">
-                        <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
-                          Misi
-                        </h1>
-                        <ul className="list-disc list-inside text-black/50">
-                          <li className="font-Poppins font-medium text-lg lg:text-xl">
-                            Mempersiapkan Sumber Daya Manusia yang literat
-                            terhadap Teknologi Informasi.
-                          </li>
-                          <li className="font-Poppins font-medium text-lg lg:text-xl">
-                            Membangun Kultur Pemanfaatan TIK Pendidikan di
-                            Lingkungan Satuan Pendidikan.
-                          </li>
-                          <li className="font-Poppins font-medium text-lg lg:text-xl">
-                            Menghasilkan Produk TIK yang berkualitas bagi
-                            Pendidikan.
-                          </li>
-                          <li className="font-Poppins font-medium text-lg lg:text-xl">
-                            Memberikan pelayanan profesional dengan menggunakan
-                            teknologi informasi dan komunikasi di berbagai
-                            sektor Pendidikan.
-                          </li>
-                          <li className="font-Poppins font-medium text-lg lg:text-xl">
-                            Mewujudkan Layanan Pendidikan Terintegrasi berbasis
-                            TIK di Jawa Barat.
-                          </li>
-                          <li className="font-Poppins font-medium text-lg lg:text-xl">
-                            Menjadi pusat pembangunan dan pengembangan TIK
-                            Pendidikan.
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="w-full border text-black/20 my-4" />
+                    <div className="flex-col space-y-2">
+                      <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
+                        Misi
+                      </h1>
+                      <ul className="list-disc list-inside text-black/50">
+                        <li className="font-Poppins font-medium text-lg lg:text-xl">
+                          Mempersiapkan Sumber Daya Manusia yang literat
+                          terhadap Teknologi Informasi.
+                        </li>
+                        <li className="font-Poppins font-medium text-lg lg:text-xl">
+                          Membangun Kultur Pemanfaatan TIK Pendidikan di
+                          Lingkungan Satuan Pendidikan.
+                        </li>
+                        <li className="font-Poppins font-medium text-lg lg:text-xl">
+                          Menghasilkan Produk TIK yang berkualitas bagi
+                          Pendidikan.
+                        </li>
+                        <li className="font-Poppins font-medium text-lg lg:text-xl">
+                          Memberikan pelayanan profesional dengan menggunakan
+                          teknologi informasi dan komunikasi di berbagai sektor
+                          Pendidikan.
+                        </li>
+                        <li className="font-Poppins font-medium text-lg lg:text-xl">
+                          Mewujudkan Layanan Pendidikan Terintegrasi berbasis
+                          TIK di Jawa Barat.
+                        </li>
+                        <li className="font-Poppins font-medium text-lg lg:text-xl">
+                          Menjadi pusat pembangunan dan pengembangan TIK
+                          Pendidikan.
+                        </li>
+                      </ul>
                     </div>
-                  </div>
-                  <div className="hidden lg:grid lg:grid-cols-2">
-                    <div className="col-start-1 row-start-1 flex justify-end p-2 w-52 h-40">
-                      <Image
-                        src={"/image/visi-misi1.jpg"}
-                        width={400}
-                        height={0}
-                        className="rounded-lg"
-                      />
-                    </div>
-                    <div className="col-start-2 row-start-2 flex justify-start p-2 w-52 h-40">
-                      <Image
-                        src={"/image/visi-misi2.jpg"}
-                        width={200}
-                        height={0}
-                        className="rounded-lg"
-                      />
-                    </div>
-                    <div className="col-start-1 row-start-3 flex justify-end p-2 w-52 h-40">
-                      <Image
-                        src={"/image/visi-misi3.jpg"}
-                        width={200}
-                        height={0}
-                        className="rounded-lg"
-                      />
-                    </div>
+                    <div className="w-full border text-black/20 my-4" />
                   </div>
                 </div>
               </div>
-              <div className="flex justify-center flex-col lg:flex-row items-center gap-10 m-10">
+              <div className="flex justify-center flex-col lg:flex-row items-center gap-10 p-5 lg:p-10">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.884767821528!2d107.59763201595032!3d-6.904381069491416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e7527b1d6913%3A0xad04e4b7ff8c2657!2sTIKomDik%20Disdik%20Jabar!5e0!3m2!1sid!2sid!4v1676527554995!5m2!1sid!2sid"
                   className="border lg:w-[640px] lg:h-[400px] rounded-2xl"
@@ -201,13 +172,13 @@ export default function Profile() {
                   <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary">
                     ALAMAT TIKOMDIK
                   </h1>
-                  <h1 className="font-Poppins font-medium text-lg text-black/50 mb-5 lg:w-9/12">
+                  <h1 className="font-Poppins font-medium text-lg text-black/50 mb-5 lg:w-9/12 lg:text-center">
                     Dinas Pendidikan, Jl. Dr. Rajiman No.6, Pasir Kaliki, Kec.
                     Cicendo, Kota Bandung, Jawa Barat 40171
                   </h1>
                 </div>
               </div>
-              <div className="m-10" id="team-project">
+              <div className="px-5 lg:px-10" id="team-project">
                 <h1 className="font-Lora font-bold text-center py-5 text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary">
                   Project Team
                 </h1>

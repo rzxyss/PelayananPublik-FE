@@ -48,10 +48,10 @@ export default function Navbar() {
           >
             <li
               className={`font-Poppins font-semibold text-xl ${
-                router.pathname === "/" ? "text-primary" : "text-black/50"
+                router.pathname === "/about" ? "text-primary" : "text-black/50"
               }`}
             >
-              <Link href="/">Home</Link>
+              <Link href="/about">Profile</Link>
             </li>
             <li
               className={`font-Poppins font-semibold text-xl ${
@@ -68,7 +68,7 @@ export default function Navbar() {
                   onMouseEnter={() => setShow(true)}
                   onMouseLeave={() => setShow(false)}
                 >
-                  Profile
+                  Layanan
                 </h1>
                 <FontAwesomeIcon
                   icon={faChevronDown}
@@ -86,25 +86,11 @@ export default function Navbar() {
                 onMouseLeave={() => setShow(false)}
               >
                 <li>
-                  <Link href="/about" className="text-lg font-medium">
-                    Tentang Kami
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about" className="text-lg font-medium">
-                    Portofolio
+                  <Link href="https://www.phiradio.net/" className="text-lg font-medium" passHref target={'_blank'}>
+                    Phi Radio
                   </Link>
                 </li>
               </ul>
-            </li>
-            <li
-              className={`font-Poppins font-semibold text-xl ${
-                router.pathname === "/laporan"
-                  ? "text-primary"
-                  : "text-black/50"
-              }`}
-            >
-              <Link href={"/laporan"}>Laporan</Link>
             </li>
             <li
               className={`font-Poppins font-semibold text-xl ${
@@ -117,10 +103,12 @@ export default function Navbar() {
             </li>
             <li
               className={`font-Poppins font-semibold text-xl ${
-                router.pathname === "/faq" ? "text-primary" : "text-black/50"
+                router.pathname === "/laporan"
+                  ? "text-primary"
+                  : "text-black/50"
               }`}
             >
-              <Link href={"/faq"}>FAQ</Link>
+              <Link href={"/laporan"}>Laporan</Link>
             </li>
           </ul>
         </div>

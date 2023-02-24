@@ -12,14 +12,6 @@ export default function Calendar() {
   const [detailAgenda, setDetailAgenda] = React.useState([]);
   const availableAgenda = available.map((days) => new Date(days.tgl_acara));
 
-  const selectInfo = selectDate ? (
-    <h1 className="font-Poppins font-semibold text-second text-base lg:text-lg xl:text-xl px-5 py-2">
-      {format(selectDate, "MMMM d, yyyy")}
-    </h1>
-  ) : (
-    setSelectDate(new Date())
-  );
-
   const getAgenda = async () => {
     const tglAcara = format(selectDate || new Date(), "yyyy-M-d");
     const agenda = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/agenda`);
@@ -43,7 +35,9 @@ export default function Calendar() {
 
   return (
     <div className="flex flex-col">
-      {selectInfo}
+      <h1 className="font-Poppins font-semibold text-second text-base lg:text-lg xl:text-xl px-5 py-2">
+        {format((new Date()), "MMMM d, yyyy")}
+      </h1>
       <div className="flex justify-center">
         <DayPicker
           styles={{
@@ -57,7 +51,7 @@ export default function Calendar() {
             available: {
               textDecoration: "underline",
               textDecorationThickness: "3px",
-              textDecorationColor: "#16A75C",
+              textDecorationColor: "#FF0000",
             },
           }}
           onDayClick={handleDayClick}
@@ -75,8 +69,7 @@ export default function Calendar() {
               className="w-20 h-20 text-primary"
             />
             <h1 className="font-Poppins font-semibold text-second text-lg lg:text-xl xl:text-2xl text-center">
-              Tidak ada Agenda pada{" "}
-              {format(selectDate, "MMMM d, yyyy")}
+              Tidak ada Agenda pada {format(selectDate, "MMMM d, yyyy")}
             </h1>
           </div>
         ) : (

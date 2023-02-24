@@ -4,7 +4,12 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import Footer from "../components/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUp, faClockRotateLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowUp,
+  faClockRotateLeft,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
+import Breadcrumb from "../components/Breadcrumb";
 
 export default function Berita() {
   const [berita, setBerita] = useState([]);
@@ -48,23 +53,24 @@ export default function Berita() {
           <FontAwesomeIcon icon={faArrowUp} className="w-6 h-6 text-white" />
         </button>
       )}
-      <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
-        <div className="bg-black/60 w-full h-full">
-          <div className="flex flex-col p-10 space-y-1">
-            <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
-              KEGIATAN UPTD TIKOMDIK
-            </h1>
-            <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg text-white/50">
-              Menyajikan Kegiatan seputar UPTD TIKOMDIK.
-            </h1>
+      <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80 xl:h-[500px]'>
+        <div className="bg-black/80 w-full h-full">
+          <div className="py-10 xl:py-20">
+            <Breadcrumb />
           </div>
-          <div className="w-full h-auto mx-auto px-5 md:px-16 lg:container">
-            <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg my-10">
-              <div className="w-full flex flex-row justify-between items-center p-5">
-                <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary">
-                  KEGIATAN TIKOMDIK
-                </h1>
-                <div className="lg:w-2/12 border border-outline flex justify-between items-center rounded-xl">
+          <div className="w-full h-auto mx-auto px-5 md:px-16 lg:container lg:mt-20">
+            <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg my-10 p-5 lg:px-10">
+              <div className="w-full flex flex-row justify-between items-center">
+                <div className="flex flex-col">
+                  <h1 className="font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary">
+                    KEGIATAN TIKOMDIK
+                  </h1>
+                  <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg text-black/50">
+                    Menyajikan Kegiatan seputar UPTD TIKOMDIK.
+                  </h1>
+                </div>
+              </div>
+              <div className="w-full border border-outline flex justify-between items-center rounded-xl mt-5 p-2">
                   <input
                     type="search"
                     className="block w-full px-2 text-sm focus:outline-none"
@@ -72,17 +78,19 @@ export default function Berita() {
                     // value={query}
                     // onChange={(e) => setQuery(e.target.value)}
                   />
-                  <button type="submit" className="bg-primary p-4 rounded-xl">
-                    <FontAwesomeIcon icon={faSearch} className="w-5 h-5 text-white" />
+                  <button type="submit" className="bg-primary px-6 py-4 rounded-xl">
+                    <FontAwesomeIcon
+                      icon={faSearch}
+                      className="w-5 h-5 text-white"
+                    />
                   </button>
                 </div>
-              </div>
-              <div className="w-full flex flex-col lg:flex-row p-10">
+              <div className="w-full flex flex-col lg:flex-row">
                 <div className="grid lg:grid-cols-3 gap-5 w-full">
                   {berita.map((data, index) => {
                     return (
                       <div
-                        className="hover:bg-black/10 rounded-2xl duration-500 shadow-md"
+                        className="hover:bg-black/10 rounded-2xl duration-500 shadow-md mt-5"
                         key={index}
                       >
                         <Image
@@ -102,7 +110,10 @@ export default function Berita() {
                           </h1>
                         </div>
                         <div className="flex flex-row items-center text-black/60 mt-2 gap-1 p-2">
-                          <FontAwesomeIcon icon={faClockRotateLeft} className="w-5 h-5" />
+                          <FontAwesomeIcon
+                            icon={faClockRotateLeft}
+                            className="w-5 h-5"
+                          />
                           <h1 className="font-Poppins font-light text-sm">
                             {data.createdAt}
                           </h1>

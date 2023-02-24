@@ -3,6 +3,7 @@ import Router from "next/router";
 import React, { useEffect, useState } from "react";
 import { BiArrowToTop } from "react-icons/bi";
 import Swal from "sweetalert2";
+import Breadcrumb from "../components/Breadcrumb";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
@@ -68,23 +69,24 @@ export default function Laporan() {
             <BiArrowToTop className="w-6 h-6 text-white" />
           </button>
         )}
-        <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80'>
-          <div className="bg-black/60 w-full h-full">
-            <div className="flex flex-col p-10 space-y-1">
-              <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
+        <div className='bg-cover bg-[url("/image/tikomdik.jpg")] bg-center w-full h-80 xl:h-[500px]'>
+          <div className="bg-black/80 w-full h-full">
+            <div className="py-10 xl:py-20">
+              <Breadcrumb />
+              {/* <h1 className="font-Lora font-bold text-lg md:text-xl lg:text-2xl xl:text-3xl text-primary">
                 LAPORAN UPTD TIKOMDIK
               </h1>
               <h1 className="font-Poppins font-medium text-sm md:text-sm lg:text-lg text-white/50">
                 Memberi laporan terhadap UPTD TIKOMDIK.
-              </h1>
+              </h1> */}
             </div>
-            <div className="w-full h-auto mx-auto px-5 md:px-16 lg:container">
-              <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg my-10">
+            <div className="w-full h-auto mx-auto px-5 md:px-16 lg:container lg:mt-20">
+              <div className="bg-white rounded-lg shadow-2xl lg:shadow-lg mb-10">
                 <div className="border border-collapse rounded-md p-2">
                   <h1 className="text-center font-Lora font-bold text-xl md:text-2xl lg:text-3xl xl:text-4xl text-primary py-8">
                     LAPORAN PELAYANAN PUBLIK
                   </h1>
-                  <form className="mt-10" onSubmit={kirimLaporan}>
+                  <form className="p-5 lg:px-10" onSubmit={kirimLaporan}>
                     <fieldset className="flex flex-wrap gap-5 md:gap-10 lg:gap-14 justify-center my-10">
                       <div className="flex gap-1">
                         <input

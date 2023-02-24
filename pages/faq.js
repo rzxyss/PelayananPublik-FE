@@ -2,35 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Faq1 from "../components/tab/faq/faq1";
-import Faq2 from "../components/tab/faq/faq2";
-import Faq3 from "../components/tab/faq/faq3";
+import Type1 from "../components/tab/faq/type1";
+import Type2 from "../components/tab/faq/type2";
+import Type3 from "../components/tab/faq/type3";
 
 export default function FaQ() {
-  const [faq, setFaq] = useState([]);
-  const [selected, setSelected] = useState(null);
-  const [type, setType] = useState('faq1')
-  const getFaq = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/faq`
-      );
-      setFaq(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const toggle = (i) => {
-    if (selected == i) {
-      return setSelected(null);
-    }
-    setSelected(i);
-  };
-
-  useEffect(() => {
-    getFaq();
-  }, []);
+  const [type, setType] = useState('1')
+  
   return (
     <>
       <Navbar />
@@ -40,34 +18,34 @@ export default function FaQ() {
           <button
             type="button"
             className={`py-2 px-4 text-sm font-medium bg-transparent ${
-              type == "faq1" ? "border-b-4 border-primary" : ""
+              type == "1" ? "border-b-4 border-primary" : ""
             }`}
-            onClick={() => setType("faq1")}
+            onClick={() => setType("1")}
           >
             Seputar Pendaftaran Prakerin
           </button>
           <button
             type="button"
             className={`py-2 px-4 text-sm font-medium bg-transparent ${
-              type == "faq2" ? "border-b-4 border-primary" : ""
+              type == "2" ? "border-b-4 border-primary" : ""
             }`}
-            onClick={() => setType("faq2")}
+            onClick={() => setType("2")}
           >
             Seputar Program Tikomdik
           </button>
           <button
             type="button"
             className={`py-2 px-4 text-sm font-medium bg-transparent ${
-              type == "faq3" ? "border-b-4 border-primary" : ""
+              type == "3" ? "border-b-4 border-primary" : ""
             }`}
-            onClick={() => setType("faq3")}
+            onClick={() => setType("3")}
           >
-            Seputar Program Tikomdik
+            Seputar Kegiatan Tikomdik
           </button>
         </div>
-        {type == 'faq1' && <Faq1 />}
-        {type == 'faq2' && <Faq2 />}
-        {type == 'faq3' && <Faq3 />}
+        {type == '1' && <Type1 />}
+        {type == '2' && <Type2 />}
+        {type == '3' && <Type3 />}
       </div>
       <div className="w-full lg:fixed bottom-0">
         <Footer />
